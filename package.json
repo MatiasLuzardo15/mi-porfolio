@@ -1,7 +1,9 @@
 {
-  "name": "beautiful-portfolio",
+  "name": "mi-portfolio",
+  "description": "Portfolio personal de Matías Luzardo - Estudiante de Tecnologías de la Información",
+  "author": "Matías Luzardo",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",

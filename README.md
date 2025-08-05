@@ -1,9 +1,9 @@
-# Build a Modern Portfolio Website with React & TailwindCSS
+# Mi Portfolio - Matías Luzardo
 
 <div align="center">
   <br />
-  <a href="https://youtu.be/YOUR_VIDEO_ID" target="_blank">
-    <img src="./banner.png" alt="Portfolio Website Banner">
+  <a href="https://github.com/MatiasLuzardo15/mi-portfolio" target="_blank">
+    <img src="./banner.png" alt="Portfolio de Matías Luzardo">
   </a>
   <br />
   <div>
@@ -11,123 +11,136 @@
     <img src="https://img.shields.io/badge/-TailwindCSS-06B6D4?style=for-the-badge&logo=tailwindcss" alt="Tailwind CSS" />
     <img src="https://img.shields.io/badge/-Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
     <img src="https://img.shields.io/badge/-Lucide Icons-FD4D4D?style=for-the-badge&logo=lucide" alt="Lucide Icons" />
-    <img src="https://img.shields.io/badge/-Radix UI-9D4EDD?style=for-the-badge&logo=data:image/svg+xml;base64..." alt="Radix UI" />
+    <img src="https://img.shields.io/badge/-JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
   </div>
-  <h3 align="center">Create a Stunning Developer Portfolio with Animations, Dark Mode, and Projects Showcase</h3>
+  <h3 align="center">Portfolio Personal de Matías Luzardo - Estudiante de Tecnologías de la Información</h3>
   <div align="center">
-    Follow the full video tutorial on 
-    <a href="https://youtu.be/YOUR_VIDEO_ID" target="_blank"><b>YouTube</b></a>
+    Explora mis proyectos y habilidades en desarrollo web
   </div>
   <br />
 </div>
 
-## 📋 Table of Contents
+## 📋 Tabla de Contenidos
 
-1. [Introduction](#-introduction)
-2. [Tech Stack](#-tech-stack)
-3. [Features](#-features)
-4. [Quick Start](#-quick-start)
-5. [Screenshots](#-screenshots)
-6. [Deployment](#-deployment)
-
----
-
-## 🚀 Introduction
-
-In this tutorial, you'll learn how to build a modern portfolio website using **React**, **TailwindCSS**, **Vite**, and **Lucide Icons**. From dark mode support to responsive animations and deployable project showcases, this video walks you through every step—perfect for developers looking to level up their frontend skills or apply for jobs.
-
-🎥 Watch the full tutorial: [YouTube](https://youtu.be/YOUR_VIDEO_ID)
+1. [Introducción](#-introducción)
+2. [Stack Tecnológico](#-stack-tecnológico)
+3. [Características](#-características)
+4. [Inicio Rápido](#-inicio-rápido)
+5. [Secciones](#-secciones)
+6. [Contacto](#-contacto)
 
 ---
 
-## ⚙️ Tech Stack
+## 🚀 Introducción
 
-* **React** – Component-based UI development
-* **Vite** – Lightning-fast build tool
-* **TailwindCSS** – Utility-first CSS for styling
-* **Lucide Icons** – Clean and beautiful icon pack
-* **Radix UI** – Accessible component primitives
-* **TypeScript (optional)** – Type safety and tooling
-* **GitHub & Vercel** – Deployment
+Portfolio personal desarrollado con **React**, **TailwindCSS** y **Vite**. Presenta mis proyectos, habilidades y experiencia como estudiante de 4º semestre de Licenciatura en Tecnologías de la Información, con formación autodidacta en desarrollo web, WordPress y marketing digital.
 
 ---
 
-## ⚡️ Features
+## ⚙️ Stack Tecnológico
 
-* 🌑 **Light/Dark Mode Toggle**
-  Save theme preference in local storage with beautiful transitions
-
-* 💫 **Animated Backgrounds**
-  Stars, meteors, scroll effects, and glowing UI elements
-
-* 📱 **Responsive Navigation**
-  Desktop and mobile menus with glassmorphism
-
-* 👨‍💻 **Hero & About Sections**
-  Showcase who you are with smooth intro animations and buttons
-
-* 📊 **Skills Grid**
-  Filterable progress bars and categories with animated width
-
-* 🖼️ **Projects Showcase**
-  Display screenshots, tech stacks, and GitHub/demo links
-
-* 📩 **Contact Section**
-  Social icons + responsive contact form with toast notifications
-
-* 🚀 **One-Click Deployment**
-  Easily host your site with Vercel and GitHub
+* **React 18.3.1** – Desarrollo de interfaces de usuario modernas
+* **Vite 5.3.4** – Herramienta de construcción ultrarrápida
+* **TailwindCSS 4.1.4** – Framework CSS utility-first
+* **Lucide Icons** – Iconografía moderna y limpia
+* **React Router DOM** – Navegación del lado del cliente
+* **JavaScript ES6+** – Lógica y funcionalidad
 
 ---
 
-## 👌 Quick Start
+## ⚡️ Características
 
-### Prerequisites
+* � **Modo Oscuro/Claro**
+  Toggle de tema con persistencia en localStorage
 
-* [Node.js](https://nodejs.org/)
+* 💫 **Animaciones Suaves**
+  Efectos de fade-in, hover y transiciones fluidas
+
+* 📱 **Diseño Responsivo**
+  Optimizado para dispositivos móviles, tablets y desktop
+
+* 👨‍💻 **Sección Hero**
+  Presentación personal con imagen de perfil y llamadas a la acción
+
+* 📊 **Habilidades Técnicas**
+  Grid de habilidades categorizadas con barras de progreso animadas
+
+* � **Proyectos Destacados**
+  Showcase de proyectos con enlaces a demos y repositorios
+
+* 📩 **Formulario de Contacto**
+  Formulario funcional con notificaciones toast
+
+* 🎓 **Expediente Académico**
+  Descarga directa del expediente en formato PDF
+
+---
+
+## 👌 Inicio Rápido
+
+### Prerrequisitos
+
+* [Node.js](https://nodejs.org/) (versión 16 o superior)
 * [Git](https://git-scm.com/)
 
-### Clone and Run
+### Clonar y Ejecutar
 
 ```bash
-git clone https://github.com/yourusername/react-tailwind-portfolio.git
-cd react-tailwind-portfolio
+git clone https://github.com/MatiasLuzardo15/mi-portfolio.git
+cd mi-portfolio
 npm install
 npm run dev
 ```
 
-Your app will be available at: [http://localhost:5173](http://localhost:5173)
+La aplicación estará disponible en: [http://localhost:5173](http://localhost:5173)
 
 ---
 
-## 🖼️ Screenshots
+## � Secciones
 
-> 📸 Add screenshots of your Hero section, Projects grid, and Contact form here to show off your site.
+### 🏠 Inicio (Hero)
+- Presentación personal con imagen de perfil
+- Descripción de rol y especialización
+- Botones de navegación a secciones principales
+
+### 👤 Acerca de Mí
+- Información académica y profesional
+- Descripción de experiencia y formación
+- Botones para contacto y descarga de expediente
+
+### ⚡ Habilidades
+- Categorización por Frontend, Backend y Herramientas
+- Barras de progreso animadas
+- Filtros interactivos por categoría
+
+### 📁 Proyectos
+- **Weatherl**: Aplicación del clima con React y Framer Motion
+- **Cold Laked Store**: E-commerce desarrollado en WordPress
+- Enlaces directos a demos y repositorios
+
+### 📞 Contacto
+- Información de contacto personal
+- Enlaces a redes sociales (LinkedIn, Instagram)
+- Formulario de contacto funcional
 
 ---
 
-## ☁️ Deployment
+## 📬 Contacto
 
-### Deploy on Vercel
-
-1. Push your code to GitHub
-2. Go to [vercel.com](https://vercel.com)
-3. Import your repository
-4. Click **Deploy**
-
-Your live website will be hosted on a custom subdomain (e.g. `https://your-name.vercel.app`)
+* **Email**: matiasluzardo1501@gmail.com
+* **LinkedIn**: [Matias Luzardo](https://www.linkedin.com/in/matias-luzardo-8bb785264/)
+* **Instagram**: [@matias_luzardo15](https://www.instagram.com/matias_luzardo15/)
+* **GitHub**: [MatiasLuzardo15](https://github.com/MatiasLuzardo15)
 
 ---
 
-## 🔗 Useful Links
+## 🔗 Enlaces Útiles
 
 * [React Documentation](https://reactjs.org/)
 * [Tailwind CSS Docs](https://tailwindcss.com/)
 * [Lucide Icons](https://lucide.dev/)
-* [Radix UI](https://www.radix-ui.com/)
 * [Vite](https://vitejs.dev/)
-* [Vercel](https://vercel.com/)
 
 ---
 
-Let me know if you'd like me to generate a version with your actual GitHub repo, YouTube URL, or a banner image suggestion!
+**Desarrollado con ❤️ por Matías Luzardo**

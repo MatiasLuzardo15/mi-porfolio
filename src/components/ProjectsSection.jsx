@@ -1,24 +1,23 @@
-import { ArrowRight, ExternalLink, Github } from "lucide-react";
+import { ArrowRight, ExternalLink, Github, FolderOpen } from "lucide-react";
 
 const projects = [
   {
     id: 1,
-    title: "SaaS Landing Page",
-    description: "A beautiful landing page app using React and Tailwind.",
+    title: "Weatherl",
+    description: "Una hermosa aplicación del clima con animaciones estilo Apple, construida con React, Framer Motion y TailwindCSS.",
     image: "/projects/project1.png",
-    tags: ["React", "TailwindCSS", "Supabase"],
-    demoUrl: "#",
-    githubUrl: "#",
+    tags: ["React", "TailwindCSS", "Framer Motion", "JavaScript"],
+    demoUrl: "https://weatherl.space",
+    githubUrl: "https://github.com/MatiasLuzardo15/weatherl",
   },
   {
     id: 2,
-    title: "Orbit Analytics Dashboard",
-    description:
-      "Interactive analytics dashboard with data visualization and filtering capabilities.",
-    image: "/projects/project2.png",
-    tags: ["TypeScript", "D3.js", "Next.js"],
-    demoUrl: "#",
-    githubUrl: "#",
+    title: "Cold Laked Store",
+    description: "Sitio web de e-commerce desarrollado en WordPress con diseño moderno y funcionalidades completas de tienda online.",
+    image: "/dist/projects/project2.png",
+    tags: ["WordPress", "Hostinger", "E-commerce"],
+    demoUrl: "https://coldlaked.store/",
+    githubUrl: null,
   },
   {
     id: 3,
@@ -36,14 +35,15 @@ export const ProjectsSection = () => {
   return (
     <section id="projects" className="py-24 px-4 relative">
       <div className="container mx-auto max-w-5xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-          {" "}
-          Featured <span className="text-primary"> Projects </span>
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center flex items-center justify-center gap-3">
+          <FolderOpen className="text-primary" size={36} />
+          <span className="text-primary"> Proyectos </span>
         </h2>
 
         <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Here are some of my recent projects. Each project was carefully
-          crafted with attention to detail, performance, and user experience.
+          Aquí puedes ver algunos de mis proyectos más recientes. Cada uno ha sido desarrollado 
+          con especial atención al detalle, rendimiento y experiencia del usuario, aplicando 
+          las mejores prácticas de desarrollo web.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -82,13 +82,15 @@ export const ProjectsSection = () => {
                     >
                       <ExternalLink size={20} />
                     </a>
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      className="text-foreground/80 hover:text-primary transition-colors duration-300"
-                    >
-                      <Github size={20} />
-                    </a>
+                    {project.githubUrl && (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        className="text-foreground/80 hover:text-primary transition-colors duration-300"
+                      >
+                        <Github size={20} />
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
@@ -100,9 +102,11 @@ export const ProjectsSection = () => {
           <a
             className="cosmic-button w-fit flex items-center mx-auto gap-2"
             target="_blank"
-            href="https://github.com/machadop1407"
+            href="https://github.com/MatiasLuzardo15"
           >
-            Check My Github <ArrowRight size={16} />
+            <Github size={16} />
+            Revisa mi GitHub 
+            <ArrowRight size={16} />
           </a>
         </div>
       </div>
