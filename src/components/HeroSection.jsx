@@ -64,11 +64,6 @@ export const HeroSection = () => {
             <ArrowDown className="h-5 w-5 text-primary/80 group-hover:text-primary animate-bounce transition-colors duration-300" style={{animationDelay: '150ms'}} />
             <ArrowDown className="h-4 w-4 text-primary/60 group-hover:text-primary animate-bounce transition-colors duration-300" style={{animationDelay: '300ms'}} />
           </div>
-          
-          {/* Elegant call to action text */}
-          <span className="text-sm text-muted-foreground/80 group-hover:text-primary/90 tracking-wide hidden sm:block transition-all duration-300 mt-3 font-bold">
-            Mis Proyectos
-          </span>
         </div>
       </button>
     </section>
