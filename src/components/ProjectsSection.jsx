@@ -116,8 +116,8 @@ export const ProjectsSection = () => {
       className="py-16 px-4 relative overflow-hidden"
     >
       <div className="container mx-auto max-w-5xl relative z-10">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center flex items-center justify-center gap-3">
-          <FolderOpen className="text-primary" size={36} />
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-center flex items-center justify-center gap-3">
+          <FolderOpen className="text-primary" size={42} />
           <span className="text-primary"> Proyectos </span>
         </h2>
 

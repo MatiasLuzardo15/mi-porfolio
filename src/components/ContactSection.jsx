@@ -62,8 +62,8 @@ export const ContactSection = () => {
   return (
     <section id="contact" className="py-20 px-4 relative">
       <div className="container mx-auto max-w-5xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center flex items-center justify-center gap-3">
-          <MessageSquare className="text-primary" size={36} />
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-center flex items-center justify-center gap-3">
+          <MessageSquare className="text-primary" size={42} />
           Ponte en <span className="text-primary"> Contacto</span>
         </h2>
 

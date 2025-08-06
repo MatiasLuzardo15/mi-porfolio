@@ -37,8 +37,8 @@ export const SkillsSection = () => {
   return (
     <section id="skills" className="py-20 px-4 relative">
       <div className="container mx-auto max-w-5xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center flex items-center justify-center gap-3">
-          <Zap className="text-primary" size={36} />
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-12 text-center flex items-center justify-center gap-3">
+          <Zap className="text-primary" size={42} />
           Mis <span className="text-primary"> Habilidades</span>
         </h2>
 
