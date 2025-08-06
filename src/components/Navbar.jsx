@@ -83,22 +83,32 @@ export const Navbar = () => {
         <div className="md:hidden flex items-center space-x-2">
           <button
             onClick={() => setIsMenuOpen((prev) => !prev)}
-            className="p-2 text-foreground z-50"
-            aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
+            className="p-2 text-foreground z-50 relative hover:text-primary transition-colors"
+            aria-label="Open Menu"
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            <Menu size={24} />
           </button>
         </div>
 
+        {/* Mobile menu overlay */}
         <div
           className={cn(
-            "fixed inset-0 bg-background/95 backdrop-blur-md z-40 flex flex-col items-center justify-center",
+            "fixed top-0 left-0 w-full h-screen bg-background/95 backdrop-blur-md z-50 flex flex-col items-center justify-center",
             "transition-all duration-300 md:hidden",
             isMenuOpen
               ? "opacity-100 pointer-events-auto"
               : "opacity-0 pointer-events-none"
           )}
         >
+          {/* Close button */}
+          <button
+            onClick={() => setIsMenuOpen(false)}
+            className="absolute top-6 right-6 p-2 text-foreground hover:text-primary transition-colors"
+            aria-label="Close Menu"
+          >
+            <X size={24} />
+          </button>
+
           <div className="flex flex-col space-y-6 text-xl px-8 w-full max-w-sm">
             {navItems.map((item, key) => (
               <a

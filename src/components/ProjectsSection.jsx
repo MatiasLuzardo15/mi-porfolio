@@ -26,7 +26,7 @@ const projects = [
     image: "/projects/project3.png",
     tags: ["React", "Vite", "Tailwind CSS", "React Router"],
     demoUrl: "http://localhost:5173/",
-    githubUrl: "https://github.com/machadop1407/beautiful-react-tailwind-portfolio",
+    githubUrl: "https://github.com/MatiasLuzardo15/mi-porfolio",
   },
 ];
 
