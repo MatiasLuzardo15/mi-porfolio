@@ -11,13 +11,17 @@ export const HeroSection = () => {
           {/* Imagen de perfil circular */}
           <div className="flex justify-center mb-2 opacity-0 animate-fade-in">
             <div className="relative">
+              {/* Efecto radar para la foto - más lento y más corto */}
+              <div className="absolute -inset-0.5 rounded-full border border-primary/15 animate-ping" style={{animationDuration: '4s'}}></div>
+              <div className="absolute inset-0 rounded-full border border-primary/25 animate-ping" style={{animationDuration: '4s', animationDelay: '2s'}}></div>
+              
               <img 
                 src="/images/profile.jpg" 
                 alt="Matías Luzardo - Desarrollador Web Uruguay especializado en React JavaScript WordPress" 
                 title="Matías Luzardo - Portfolio Desarrollador Web"
-                className="w-40 h-40 md:w-48 md:h-48 rounded-full border-4 border-primary/20 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                className="relative w-40 h-40 md:w-48 md:h-48 rounded-full border-4 border-primary/20 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 z-10"
               />
-              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/10 to-transparent"></div>
+              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/10 to-transparent z-0"></div>
             </div>
           </div>
 
