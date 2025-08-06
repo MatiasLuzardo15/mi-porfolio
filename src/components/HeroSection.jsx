@@ -1,4 +1,4 @@
-import { ArrowDown, Code } from "lucide-react";
+import { ArrowDown, Code, Github } from "lucide-react";
 
 export const HeroSection = () => {
   return (
@@ -38,10 +38,21 @@ export const HeroSection = () => {
           </p>
 
           <div className="pt-4 opacity-0 animate-fade-in-delay-5">
-            <a href="#projects" className="cosmic-button inline-flex items-center gap-2">
-              <Code size={18} />
-              Ver proyectos
-            </a>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <a href="#projects" className="cosmic-button inline-flex items-center gap-2">
+                <Code size={18} />
+                Ver proyectos
+              </a>
+              <a 
+                href="https://github.com/MatiasLuzardo15" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-6 py-2 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-800 dark:bg-slate-700 dark:text-slate-200 dark:hover:bg-slate-600 dark:hover:text-slate-100 transition-all duration-300 font-medium border border-slate-200 dark:border-slate-600 hover:scale-105 active:scale-95"
+              >
+                <Github size={18} />
+                Revisa mi GitHub
+              </a>
+            </div>
           </div>
         </div>
       </div>
