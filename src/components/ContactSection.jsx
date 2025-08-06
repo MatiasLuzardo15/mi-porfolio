@@ -72,74 +72,85 @@ export const ContactSection = () => {
           Siempre estoy dispuesto a conversar sobre nuevas oportunidades y proyectos.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div className="space-y-8">
-            <h3 className="text-2xl font-semibold mb-6 text-center md:text-left">
-              {" "}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+          <div className="order-2 lg:order-1">
+            <h3 className="text-2xl font-semibold mb-6 text-center lg:text-left">
               Información de Contacto
             </h3>
 
-            <div className="space-y-6 flex flex-col items-center md:items-start">
-              <div className="flex items-start space-x-4 w-full max-w-sm">
-                <div className="p-3 rounded-full bg-primary/10 flex-shrink-0">
-                  <Mail className="h-6 w-6 text-primary" />{" "}
+            <div className="space-y-3 lg:space-y-4">
+              <div className="flex flex-col lg:flex-row items-center lg:items-center space-y-2 lg:space-y-0 lg:space-x-3 justify-center lg:justify-start">
+                <div className="p-2 lg:p-3 rounded-full bg-primary/10 flex-shrink-0">
+                  <Mail className="h-4 w-4 lg:h-5 lg:w-5 text-primary" />
                 </div>
-                <div className="text-center md:text-left flex-1">
-                  <h4 className="font-medium">Correo</h4>
+                <div className="text-center lg:text-left min-w-0 flex-1">
+                  <h4 className="font-medium text-sm lg:text-base">Correo</h4>
                   <a
                     href="mailto:luzardomatias440@gmail.com"
-                    className="text-muted-foreground hover:text-primary transition-colors block"
+                    className="text-muted-foreground hover:text-primary transition-colors text-xs lg:text-sm break-all lg:break-normal"
                   >
                     luzardomatias440@gmail.com
                   </a>
                 </div>
               </div>
-              <div className="flex items-start space-x-4 w-full max-w-sm">
-                <div className="p-3 rounded-full bg-primary/10 flex-shrink-0">
-                  <Phone className="h-6 w-6 text-primary" />{" "}
+
+              <div className="flex flex-col lg:flex-row items-center lg:items-center space-y-2 lg:space-y-0 lg:space-x-3 justify-center lg:justify-start">
+                <div className="p-2 lg:p-3 rounded-full bg-primary/10 flex-shrink-0">
+                  <Phone className="h-4 w-4 lg:h-5 lg:w-5 text-primary" />
                 </div>
-                <div className="text-center md:text-left flex-1">
-                  <h4 className="font-medium">Teléfono</h4>
+                <div className="text-center lg:text-left min-w-0 flex-1">
+                  <h4 className="font-medium text-sm lg:text-base">Teléfono</h4>
                   <a
                     href="https://wa.me/598091692885"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-primary transition-colors block"
+                    className="text-muted-foreground hover:text-primary transition-colors text-xs lg:text-sm"
                   >
                     +598 091 692 885
                   </a>
                 </div>
               </div>
-              <div className="flex items-start space-x-4 w-full max-w-sm">
-                <div className="p-3 rounded-full bg-primary/10 flex-shrink-0">
-                  <MapPin className="h-6 w-6 text-primary" />{" "}
+
+              <div className="flex flex-col lg:flex-row items-center lg:items-center space-y-2 lg:space-y-0 lg:space-x-3 justify-center lg:justify-start">
+                <div className="p-2 lg:p-3 rounded-full bg-primary/10 flex-shrink-0">
+                  <MapPin className="h-4 w-4 lg:h-5 lg:w-5 text-primary" />
                 </div>
-                <div className="text-center md:text-left flex-1">
-                  <h4 className="font-medium">Ubicación</h4>
-                  <a className="text-muted-foreground hover:text-primary transition-colors block">
+                <div className="text-center lg:text-left min-w-0 flex-1">
+                  <h4 className="font-medium text-sm lg:text-base">Ubicación</h4>
+                  <span className="text-muted-foreground text-xs lg:text-sm">
                     Florida, Uruguay
-                  </a>
+                  </span>
                 </div>
               </div>
             </div>
 
-            <div className="pt-8 flex flex-col items-center md:items-start">
-              <h4 className="font-medium mb-4 text-center md:text-left">Conéctate Conmigo</h4>
-              <div className="flex space-x-4 justify-center md:justify-start">
-                <a href="https://www.linkedin.com/in/matias-luzardo-a87280248/" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-primary/10 hover:bg-primary/20 transition-colors duration-300">
-                  <Linkedin className="h-6 w-6 text-primary" />
+            <div className="mt-4 lg:mt-6 pt-4 lg:pt-5 border-t border-border/50">
+              <h4 className="font-medium mb-3 text-center lg:text-left text-sm lg:text-base">Conéctate Conmigo</h4>
+              <div className="flex space-x-3 lg:space-x-4 justify-center lg:justify-start">
+                <a 
+                  href="https://www.linkedin.com/in/matias-luzardo-a87280248/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="p-2 lg:p-3 rounded-full bg-primary/10 hover:bg-primary/20 transition-colors duration-300 hover:scale-105"
+                >
+                  <Linkedin className="h-4 w-4 lg:h-5 lg:w-5 text-primary" />
                 </a>
-                <a href="https://www.instagram.com/matias_luzardoo/" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-primary/10 hover:bg-primary/20 transition-colors duration-300">
-                  <Instagram className="h-6 w-6 text-primary" />
+                <a 
+                  href="https://www.instagram.com/matias_luzardoo/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="p-2 lg:p-3 rounded-full bg-primary/10 hover:bg-primary/20 transition-colors duration-300 hover:scale-105"
+                >
+                  <Instagram className="h-4 w-4 lg:h-5 lg:w-5 text-primary" />
                 </a>
               </div>
             </div>
           </div>
 
-          <div className="bg-card p-8 rounded-lg shadow-xs">
-            <h3 className="text-2xl font-semibold mb-6">Envía un Mensaje</h3>
+          <div className="order-1 lg:order-2 bg-card p-6 lg:p-8 rounded-lg shadow-xs">
+            <h3 className="text-2xl font-semibold mb-6 text-center lg:text-left">Envía un Mensaje</h3>
 
-            <form className="space-y-6" onSubmit={handleSubmit}>
+            <form className="space-y-4 lg:space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label
                   htmlFor="name"
@@ -152,8 +163,8 @@ export const ContactSection = () => {
                   id="name"
                   name="name"
                   required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden foucs:ring-2 focus:ring-primary"
-                  placeholder="Matías Luzardo..."
+                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary text-sm lg:text-base"
+                  placeholder="Escribe tu nombre..."
                 />
               </div>
 
@@ -169,7 +180,7 @@ export const ContactSection = () => {
                   id="email"
                   name="email"
                   required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden foucs:ring-2 focus:ring-primary"
+                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary text-sm lg:text-base"
                   placeholder="ejemplo@gmail.com"
                 />
               </div>
@@ -185,7 +196,8 @@ export const ContactSection = () => {
                   id="message"
                   name="message"
                   required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden foucs:ring-2 focus:ring-primary resize-none"
+                  rows="4"
+                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary resize-none text-sm lg:text-base"
                   placeholder="Hola, me gustaría hablar sobre..."
                 />
               </div>
@@ -194,7 +206,7 @@ export const ContactSection = () => {
                 type="submit"
                 disabled={isSubmitting}
                 className={cn(
-                  "cosmic-button w-full flex items-center justify-center gap-2"
+                  "cosmic-button w-full flex items-center justify-center gap-2 py-3 lg:py-2"
                 )}
               >
                 {isSubmitting ? "Enviando..." : "Enviar Mensaje"}
