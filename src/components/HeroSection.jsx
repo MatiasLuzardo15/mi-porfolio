@@ -69,7 +69,7 @@ export const HeroSection = () => {
               {/* Segunda fila en móvil: LinkedIn + GitHub */}
               <div className="flex flex-wrap justify-center gap-3 sm:contents">
                 <a 
-                  href="https://www.linkedin.com/in/matias-luzardo" 
+                  href="https://www.linkedin.com/in/matias-luzardo-a87280248/" 
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-6 py-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 font-medium hover:scale-105 active:scale-95"
