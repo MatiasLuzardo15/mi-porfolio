@@ -80,8 +80,8 @@ export const ContactSection = () => {
 
             <div className="space-y-3 lg:space-y-4">
               <div className="flex flex-col lg:flex-row items-center lg:items-center space-y-2 lg:space-y-0 lg:space-x-3 justify-center lg:justify-start">
-                <div className="p-2 lg:p-3 rounded-full bg-primary/10 flex-shrink-0">
-                  <Mail className="h-4 w-4 lg:h-5 lg:w-5 text-primary" />
+                <div className="p-3 lg:p-3 rounded-full bg-primary/10 flex-shrink-0">
+                  <Mail className="h-5 w-5 lg:h-6 lg:w-6 text-primary" />
                 </div>
                 <div className="text-center lg:text-left min-w-0 flex-1">
                   <h4 className="font-medium text-sm lg:text-base">Correo</h4>
@@ -95,8 +95,8 @@ export const ContactSection = () => {
               </div>
 
               <div className="flex flex-col lg:flex-row items-center lg:items-center space-y-2 lg:space-y-0 lg:space-x-3 justify-center lg:justify-start">
-                <div className="p-2 lg:p-3 rounded-full bg-primary/10 flex-shrink-0">
-                  <Phone className="h-4 w-4 lg:h-5 lg:w-5 text-primary" />
+                <div className="p-3 lg:p-3 rounded-full bg-primary/10 flex-shrink-0">
+                  <Phone className="h-5 w-5 lg:h-6 lg:w-6 text-primary" />
                 </div>
                 <div className="text-center lg:text-left min-w-0 flex-1">
                   <h4 className="font-medium text-sm lg:text-base">Teléfono</h4>
@@ -112,8 +112,8 @@ export const ContactSection = () => {
               </div>
 
               <div className="flex flex-col lg:flex-row items-center lg:items-center space-y-2 lg:space-y-0 lg:space-x-3 justify-center lg:justify-start">
-                <div className="p-2 lg:p-3 rounded-full bg-primary/10 flex-shrink-0">
-                  <MapPin className="h-4 w-4 lg:h-5 lg:w-5 text-primary" />
+                <div className="p-3 lg:p-3 rounded-full bg-primary/10 flex-shrink-0">
+                  <MapPin className="h-5 w-5 lg:h-6 lg:w-6 text-primary" />
                 </div>
                 <div className="text-center lg:text-left min-w-0 flex-1">
                   <h4 className="font-medium text-sm lg:text-base">Ubicación</h4>
@@ -131,17 +131,17 @@ export const ContactSection = () => {
                   href="https://www.linkedin.com/in/matias-luzardo-a87280248/" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="p-2 lg:p-3 rounded-full bg-primary/10 hover:bg-primary/20 transition-colors duration-300 hover:scale-105"
+                  className="p-3 lg:p-3 rounded-full bg-primary/10 hover:bg-primary/20 transition-colors duration-300 hover:scale-105"
                 >
-                  <Linkedin className="h-4 w-4 lg:h-5 lg:w-5 text-primary" />
+                  <Linkedin className="h-5 w-5 lg:h-6 lg:w-6 text-primary" />
                 </a>
                 <a 
                   href="https://www.instagram.com/matias_luzardoo/" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="p-2 lg:p-3 rounded-full bg-primary/10 hover:bg-primary/20 transition-colors duration-300 hover:scale-105"
+                  className="p-3 lg:p-3 rounded-full bg-primary/10 hover:bg-primary/20 transition-colors duration-300 hover:scale-105"
                 >
-                  <Instagram className="h-4 w-4 lg:h-5 lg:w-5 text-primary" />
+                  <Instagram className="h-5 w-5 lg:h-6 lg:w-6 text-primary" />
                 </a>
               </div>
             </div>
