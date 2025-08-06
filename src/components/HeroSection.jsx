@@ -13,7 +13,8 @@ export const HeroSection = () => {
             <div className="relative">
               <img 
                 src="/images/profile.jpg" 
-                alt="Matias Luzardo" 
+                alt="Matías Luzardo - Desarrollador Web Uruguay especializado en React JavaScript WordPress" 
+                title="Matías Luzardo - Portfolio Desarrollador Web"
                 className="w-40 h-40 md:w-48 md:h-48 rounded-full border-4 border-primary/20 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
               />
               <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/10 to-transparent"></div>
@@ -33,7 +34,7 @@ export const HeroSection = () => {
           </h1>
 
           <p className="text-lg md:text-xl text-muted-foreground max-2-2xl mx-auto opacity-0 animate-fade-in-delay-4">
-            Estudiante de <span className="text-primary font-semibold">3.º semestre</span> de <span className="text-blue-400 font-semibold">Lic. en TI</span> con habilidades en <span className="text-green-400 font-semibold">desarrollo web</span> (<span className="text-orange-400 font-semibold">HTML</span>, <span className="text-blue-500 font-semibold">CSS</span>, <span className="text-cyan-400 font-semibold">Tailwind</span>, <span className="text-yellow-400 font-semibold">JavaScript</span>), conocimientos en <span className="text-pink-400 font-semibold">testing</span>, <span className="text-purple-400 font-semibold">infraestructura de redes</span>, <span className="text-indigo-400 font-semibold">bases de datos relacionales</span> y una base en <span className="text-red-400 font-semibold">marketing digital</span>.
+            <span className="text-primary font-semibold">Desarrollador Web</span> en <span className="text-blue-400 font-semibold">Uruguay</span> con conocimientos en <span className="text-green-400 font-semibold">React</span>, <span className="text-yellow-400 font-semibold">JavaScript</span> y <span className="text-orange-400 font-semibold">WordPress</span>. Estudiante de <span className="text-cyan-400 font-semibold">Tecnologías de la Información</span> con experiencia en <span className="text-pink-400 font-semibold">desarrollo frontend</span>, <span className="text-purple-400 font-semibold">backend</span>, <span className="text-indigo-400 font-semibold">bases de datos</span> y <span className="text-red-400 font-semibold">marketing digital</span>. Creando soluciones web modernas y responsivas.
           </p>
 
           <div className="pt-4 opacity-0 animate-fade-in-delay-5">

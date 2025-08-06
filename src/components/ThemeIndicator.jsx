@@ -13,14 +13,11 @@ export const ThemeIndicator = () => {
       setIsDark(isDarkMode);
       setShow(true);
       
-      // Ocultar después de 2 segundos
       setTimeout(() => setShow(false), 2000);
     };
 
-    // Escuchar cambios en localStorage
     window.addEventListener("storage", handleStorageChange);
     
-    // También escuchar cambios directos (para la misma pestaña)
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.attributeName === "class") {

@@ -13,11 +13,11 @@ export const AboutSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <h3 className="text-2xl font-semibold">
-              Estudiante de Tecnologías de la Información
+              Desarrollador Web Frontend & Backend | Uruguay
             </h3>
 
             <p className="text-muted-foreground">
-              Soy Matías, estudiante de <span className="text-primary font-semibold">4.º semestre</span> de <span className="text-blue-400 font-semibold">Licenciatura en Tecnologías de la Información</span>. He participado en <span className="text-green-400 font-semibold">proyectos integradores</span> aplicando conocimientos en <span className="text-yellow-400 font-semibold">programación</span>, <span className="text-purple-400 font-semibold">bases de datos</span>, <span className="text-cyan-400 font-semibold">redes</span> y <span className="text-pink-400 font-semibold">testing</span>. Además, me he formado de manera autodidacta en <span className="text-blue-500 font-semibold">desarrollo web</span>, <span className="text-violet-400 font-semibold">WordPress</span> y <span className="text-orange-400 font-semibold">marketing digital</span>, lo que me brinda una visión más completa para crear soluciones funcionales y atractivas.
+              Soy <span className="text-primary font-semibold">Matías Luzardo</span>, <span className="text-blue-400 font-semibold">desarrollador web</span> y estudiante de <span className="text-green-400 font-semibold">4.º semestre de Tecnologías de la Información</span> en <span className="text-cyan-400 font-semibold">Uruguay</span>. Con conocimientos en <span className="text-yellow-400 font-semibold">React</span>, <span className="text-purple-400 font-semibold">JavaScript</span>, <span className="text-pink-400 font-semibold">WordPress</span> y <span className="text-violet-400 font-semibold">TailwindCSS</span>. Con experiencia en <span className="text-blue-500 font-semibold">desarrollo frontend</span>, <span className="text-orange-400 font-semibold">backend</span>, <span className="text-red-400 font-semibold">bases de datos</span> y <span className="text-indigo-400 font-semibold">marketing digital</span>, creo soluciones web modernas, responsivas y funcionales para clientes internacionales.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">

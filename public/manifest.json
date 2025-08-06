@@ -1,0 +1,31 @@
+{
+  "name": "Matías Luzardo - Portfolio Desarrollador Web",
+  "short_name": "Matías Luzardo",
+  "description": "Portfolio profesional de Matías Luzardo, desarrollador web especializado en React, JavaScript y WordPress desde Uruguay",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "categories": ["business", "productivity", "portfolio"],
+  "lang": "es-UY",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/banner.png",
+      "sizes": "1280x640",
+      "type": "image/png",
+      "label": "Portfolio de Matías Luzardo"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

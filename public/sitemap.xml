@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Página principal -->
+  <url>
+    <loc>https://matias-luzardo-portfolio.vercel.app/</loc>
+    <lastmod>2025-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://matias-luzardo-portfolio.vercel.app/images/profile.jpg</image:loc>
+      <image:title>Matías Luzardo - Desarrollador Web</image:title>
+      <image:caption>Foto de perfil de Matías Luzardo, desarrollador web especializado en React y WordPress</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://matias-luzardo-portfolio.vercel.app/banner.png</image:loc>
+      <image:title>Portfolio Banner - Matías Luzardo</image:title>
+      <image:caption>Banner del portfolio de Matías Luzardo</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Sección Acerca de -->
+  <url>
+    <loc>https://matias-luzardo-portfolio.vercel.app/#about</loc>
+    <lastmod>2025-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Sección Proyectos -->
+  <url>
+    <loc>https://matias-luzardo-portfolio.vercel.app/#projects</loc>
+    <lastmod>2025-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://matias-luzardo-portfolio.vercel.app/projects/project1.png</image:loc>
+      <image:title>Weatherl - Aplicación del Clima</image:title>
+      <image:caption>Aplicación del clima desarrollada con React y Framer Motion</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://matias-luzardo-portfolio.vercel.app/projects/project2.png</image:loc>
+      <image:title>Cold Laked Store - E-commerce</image:title>
+      <image:caption>Tienda en línea desarrollada con WordPress</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Sección Habilidades -->
+  <url>
+    <loc>https://matias-luzardo-portfolio.vercel.app/#skills</loc>
+    <lastmod>2025-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Sección Contacto -->
+  <url>
+    <loc>https://matias-luzardo-portfolio.vercel.app/#contact</loc>
+    <lastmod>2025-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Expediente Académico -->
+  <url>
+    <loc>https://matias-luzardo-portfolio.vercel.app/Expediente_Academico.pdf</loc>
+    <lastmod>2025-08-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+</urlset>

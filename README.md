@@ -127,7 +127,7 @@ La aplicación estará disponible en: [http://localhost:5173](http://localhost:5
 
 ## 📬 Contacto
 
-* **Email**: matiasluzardo1501@gmail.com
+* **Email**: luzardomatias440@gmail.com
 * **LinkedIn**: [Matias Luzardo](https://www.linkedin.com/in/matias-luzardo-8bb785264/)
 * **Instagram**: [@matias_luzardo15](https://www.instagram.com/matias_luzardo15/)
 * **GitHub**: [MatiasLuzardo15](https://github.com/MatiasLuzardo15)
