@@ -14,20 +14,43 @@ const navItems = [
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.screenY > 10);
+      const currentScrollY = window.scrollY;
+      
+      // Determinar si ha hecho scroll
+      setIsScrolled(currentScrollY > 10);
+      
+      // Determinar la dirección del scroll y visibilidad
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down & not at top
+        setIsVisible(false);
+      } else if (currentScrollY < lastScrollY || currentScrollY <= 100) {
+        // Scrolling up or near top
+        setIsVisible(true);
+      }
+      
+      setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [lastScrollY]);
   return (
     <nav
       className={cn(
-        "fixed w-full z-40 transition-all duration-300",
-        isScrolled ? "py-3 bg-background/80 backdrop-blur-md shadow-xs" : "py-5"
+        "fixed w-full z-40 transition-all duration-500 ease-in-out",
+        // Visibilidad basada en scroll
+        isVisible ? "translate-y-0" : "-translate-y-full",
+        // Estilos de fondo con blur mejorado para móvil
+        isScrolled 
+          ? "py-3 bg-background/70 md:bg-background/80 backdrop-blur-xl shadow-lg border-b border-border/20" 
+          : "py-5",
+        // Estilo flotante en móvil cuando está scrolled
+        isScrolled && "md:mx-4 md:mt-4 md:rounded-2xl md:shadow-2xl"
       )}
     >
       <div className="container flex items-center justify-between">
