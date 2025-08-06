@@ -6,7 +6,7 @@ export const HeroSection = () => {
       id="hero"
       className="relative min-h-screen flex flex-col items-center justify-center px-4"
     >
-      <div className="container max-w-4xl mx-auto text-center z-10 pb-16 md:pb-20">
+      <div className="container max-w-4xl mx-auto text-center z-10 pb-12 md:pb-16">
         <div className="space-y-6">
           {/* Imagen de perfil circular */}
           <div className="flex justify-center mb-6 opacity-0 animate-fade-in">
