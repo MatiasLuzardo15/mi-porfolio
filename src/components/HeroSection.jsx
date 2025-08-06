@@ -6,7 +6,7 @@ export const HeroSection = () => {
       id="hero"
       className="relative min-h-screen flex flex-col items-center justify-center px-4"
     >
-      <div className="container max-w-4xl mx-auto text-center z-10 pb-12 md:pb-16">
+      <div className="container max-w-4xl mx-auto text-center z-10 pb-16 md:pb-20">
         <div className="space-y-6">
           {/* Imagen de perfil circular */}
           <div className="flex justify-center mb-6 opacity-0 animate-fade-in">
@@ -89,7 +89,7 @@ export const HeroSection = () => {
             block: 'start'
           });
         }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-0 animate-fade-in-delay-4 group cursor-pointer transition-all duration-500 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary/30 rounded-full p-3"
+        className="absolute bottom-4 md:bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-0 animate-fade-in-delay-4 group cursor-pointer transition-all duration-500 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary/30 rounded-full p-3"
         aria-label="Ver mis proyectos"
       >
         <div className="text-center">
