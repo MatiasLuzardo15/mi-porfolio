@@ -25,7 +25,7 @@ const projects = [
     description: "Portfolio personal desarrollado con React, Vite y TailwindCSS. Diseño moderno, responsivo y optimizado para SEO con animaciones suaves y tema oscuro/claro.",
     image: "/projects/project3.png",
     tags: ["React", "Vite", "Tailwind CSS", "React Router"],
-    demoUrl: "http://localhost:5173/",
+    demoUrl: "https://matiasluzardo.com",
     githubUrl: "https://github.com/MatiasLuzardo15/mi-porfolio",
   },
 ];
@@ -74,13 +74,15 @@ export const ProjectsSection = () => {
                 </p>
                 <div className="flex justify-between items-center">
                   <div className="flex space-x-3">
-                    <a
-                      href={project.demoUrl}
-                      target="_blank"
-                      className="text-foreground/80 hover:text-primary transition-colors duration-300"
-                    >
-                      <ExternalLink size={20} />
-                    </a>
+                    {project.id !== 3 && (
+                      <a
+                        href={project.demoUrl}
+                        target="_blank"
+                        className="text-foreground/80 hover:text-primary transition-colors duration-300"
+                      >
+                        <ExternalLink size={20} />
+                      </a>
+                    )}
                     {project.githubUrl && (
                       <a
                         href={project.githubUrl}

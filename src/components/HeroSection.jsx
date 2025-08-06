@@ -6,7 +6,7 @@ export const HeroSection = () => {
       id="hero"
       className="relative min-h-screen flex flex-col items-center justify-center px-4"
     >
-      <div className="container max-w-4xl mx-auto text-center z-10">
+      <div className="container max-w-4xl mx-auto text-center z-10 pb-16 md:pb-20">
         <div className="space-y-6">
           {/* Imagen de perfil circular */}
           <div className="flex justify-center mb-6 opacity-0 animate-fade-in">
@@ -46,10 +46,31 @@ export const HeroSection = () => {
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
-        <span className="text-base md:text-lg text-muted-foreground mb-2">Desliza para explorar</span>
-        <ArrowDown className="h-5 w-5 text-primary" />
-      </div>
+      {/* Intuitive "explore more" button */}
+      <button 
+        onClick={() => {
+          document.getElementById('projects')?.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-0 animate-fade-in-delay-5 group cursor-pointer transition-all duration-500 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary/30 rounded-full p-3"
+        aria-label="Ver mis proyectos"
+      >
+        <div className="text-center">
+          {/* Beautiful cascading arrows */}
+          <div className="flex flex-col items-center space-y-1">
+            <ArrowDown className="h-4 w-4 text-primary/60 group-hover:text-primary animate-bounce transition-colors duration-300" style={{animationDelay: '0ms'}} />
+            <ArrowDown className="h-5 w-5 text-primary/80 group-hover:text-primary animate-bounce transition-colors duration-300" style={{animationDelay: '150ms'}} />
+            <ArrowDown className="h-4 w-4 text-primary/60 group-hover:text-primary animate-bounce transition-colors duration-300" style={{animationDelay: '300ms'}} />
+          </div>
+          
+          {/* Elegant call to action text */}
+          <span className="text-sm text-muted-foreground/80 group-hover:text-primary/90 tracking-wide hidden sm:block transition-all duration-300 mt-3 font-bold">
+            Mis Proyectos
+          </span>
+        </div>
+      </button>
     </section>
   );
 };
