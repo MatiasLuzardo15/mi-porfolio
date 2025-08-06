@@ -1,4 +1,4 @@
-import { ArrowDown, Code, Github } from "lucide-react";
+import { ArrowDown, Code, Github, Linkedin } from "lucide-react";
 
 export const HeroSection = () => {
   return (
@@ -7,9 +7,9 @@ export const HeroSection = () => {
       className="relative min-h-screen flex flex-col items-center justify-center px-4"
     >
       <div className="container max-w-4xl mx-auto text-center z-10 pb-12 md:pb-16">
-        <div className="space-y-6">
+        <div className="space-y-3">
           {/* Imagen de perfil circular */}
-          <div className="flex justify-center mb-6 opacity-0 animate-fade-in">
+          <div className="flex justify-center mb-2 opacity-0 animate-fade-in">
             <div className="relative">
               <img 
                 src="/images/profile.jpg" 
@@ -33,25 +33,57 @@ export const HeroSection = () => {
             </span>
           </h1>
 
-          <p className="text-lg md:text-xl text-muted-foreground max-2-2xl mx-auto opacity-0 animate-fade-in-delay-4">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto opacity-0 animate-fade-in-delay-4">
             <span className="text-primary font-semibold">Desarrollador Web</span> en <span className="text-blue-400 font-semibold">Uruguay</span> con conocimientos en <span className="text-green-400 font-semibold">React</span>, <span className="text-yellow-400 font-semibold">JavaScript</span> y <span className="text-orange-400 font-semibold">WordPress</span>. Estudiante de <span className="text-cyan-400 font-semibold">Tecnologías de la Información</span> con experiencia en <span className="text-pink-400 font-semibold">desarrollo frontend</span>, <span className="text-purple-400 font-semibold">backend</span>, <span className="text-indigo-400 font-semibold">bases de datos</span> y <span className="text-red-400 font-semibold">marketing digital</span>. Creando soluciones web modernas y responsivas.
           </p>
 
-          <div className="pt-4 opacity-0 animate-fade-in-delay-5">
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <a href="#projects" className="cosmic-button inline-flex items-center gap-2">
-                <Code size={18} />
-                Ver proyectos
-              </a>
-              <a 
-                href="https://github.com/MatiasLuzardo15" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-6 py-2 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-800 dark:bg-slate-700 dark:text-slate-200 dark:hover:bg-slate-600 dark:hover:text-slate-100 transition-all duration-300 font-medium border border-slate-200 dark:border-slate-600 hover:scale-105 active:scale-95"
-              >
-                <Github size={18} />
-                Revisa mi GitHub
-              </a>
+          <div className="pt-2 opacity-0 animate-fade-in-delay-5">
+            {/* Layout estilo collage para móvil, fila para desktop */}
+            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center max-w-lg mx-auto sm:max-w-none">
+              {/* Primera fila en móvil: Disponibilidad + Ver proyectos */}
+              <div className="flex flex-wrap justify-center gap-3 sm:contents">
+                {/* Botón de disponibilidad */}
+                <a 
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=luzardomatias440@gmail.com&su=Oportunidad%20Laboral&body=Hola%20Matías,%0A%0AEstoy%20interesado%20en%20contactarte%20sobre%20una%20oportunidad%20laboral."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-green-400 rounded-full text-sm font-medium text-white shadow-sm hover:bg-green-500 transition-all duration-300 hover:scale-105"
+                >
+                  <div className="relative">
+                    <div className="w-2 h-2 bg-white rounded-full"></div>
+                    <div className="absolute inset-0 w-2 h-2 bg-white rounded-full animate-ping opacity-75"></div>
+                  </div>
+                  Disponible para nuevas oportunidades
+                </a>
+                
+                <a href="#projects" className="cosmic-button inline-flex items-center gap-2">
+                  <Code size={18} />
+                  Ver proyectos
+                </a>
+              </div>
+              
+              {/* Segunda fila en móvil: LinkedIn + GitHub */}
+              <div className="flex flex-wrap justify-center gap-3 sm:contents">
+                <a 
+                  href="https://www.linkedin.com/in/matias-luzardo" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-6 py-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 font-medium hover:scale-105 active:scale-95"
+                >
+                  <Linkedin size={18} />
+                  LinkedIn
+                </a>
+                
+                <a 
+                  href="https://github.com/MatiasLuzardo15" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-6 py-2 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-800 dark:bg-slate-700 dark:text-slate-200 dark:hover:bg-slate-600 dark:hover:text-slate-100 transition-all duration-300 font-medium border border-slate-200 dark:border-slate-600 hover:scale-105 active:scale-95"
+                >
+                  <Github size={18} />
+                  GitHub
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -65,7 +97,7 @@ export const HeroSection = () => {
             block: 'start'
           });
         }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-0 animate-fade-in-delay-5 group cursor-pointer transition-all duration-500 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary/30 rounded-full p-3"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-0 animate-fade-in-delay-4 group cursor-pointer transition-all duration-500 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary/30 rounded-full p-3"
         aria-label="Ver mis proyectos"
       >
         <div className="text-center">

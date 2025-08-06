@@ -1,7 +1,6 @@
-import { ArrowRight, ExternalLink, Github, FolderOpen } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
+import { ExternalLink, FolderOpen, Github } from "lucide-react";
 
-// Función para obtener el ícono y color de cada tecnología
+// Función para obtener el ícono y color de tecnología
 const getTechIcon = (tech) => {
   const icons = {
     "React": { 
@@ -111,39 +110,11 @@ const projects = [
 ];
 
 export const ProjectsSection = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-      },
-      { threshold: 0.3 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <section 
-      ref={sectionRef}
       id="projects" 
-      className={`py-16 px-4 relative overflow-hidden transition-all duration-1000 ${
-        isVisible ? 'bg-gradient-to-br from-primary/8 via-primary/2 to-secondary/12' : ''
-      }`}
+      className="py-16 px-4 relative overflow-hidden"
     >
-      {/* Efectos de difuminación que aparecen cuando la sección está visible */}
-      <div className={`absolute inset-0 transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="absolute top-10 -left-10 w-40 h-40 bg-primary/8 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-10 -right-10 w-48 h-48 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-700"></div>
-        <div className="absolute top-1/2 left-1/3 w-32 h-32 bg-primary/5 rounded-full blur-2xl animate-pulse delay-300"></div>
-      </div>
-      
       <div className="container mx-auto max-w-5xl relative z-10">
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center flex items-center justify-center gap-3">
           <FolderOpen className="text-primary" size={36} />
@@ -217,18 +188,6 @@ export const ProjectsSection = () => {
               </div>
             </div>
           ))}
-        </div>
-
-        <div className="text-center mt-12">
-          <a
-            className="cosmic-button w-fit flex items-center mx-auto gap-2"
-            target="_blank"
-            href="https://github.com/MatiasLuzardo15"
-          >
-            <Github size={16} />
-            Revisa mi GitHub 
-            <ArrowRight size={16} />
-          </a>
         </div>
       </div>
     </section>
