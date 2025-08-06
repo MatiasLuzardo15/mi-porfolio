@@ -47,7 +47,7 @@ export const Navbar = () => {
         isVisible ? "translate-y-0" : "-translate-y-full",
         // Estilos de fondo con blur mejorado para móvil
         isScrolled 
-          ? "py-3 bg-background/70 md:bg-background/80 backdrop-blur-xl shadow-lg border-b border-border/20" 
+          ? "py-3 bg-background/85 md:bg-background/90 backdrop-blur-xl shadow-lg border-b border-border/20" 
           : "py-5",
         // Estilo flotante en móvil cuando está scrolled
         isScrolled && "md:mx-4 md:mt-4 md:rounded-2xl md:shadow-2xl"
@@ -93,7 +93,7 @@ export const Navbar = () => {
         {/* Mobile menu overlay */}
         <div
           className={cn(
-            "fixed top-0 left-0 w-full h-screen bg-background/95 backdrop-blur-md z-50 flex flex-col items-center justify-center",
+            "fixed top-0 left-0 w-full h-screen bg-background/98 backdrop-blur-md z-50 flex flex-col items-center justify-center",
             "transition-all duration-300 md:hidden",
             isMenuOpen
               ? "opacity-100 pointer-events-auto"
