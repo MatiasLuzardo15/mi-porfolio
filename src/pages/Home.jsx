@@ -1,5 +1,5 @@
 import { Navbar } from "../components/Navbar";
-import { StarBackground } from "@/components/StarBackground";
+import { ProfessionalBackground } from "@/components/StarBackground";
 import { HeroSection } from "../components/HeroSection";
 import { AboutSection } from "../components/AboutSection";
 import { ProjectsSection } from "../components/ProjectsSection";
@@ -12,8 +12,8 @@ export const Home = () => {
   
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      {/* Background Effects */}
-      <StarBackground />
+      {/* Professional Background */}
+      <ProfessionalBackground />
 
       {/* Navbar */}
       <Navbar />

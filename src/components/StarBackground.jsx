@@ -1,66 +1,25 @@
-import { useEffect, useState, useMemo } from "react";
-
-export const StarBackground = () => {
-  const [stars, setStars] = useState([]);
-
-  // Memoizar el cálculo de estrellas para evitar recálculos innecesarios
-  const starCount = useMemo(() => {
-    if (typeof window === 'undefined') return 50; // SSR safety
-    return Math.min(
-      Math.floor((window.innerWidth * window.innerHeight) / 15000),
-      100 // Límite máximo para mejor rendimiento
-    );
-  }, []);
-
-  useEffect(() => {
-    generateStars();
-
-    // Debounce resize handler para mejor rendimiento
-    let resizeTimeout;
-    const handleResize = () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(generateStars, 250);
-    };
-
-    window.addEventListener("resize", handleResize, { passive: true });
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      clearTimeout(resizeTimeout);
-    };
-  }, [starCount]);
-
-  const generateStars = () => {
-    const newStars = [];
-
-    for (let i = 0; i < starCount; i++) {
-      newStars.push({
-        id: i,
-        size: Math.random() * 2 + 1, // Tamaño reducido
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-        opacity: Math.random() * 0.5 + 0.5,
-      });
-    }
-
-    setStars(newStars);
-  };
-
+export const ProfessionalBackground = () => {
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-      {stars.map((star) => (
-        <div
-          key={star.id}
-          className="star"
-          style={{
-            width: star.size + "px",
-            height: star.size + "px",
-            left: star.x + "%",
-            top: star.y + "%",
-            opacity: star.opacity,
-          }}
-        />
-      ))}
+      {/* Gradiente sutil y profesional */}
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-muted/10 dark:from-background dark:via-background dark:to-primary/5" />
+      
+      {/* Efectos geométricos sutiles */}
+      <div className="absolute top-0 left-0 w-full h-full opacity-30 dark:opacity-20">
+        {/* Círculos sutiles en las esquinas */}
+        <div className="absolute -top-40 -left-40 w-80 h-80 rounded-full bg-primary/5 blur-3xl" />
+        <div className="absolute -bottom-40 -right-40 w-80 h-80 rounded-full bg-accent/5 blur-3xl" />
+        <div className="absolute top-1/3 -right-60 w-96 h-96 rounded-full bg-muted/5 blur-3xl" />
+      </div>
+      
+      {/* Grid sutil para textura */}
+      <div 
+        className="absolute inset-0 opacity-[0.03] dark:opacity-[0.02]"
+        style={{
+          backgroundImage: `radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)`,
+          backgroundSize: '20px 20px'
+        }}
+      />
     </div>
   );
 };
