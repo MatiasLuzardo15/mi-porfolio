@@ -22,14 +22,8 @@ export default defineConfig({
         },
       },
     },
-    // Compresión y optimización
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
-    },
+    // Usar minificación por defecto (esbuild) que es más compatible
+    minify: 'esbuild',
     // Optimización de assets
     assetsInlineLimit: 4096,
   },
