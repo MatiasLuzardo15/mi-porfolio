@@ -1,12 +1,8 @@
 import {
-  Instagram,
-  Linkedin,
   Mail,
   MapPin,
   Phone,
   Send,
-  Twitch,
-  Twitter,
   MessageSquare,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -60,7 +56,7 @@ export const ContactSection = () => {
     }
   };
   return (
-    <section id="contact" className="py-20 px-4 relative">
+    <section id="contact" className="pt-20 pb-12 px-4 relative">
       <div className="container mx-auto max-w-5xl">
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-center flex items-center justify-center gap-3">
           <MessageSquare className="text-primary" size={42} />
@@ -121,28 +117,6 @@ export const ContactSection = () => {
                     Florida, Uruguay
                   </span>
                 </div>
-              </div>
-            </div>
-
-            <div className="mt-4 lg:mt-6 pt-4 lg:pt-5 border-t border-border/50">
-              <h4 className="font-medium mb-3 text-center lg:text-left text-sm lg:text-base">Conéctate Conmigo</h4>
-              <div className="flex space-x-3 lg:space-x-4 justify-center lg:justify-start">
-                <a 
-                  href="https://www.linkedin.com/in/matias-luzardo-a87280248/" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="p-3 lg:p-3 rounded-full bg-primary/10 hover:bg-primary/20 transition-colors duration-300 hover:scale-105"
-                >
-                  <Linkedin className="h-5 w-5 lg:h-6 lg:w-6 text-primary" />
-                </a>
-                <a 
-                  href="https://www.instagram.com/matias_luzardoo/" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="p-3 lg:p-3 rounded-full bg-primary/10 hover:bg-primary/20 transition-colors duration-300 hover:scale-105"
-                >
-                  <Instagram className="h-5 w-5 lg:h-6 lg:w-6 text-primary" />
-                </a>
               </div>
             </div>
           </div>

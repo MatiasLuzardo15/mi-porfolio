@@ -25,8 +25,7 @@ export const HeroSection = () => {
             </div>
           </div>
 
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-            <span className="opacity-0 animate-fade-in-delay-1"> Hola, soy</span>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight">
             <span className="text-primary opacity-0 animate-fade-in-delay-2">
               {" "}
               Matias
@@ -58,7 +57,7 @@ export const HeroSection = () => {
               </a>
               
               <a 
-                href="https://www.linkedin.com/in/matias-luzardo" 
+                href="https://www.linkedin.com/in/matias-luzardo-a87280248/" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-6 py-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 font-medium hover:scale-105 active:scale-95"
@@ -81,7 +80,7 @@ export const HeroSection = () => {
         </div>
       </div>
 
-      {/* Intuitive "explore more" button */}
+      {/* Flecha minimalista */}
       <button 
         onClick={() => {
           document.getElementById('projects')?.scrollIntoView({ 
@@ -89,17 +88,10 @@ export const HeroSection = () => {
             block: 'start'
           });
         }}
-        className="absolute bottom-4 md:bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-0 animate-fade-in-delay-4 group cursor-pointer transition-all duration-500 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary/30 rounded-full p-3"
-        aria-label="Ver mis proyectos"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 animate-fade-in-delay-4 group cursor-pointer transition-all duration-200 hover:scale-110"
+        aria-label="Ver proyectos"
       >
-        <div className="text-center">
-          {/* Beautiful cascading arrows */}
-          <div className="flex flex-col items-center space-y-1">
-            <ArrowDown className="h-4 w-4 text-primary/60 group-hover:text-primary animate-bounce transition-colors duration-300" style={{animationDelay: '0ms'}} />
-            <ArrowDown className="h-5 w-5 text-primary/80 group-hover:text-primary animate-bounce transition-colors duration-300" style={{animationDelay: '150ms'}} />
-            <ArrowDown className="h-4 w-4 text-primary/60 group-hover:text-primary animate-bounce transition-colors duration-300" style={{animationDelay: '300ms'}} />
-          </div>
-        </div>
+        <ArrowDown className="h-6 w-6 text-primary/70 hover:text-primary animate-bounce transition-colors duration-200" />
       </button>
     </section>
   );
