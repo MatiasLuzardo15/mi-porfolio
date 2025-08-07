@@ -1,31 +1,42 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 export const StarBackground = () => {
   const [stars, setStars] = useState([]);
 
+  // Memoizar el cálculo de estrellas para evitar recálculos innecesarios
+  const starCount = useMemo(() => {
+    if (typeof window === 'undefined') return 50; // SSR safety
+    return Math.min(
+      Math.floor((window.innerWidth * window.innerHeight) / 15000),
+      100 // Límite máximo para mejor rendimiento
+    );
+  }, []);
+
   useEffect(() => {
     generateStars();
 
+    // Debounce resize handler para mejor rendimiento
+    let resizeTimeout;
     const handleResize = () => {
-      generateStars();
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(generateStars, 250);
     };
 
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", handleResize, { passive: true });
 
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      clearTimeout(resizeTimeout);
+    };
+  }, [starCount]);
 
   const generateStars = () => {
-    const numberOfStars = Math.floor(
-      (window.innerWidth * window.innerHeight) / 10000
-    );
-
     const newStars = [];
 
-    for (let i = 0; i < numberOfStars; i++) {
+    for (let i = 0; i < starCount; i++) {
       newStars.push({
         id: i,
-        size: Math.random() * 3 + 1,
+        size: Math.random() * 2 + 1, // Tamaño reducido
         x: Math.random() * 100,
         y: Math.random() * 100,
         opacity: Math.random() * 0.5 + 0.5,

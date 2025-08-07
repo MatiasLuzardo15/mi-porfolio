@@ -10,4 +10,37 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    // Optimizaciones para mejor estabilidad
+    chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          router: ['react-router-dom'],
+          icons: ['lucide-react'],
+        },
+      },
+    },
+    // Compresión y optimización
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
+    // Optimización de assets
+    assetsInlineLimit: 4096,
+  },
+  // Optimización del servidor de desarrollo
+  server: {
+    hmr: {
+      overlay: false,
+    },
+  },
+  // Preload de dependencias críticas
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom', 'lucide-react'],
+  },
 });

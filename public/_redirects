@@ -1,0 +1,9 @@
+# SPA redirects for React Router
+/*    /index.html   200
+
+# Force HTTPS
+http://matiasluzardo.com/*    https://matiasluzardo.com/:splat    301!
+http://www.matiasluzardo.com/*    https://matiasluzardo.com/:splat    301!
+
+# Cache optimization headers
+/assets/*    /assets/:splat    200    Cache-Control: public,max-age=31536000,immutable
