@@ -190,7 +190,7 @@ export const LearningSection = () => {
   };
 
   return (
-    <section id="aprendizaje" className="relative py-20 px-4 bg-muted/20 overflow-hidden">
+    <section id="aprendizaje" className="relative py-12 px-4 bg-muted/20 overflow-hidden">
       <div className="container mx-auto max-w-7xl relative z-10">
         {/* Header - Con animación de aparición */}
         <div className="text-center mb-12 opacity-100 transform translate-y-0 transition-all duration-700">
@@ -309,90 +309,6 @@ export const LearningSection = () => {
                   (Click para {autoScrollEnabled ? 'pausar' : 'reanudar'})
                 </span>
               </button>
-            )}
-            
-            {/* Scrollbar estilo perilla de volumen para móviles */}
-            {(isIOS || isAndroid) && (
-              <div className="flex flex-col items-center gap-4 mt-6">
-                <div className="relative w-64 h-12 bg-gradient-to-b from-muted/20 to-muted/40 rounded-lg border border-border/50 shadow-inner p-2">
-                  {/* Canal principal de la scrollbar */}
-                  <div className="relative w-full h-full">
-                    {/* Pista principal con efecto hundido */}
-                    <div className="absolute top-1/2 left-2 right-2 h-2 bg-gradient-to-b from-muted-foreground/30 to-muted-foreground/10 rounded-full transform -translate-y-1/2 shadow-inner border border-muted-foreground/20" />
-                    
-                    {/* Barra de progreso que sigue al thumb */}
-                    <div 
-                      className="absolute top-1/2 left-2 h-2 bg-gradient-to-r from-primary/60 to-primary/30 rounded-full transform -translate-y-1/2 transition-all duration-100"
-                      style={{ 
-                        width: '20%', // Se actualiza dinámicamente
-                        boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.1)'
-                      }}
-                      id="progress-bar"
-                    />
-                    
-                    {/* Thumb estilo perilla profesional */}
-                    <div 
-                      className="absolute w-6 h-8 bg-gradient-to-b from-background via-background/95 to-background/90 border-2 border-primary/70 rounded-md cursor-pointer transform -translate-y-1/2 transition-all duration-150 hover:border-primary active:scale-95 shadow-lg"
-                      style={{
-                        left: '20%',
-                        top: '50%',
-                        transform: 'translateX(-50%) translateY(-50%)',
-                        boxShadow: '0 2px 8px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1)'
-                      }}
-                      onTouchStart={(e) => {
-                        const touch = e.touches[0];
-                        const rect = e.currentTarget.parentElement.getBoundingClientRect();
-                        e.currentTarget.dataset.startX = touch.clientX;
-                        e.currentTarget.dataset.startLeft = touch.clientX - rect.left;
-                        e.currentTarget.style.transition = 'none';
-                        
-                        // Añadir feedback visual
-                        e.currentTarget.style.transform = 'translateX(-50%) translateY(-50%) scale(0.98)';
-                      }}
-                      onTouchMove={(e) => {
-                        e.preventDefault();
-                        const touch = e.touches[0];
-                        const rect = e.currentTarget.parentElement.getBoundingClientRect();
-                        const startX = parseFloat(e.currentTarget.dataset.startX);
-                        const startLeft = parseFloat(e.currentTarget.dataset.startLeft);
-                        
-                        // Calcular nueva posición con límites del canal
-                        const deltaX = touch.clientX - startX;
-                        const trackWidth = rect.width - 16; // Ancho del canal menos márgenes
-                        const newLeft = Math.max(8, Math.min(rect.width - 8, startLeft + deltaX));
-                        const percentage = (newLeft - 8) / trackWidth;
-                        
-                        // Actualizar posición del thumb
-                        e.currentTarget.style.left = `${newLeft}px`;
-                        
-                        // Actualizar barra de progreso
-                        const progressBar = document.getElementById('progress-bar');
-                        if (progressBar) {
-                          progressBar.style.width = `${percentage * (trackWidth)}px`;
-                        }
-                        
-                        // Scroll suavizado de certificados
-                        if (scrollContainerRef.current) {
-                          const maxScroll = scrollContainerRef.current.scrollWidth - scrollContainerRef.current.offsetWidth;
-                          const targetScroll = percentage * maxScroll;
-                          const currentScroll = scrollContainerRef.current.scrollLeft;
-                          const smoothedScroll = currentScroll + (targetScroll - currentScroll) * 0.4;
-                          scrollContainerRef.current.scrollLeft = smoothedScroll;
-                        }
-                      }}
-                      onTouchEnd={(e) => {
-                        e.currentTarget.style.transition = 'all 0.15s ease-out';
-                        e.currentTarget.style.transform = 'translateX(-50%) translateY(-50%) scale(1)';
-                      }}
-                    >
-                      {/* Detalles del thumb estilo hardware */}
-                      <div className="absolute top-1/2 left-1/2 w-1 h-4 bg-primary/60 rounded-full transform -translate-x-1/2 -translate-y-1/2" />
-                      <div className="absolute top-1 left-1/2 w-3 h-px bg-primary/30 transform -translate-x-1/2" />
-                      <div className="absolute bottom-1 left-1/2 w-3 h-px bg-primary/30 transform -translate-x-1/2" />
-                    </div>
-                  </div>
-                </div>
-              </div>
             )}
           </div>
         </div>
