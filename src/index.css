@@ -178,6 +178,17 @@
   }
 }
 
+/* Scrollbar personalizado para carrusel */
+.scrollbar-hide {
+  /* Firefox */
+  scrollbar-width: none;
+  /* Safari and Chrome */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* Efectos profesionales removidos - ya no necesarios */
 
 #root {
