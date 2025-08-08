@@ -310,29 +310,6 @@ export const LearningSection = () => {
                 </span>
               </button>
             )}
-            
-            {/* Controles para Móviles - Solo navegación manual */}
-            {(isIOS || isAndroid) && (
-              <>
-                <div className="flex items-center gap-3">
-                  <button
-                    onClick={() => scroll('left')}
-                    className="flex items-center justify-center w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm border border-border text-muted-foreground hover:bg-background/90 transition-all duration-200 hover:scale-105 cursor-pointer"
-                  >
-                    ←
-                  </button>
-                  <button
-                    onClick={() => scroll('right')}
-                    className="flex items-center justify-center w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm border border-border text-muted-foreground hover:bg-background/90 transition-all duration-200 hover:scale-105 cursor-pointer"
-                  >
-                    →
-                  </button>
-                </div>
-                <div className="text-[10px] text-muted-foreground/70 bg-blue-500/10 px-2 py-1 rounded">
-                  📱 Navega manualmente en móvil
-                </div>
-              </>
-            )}
           </div>
         </div>
       </div>
