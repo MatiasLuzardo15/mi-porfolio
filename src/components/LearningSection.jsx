@@ -72,9 +72,12 @@ export const LearningSection = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     if (animationRef.current) cancelAnimationFrame(animationRef.current);
 
+    // Desactivar auto-scroll en dispositivos móviles
+    if (isIOS || isAndroid) return;
+
     if (!autoScrollEnabled || isScrolling) return;
 
-    const scrollSpeed = isIOS ? 2 : 1; // Velocidad más alta para iOS
+    const scrollSpeed = 1; // Velocidad estándar para desktop
     
     const autoScroll = () => {
       if (!autoScrollEnabled || isScrolling || !container) return;
@@ -84,79 +87,28 @@ export const LearningSection = () => {
       
       // Reset cuando llega al final del segundo conjunto
       if (currentScroll >= maxScroll * 2) {
-        if (isIOS) {
-          // iOS: reset directo
-          container.scrollLeft = maxScroll;
-        } else {
-          // Android/Desktop: reset suave
-          container.scrollTo({
-            left: maxScroll,
-            behavior: 'auto'
-          });
-        }
+        container.scrollTo({
+          left: maxScroll,
+          behavior: 'auto'
+        });
         return;
       }
       
-      // Aplicar scroll según dispositivo
-      if (isIOS) {
-        // iOS: manipulación directa más agresiva con múltiples métodos
-        const newScrollLeft = currentScroll + scrollSpeed;
-        
-        // Método 1: scrollLeft directo
-        container.scrollLeft = newScrollLeft;
-        
-        // Método 2: scrollTo como backup inmediato
-        try {
-          container.scrollTo({
-            left: newScrollLeft,
-            behavior: 'auto'
-          });
-        } catch (e) {
-          // Método 3: scrollBy como último recurso
-          container.scrollBy(scrollSpeed, 0);
-        }
-        
-        // Forzar repaint para iOS
-        container.style.transform = 'translateZ(0)';
-        setTimeout(() => {
-          if (container) container.style.transform = '';
-        }, 0);
-        
-      } else if (isAndroid) {
-        // Android: usar scrollBy
-        container.scrollBy(scrollSpeed, 0);
-      } else {
-        // Desktop: scrollBy con behavior
-        container.scrollBy({
-          left: scrollSpeed,
-          behavior: 'auto'
-        });
-      }
+      // Desktop: scrollBy con behavior
+      container.scrollBy({
+        left: scrollSpeed,
+        behavior: 'auto'
+      });
     };
 
-    // Estrategia diferente por dispositivo
-    if (isIOS) {
-      // iOS: setInterval más frecuente
-      intervalRef.current = setInterval(autoScroll, 12); // ~83fps para iOS
-    } else if (isAndroid) {
-      // Android: setTimeout recursivo
-      const androidScroll = () => {
-        autoScroll();
-        if (autoScrollEnabled && !isScrolling) {
-          timeoutRef.current = setTimeout(androidScroll, 16);
-        }
-      };
-      timeoutRef.current = setTimeout(androidScroll, 16);
-    } else {
-      // Desktop: requestAnimationFrame
-      const desktopScroll = () => {
-        autoScroll();
-        if (autoScrollEnabled && !isScrolling) {
-          animationRef.current = requestAnimationFrame(desktopScroll);
-        }
-      };
-      animationRef.current = requestAnimationFrame(desktopScroll);
-    }
+    // Solo Desktop: requestAnimationFrame
+    const desktopScroll = () => {
+      autoScroll();
+      if (autoScrollEnabled && !isScrolling) {
+        animationRef.current = requestAnimationFrame(desktopScroll);
+      }
+    };
+    animationRef.current = requestAnimationFrame(desktopScroll);
 
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
@@ -337,54 +289,49 @@ export const LearningSection = () => {
             ))}
           </div>
 
-          {/* Indicador de scroll automático clickeable */}
+          {/* Controles de navegación */}
           <div className="flex flex-col items-center gap-2 mt-6">
-            <button
-              onClick={toggleAutoScroll}
-              className="flex items-center gap-2 px-4 py-2 rounded-full bg-background/80 backdrop-blur-sm border border-border text-xs text-muted-foreground hover:bg-background/90 transition-all duration-200 hover:scale-105 cursor-pointer"
-            >
-              <div className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-                autoScrollEnabled 
-                  ? 'bg-primary animate-pulse' 
-                  : 'bg-red-500'
-              }`} />
-              <span className="font-medium">
-                {autoScrollEnabled ? 'Scroll automático activo' : 'Scroll automático pausado'}
-              </span>
-              <span className="text-[10px] opacity-70 hidden sm:inline">
-                (Click para {autoScrollEnabled ? 'pausar' : 'reanudar'})
-              </span>
-              <span className="text-[10px] opacity-70 sm:hidden">
-                (Toca para {autoScrollEnabled ? 'pausar' : 'reanudar'})
-              </span>
-            </button>
-            
-            {/* Botón específico para iOS cuando el auto-scroll no funciona */}
-            {isIOS && !autoScrollEnabled && (
+            {/* Controles para Desktop - Auto-scroll */}
+            {!isIOS && !isAndroid && (
               <button
-                onClick={() => {
-                  if (scrollRef.current) {
-                    const container = scrollRef.current;
-                    const targetScroll = container.scrollLeft + container.offsetWidth * 0.8;
-                    container.scrollTo({
-                      left: targetScroll > container.scrollWidth - container.offsetWidth 
-                        ? 0 
-                        : targetScroll,
-                      behavior: 'smooth'
-                    });
-                  }
-                }}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/20 backdrop-blur-sm border border-primary/30 text-xs text-primary hover:bg-primary/30 transition-all duration-200 hover:scale-105 cursor-pointer"
+                onClick={toggleAutoScroll}
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-background/80 backdrop-blur-sm border border-border text-xs text-muted-foreground hover:bg-background/90 transition-all duration-200 hover:scale-105 cursor-pointer"
               >
-                <span className="font-medium">📱 Avanzar en iOS</span>
+                <div className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+                  autoScrollEnabled 
+                    ? 'bg-primary animate-pulse' 
+                    : 'bg-red-500'
+                }`} />
+                <span className="font-medium">
+                  {autoScrollEnabled ? 'Scroll automático activo' : 'Scroll automático pausado'}
+                </span>
+                <span className="text-[10px] opacity-70">
+                  (Click para {autoScrollEnabled ? 'pausar' : 'reanudar'})
+                </span>
               </button>
             )}
             
-            {/* Debug info para iOS */}
-            {isIOS && (
-              <div className="text-[10px] text-muted-foreground/70 bg-orange-500/10 px-2 py-1 rounded">
-                iOS detectado - Modo optimizado activo
-              </div>
+            {/* Controles para Móviles - Solo navegación manual */}
+            {(isIOS || isAndroid) && (
+              <>
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => scroll('left')}
+                    className="flex items-center justify-center w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm border border-border text-muted-foreground hover:bg-background/90 transition-all duration-200 hover:scale-105 cursor-pointer"
+                  >
+                    ←
+                  </button>
+                  <button
+                    onClick={() => scroll('right')}
+                    className="flex items-center justify-center w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm border border-border text-muted-foreground hover:bg-background/90 transition-all duration-200 hover:scale-105 cursor-pointer"
+                  >
+                    →
+                  </button>
+                </div>
+                <div className="text-[10px] text-muted-foreground/70 bg-blue-500/10 px-2 py-1 rounded">
+                  📱 Navega manualmente en móvil
+                </div>
+              </>
             )}
           </div>
         </div>
