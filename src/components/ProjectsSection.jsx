@@ -1,4 +1,6 @@
+
 import { ExternalLink, FolderOpen, Github } from "lucide-react";
+import React, { useState } from "react";
 
 // Función para obtener el ícono y color de tecnología
 const getTechIcon = (tech) => {
@@ -110,8 +112,6 @@ const projects = [
 ];
 
 
-import React, { useState } from "react";
-
 export const ProjectsSection = () => {
   const [modalProject, setModalProject] = useState(null);
 
@@ -182,15 +182,27 @@ export const ProjectsSection = () => {
                 <div className="flex justify-start items-center mt-1 transition-all duration-500 ease-out group-hover:-translate-y-1 group-hover:opacity-100 opacity-90">
                   <div className="flex space-x-3">
                     {project.id !== 3 && (
-                      <a
-                        href={project.demoUrl}
-                        target="_blank"
-                        className="flex items-center gap-2 px-3 py-2 rounded-full bg-blue-500/10 text-white hover:bg-blue-500/20 hover:text-white transition-all duration-300 text-sm font-medium"
-                        onClick={e => e.stopPropagation()}
-                      >
-                        <ExternalLink size={16} />
-                        Visitar
-                      </a>
+                      <>
+                        <a
+                          href={project.demoUrl}
+                          target="_blank"
+                          className="flex items-center gap-2 px-3 py-2 rounded-full bg-blue-500/10 text-white hover:bg-blue-500/20 hover:text-white transition-all duration-300 text-sm font-medium"
+                          onClick={e => e.stopPropagation()}
+                        >
+                          <ExternalLink size={16} />
+                          Visitar
+                        </a>
+                        {project.title === "Cold Laked Store" && (
+                          <span className="ml-2 flex items-center" title="En mantenimiento">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="w-7 h-7">
+                              <circle cx="12" cy="12" r="10" fill="white" opacity="0.0" />
+                              <rect x="10.7" y="5" width="2.6" height="9" rx="1.3" fill="white" />
+                              <circle cx="12" cy="18.5" r="1.4" fill="white" />
+                              <circle cx="12" cy="12" r="10" stroke="white" strokeWidth="1.5" fill="none" />
+                            </svg>
+                          </span>
+                        )}
+                      </>
                     )}
                     {project.githubUrl && (
                       <a
@@ -256,6 +268,7 @@ export const ProjectsSection = () => {
                     <circle cx="24" cy="24" r="20" fill="currentColor" opacity=".2" />
                     <rect x="22" y="14" width="4" height="16" rx="2" fill="currentColor" />
                     <circle cx="24" cy="36" r="2.5" fill="currentColor" />
+                    <circle cx="24" cy="24" r="20" stroke="currentColor" strokeWidth="2" fill="none" />
                   </svg>
                   <span className="text-yellow-800 dark:text-yellow-200 font-semibold">Esta app se encuentra en mantenimiento por el momento.</span>
                 </div>
