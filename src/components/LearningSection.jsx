@@ -5,6 +5,14 @@ export const LearningSection = () => {
   const scrollContainerRef = useRef(null);
   const [isScrolling, setIsScrolling] = useState(false);
   const [autoScrollEnabled, setAutoScrollEnabled] = useState(true);
+  const [isIOS, setIsIOS] = useState(false);
+
+  // Detectar iOS al montar el componente
+  useEffect(() => {
+    const iosDetection = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                        (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    setIsIOS(iosDetection);
+  }, []);
 
   // Datos de los certificados
   const certificates = [
@@ -48,57 +56,72 @@ export const LearningSection = () => {
   // Duplicar certificados para scroll infinito
   const infiniteCertificates = [...certificates, ...certificates, ...certificates];
 
-  // Auto-scroll infinito compatible con móviles
+  // Auto-scroll infinito compatible con iOS
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
 
+    let intervalId;
     let animationId;
-    let timeoutId;
-    const scrollSpeed = 0.5;
+    const scrollSpeed = 1; // Aumentar velocidad para iOS
     
-    // Detectar si es dispositivo móvil/táctil
+    // Detectar iOS específicamente
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
     const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     
     const autoScroll = () => {
       if (!isScrolling && autoScrollEnabled && container) {
-        // Usar scrollBy en lugar de modificar scrollLeft directamente
-        container.scrollBy({
-          left: scrollSpeed,
-          behavior: 'auto' // Importante: usar 'auto' en lugar de 'smooth' para móviles
-        });
+        const currentScroll = container.scrollLeft;
+        const maxScroll = container.scrollWidth / 3;
         
         // Reset cuando llega al final del segundo conjunto
-        const maxScroll = container.scrollWidth / 3;
-        if (container.scrollLeft >= maxScroll * 2) {
-          container.scrollTo({
-            left: maxScroll,
+        if (currentScroll >= maxScroll * 2) {
+          container.scrollLeft = maxScroll;
+          return;
+        }
+        
+        // Para iOS usar una aproximación más directa
+        if (isIOS) {
+          container.scrollLeft = currentScroll + scrollSpeed;
+        } else {
+          // Para otros dispositivos usar scrollBy
+          container.scrollBy({
+            left: scrollSpeed,
             behavior: 'auto'
           });
         }
       }
-      
-      // Usar setTimeout para móviles, requestAnimationFrame para desktop
-      if (isMobile) {
-        timeoutId = setTimeout(autoScroll, 16); // ~60fps
-      } else {
-        animationId = requestAnimationFrame(autoScroll);
-      }
     };
 
-    // Iniciar el scroll automático
-    if (isMobile) {
-      timeoutId = setTimeout(autoScroll, 16);
+    // Usar setInterval para iOS (más confiable que setTimeout recursivo)
+    if (isIOS) {
+      intervalId = setInterval(autoScroll, 16); // ~60fps
+    } else if (isMobile) {
+      // Usar setTimeout para otros móviles
+      const timeoutScroll = () => {
+        autoScroll();
+        if (!isScrolling && autoScrollEnabled) {
+          setTimeout(timeoutScroll, 16);
+        }
+      };
+      setTimeout(timeoutScroll, 16);
     } else {
-      animationId = requestAnimationFrame(autoScroll);
+      // requestAnimationFrame para desktop
+      const rafScroll = () => {
+        autoScroll();
+        if (!isScrolling && autoScrollEnabled) {
+          animationId = requestAnimationFrame(rafScroll);
+        }
+      };
+      animationId = requestAnimationFrame(rafScroll);
     }
 
     return () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
       if (animationId) {
         cancelAnimationFrame(animationId);
-      }
-      if (timeoutId) {
-        clearTimeout(timeoutId);
       }
     };
   }, [isScrolling, autoScrollEnabled]);
@@ -116,10 +139,23 @@ export const LearningSection = () => {
   };
 
   const handleTouchEnd = () => {
-    // Resumir después de 1 segundo en móvil
+    // Resumir después de menos tiempo en iOS
+    const resumeDelay = isIOS ? 500 : 1000;
     setTimeout(() => {
       setIsScrolling(false);
-    }, 1000);
+    }, resumeDelay);
+  };
+
+  // Función para inicializar scroll en iOS después de primera interacción
+  const handleFirstTouch = () => {
+    if (isIOS && autoScrollEnabled) {
+      // Forzar una pequeña interacción para "despertar" el scroll
+      const container = scrollContainerRef.current;
+      if (container) {
+        container.scrollLeft += 1;
+        container.scrollLeft -= 1;
+      }
+    }
   };
 
   const scroll = (direction) => {
@@ -187,13 +223,20 @@ export const LearningSection = () => {
             ref={scrollContainerRef}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            onTouchStart={handleTouchStart}
+            onTouchStart={(e) => {
+              handleFirstTouch();
+              handleTouchStart();
+            }}
             onTouchEnd={handleTouchEnd}
+            onClick={handleFirstTouch}
             className="flex gap-6 overflow-x-auto scroll-smooth px-16 pb-4 scrollbar-hide"
             style={{
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',
-              WebkitOverflowScrolling: 'touch' // Mejora el scroll en iOS
+              WebkitOverflowScrolling: 'touch',
+              // Forzar aceleración de hardware en iOS
+              transform: 'translateZ(0)',
+              willChange: 'scroll-position'
             }}
           >
             {infiniteCertificates.map((cert, index) => (
@@ -241,7 +284,7 @@ export const LearningSection = () => {
           </div>
 
           {/* Indicador de scroll automático clickeable */}
-          <div className="flex justify-center mt-6">
+          <div className="flex flex-col items-center gap-2 mt-6">
             <button
               onClick={toggleAutoScroll}
               className="flex items-center gap-2 px-4 py-2 rounded-full bg-background/80 backdrop-blur-sm border border-border text-xs text-muted-foreground hover:bg-background/90 transition-all duration-200 hover:scale-105 cursor-pointer"
@@ -261,6 +304,13 @@ export const LearningSection = () => {
                 (Toca para {autoScrollEnabled ? 'pausar' : 'reanudar'})
               </span>
             </button>
+            
+            {/* Debug info para iOS */}
+            {isIOS && (
+              <div className="text-[10px] text-muted-foreground/70 bg-orange-500/10 px-2 py-1 rounded">
+                iOS detectado - Modo optimizado activo
+              </div>
+            )}
           </div>
         </div>
       </div>
