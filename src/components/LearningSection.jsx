@@ -48,32 +48,57 @@ export const LearningSection = () => {
   // Duplicar certificados para scroll infinito
   const infiniteCertificates = [...certificates, ...certificates, ...certificates];
 
-  // Auto-scroll infinito
+  // Auto-scroll infinito compatible con móviles
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
 
     let animationId;
-    const scrollSpeed = 0.5; // Velocidad del scroll automático
-
+    let timeoutId;
+    const scrollSpeed = 0.5;
+    
+    // Detectar si es dispositivo móvil/táctil
+    const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    
     const autoScroll = () => {
       if (!isScrolling && autoScrollEnabled && container) {
-        container.scrollLeft += scrollSpeed;
+        // Usar scrollBy en lugar de modificar scrollLeft directamente
+        container.scrollBy({
+          left: scrollSpeed,
+          behavior: 'auto' // Importante: usar 'auto' en lugar de 'smooth' para móviles
+        });
         
         // Reset cuando llega al final del segundo conjunto
-        const maxScroll = container.scrollWidth / 3; // Dividido por 3 porque tenemos 3 conjuntos
+        const maxScroll = container.scrollWidth / 3;
         if (container.scrollLeft >= maxScroll * 2) {
-          container.scrollLeft = maxScroll;
+          container.scrollTo({
+            left: maxScroll,
+            behavior: 'auto'
+          });
         }
       }
-      animationId = requestAnimationFrame(autoScroll);
+      
+      // Usar setTimeout para móviles, requestAnimationFrame para desktop
+      if (isMobile) {
+        timeoutId = setTimeout(autoScroll, 16); // ~60fps
+      } else {
+        animationId = requestAnimationFrame(autoScroll);
+      }
     };
 
-    animationId = requestAnimationFrame(autoScroll);
+    // Iniciar el scroll automático
+    if (isMobile) {
+      timeoutId = setTimeout(autoScroll, 16);
+    } else {
+      animationId = requestAnimationFrame(autoScroll);
+    }
 
     return () => {
       if (animationId) {
         cancelAnimationFrame(animationId);
+      }
+      if (timeoutId) {
+        clearTimeout(timeoutId);
       }
     };
   }, [isScrolling, autoScrollEnabled]);
@@ -84,6 +109,17 @@ export const LearningSection = () => {
 
   const handleMouseLeave = () => {
     setIsScrolling(false);
+  };
+
+  const handleTouchStart = () => {
+    setIsScrolling(true);
+  };
+
+  const handleTouchEnd = () => {
+    // Resumir después de 1 segundo en móvil
+    setTimeout(() => {
+      setIsScrolling(false);
+    }, 1000);
   };
 
   const scroll = (direction) => {
@@ -151,10 +187,13 @@ export const LearningSection = () => {
             ref={scrollContainerRef}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
             className="flex gap-6 overflow-x-auto scroll-smooth px-16 pb-4 scrollbar-hide"
             style={{
               scrollbarWidth: 'none',
-              msOverflowStyle: 'none'
+              msOverflowStyle: 'none',
+              WebkitOverflowScrolling: 'touch' // Mejora el scroll en iOS
             }}
           >
             {infiniteCertificates.map((cert, index) => (
@@ -215,8 +254,11 @@ export const LearningSection = () => {
               <span className="font-medium">
                 {autoScrollEnabled ? 'Scroll automático activo' : 'Scroll automático pausado'}
               </span>
-              <span className="text-[10px] opacity-70">
+              <span className="text-[10px] opacity-70 hidden sm:inline">
                 (Click para {autoScrollEnabled ? 'pausar' : 'reanudar'})
+              </span>
+              <span className="text-[10px] opacity-70 sm:hidden">
+                (Toca para {autoScrollEnabled ? 'pausar' : 'reanudar'})
               </span>
             </button>
           </div>
