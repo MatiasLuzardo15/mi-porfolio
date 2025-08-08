@@ -6,12 +6,18 @@ export const LearningSection = () => {
   const [isScrolling, setIsScrolling] = useState(false);
   const [autoScrollEnabled, setAutoScrollEnabled] = useState(true);
   const [isIOS, setIsIOS] = useState(false);
+  const [isAndroid, setIsAndroid] = useState(false);
+  const intervalRef = useRef(null);
+  const timeoutRef = useRef(null);
+  const animationRef = useRef(null);
 
-  // Detectar iOS al montar el componente
+  // Detectar dispositivos al montar el componente
   useEffect(() => {
     const iosDetection = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
                         (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    const androidDetection = /Android/.test(navigator.userAgent);
     setIsIOS(iosDetection);
+    setIsAndroid(androidDetection);
   }, []);
 
   // Datos de los certificados
@@ -56,75 +62,108 @@ export const LearningSection = () => {
   // Duplicar certificados para scroll infinito
   const infiniteCertificates = [...certificates, ...certificates, ...certificates];
 
-  // Auto-scroll infinito compatible con iOS
+  // Auto-scroll con manejo específico por dispositivo
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
 
-    let intervalId;
-    let animationId;
-    const scrollSpeed = 1; // Aumentar velocidad para iOS
-    
-    // Detectar iOS específicamente
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    // Limpiar cualquier timer existente
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    if (animationRef.current) cancelAnimationFrame(animationRef.current);
+
+    if (!autoScrollEnabled || isScrolling) return;
+
+    const scrollSpeed = isIOS ? 2 : 1; // Velocidad más alta para iOS
     
     const autoScroll = () => {
-      if (!isScrolling && autoScrollEnabled && container) {
-        const currentScroll = container.scrollLeft;
-        const maxScroll = container.scrollWidth / 3;
-        
-        // Reset cuando llega al final del segundo conjunto
-        if (currentScroll >= maxScroll * 2) {
-          container.scrollLeft = maxScroll;
-          return;
-        }
-        
-        // Para iOS usar una aproximación más directa
+      if (!autoScrollEnabled || isScrolling || !container) return;
+      
+      const currentScroll = container.scrollLeft;
+      const maxScroll = container.scrollWidth / 3;
+      
+      // Reset cuando llega al final del segundo conjunto
+      if (currentScroll >= maxScroll * 2) {
         if (isIOS) {
-          container.scrollLeft = currentScroll + scrollSpeed;
+          // iOS: reset directo
+          container.scrollLeft = maxScroll;
         } else {
-          // Para otros dispositivos usar scrollBy
-          container.scrollBy({
-            left: scrollSpeed,
+          // Android/Desktop: reset suave
+          container.scrollTo({
+            left: maxScroll,
             behavior: 'auto'
           });
         }
+        return;
+      }
+      
+      // Aplicar scroll según dispositivo
+      if (isIOS) {
+        // iOS: manipulación directa más agresiva con múltiples métodos
+        const newScrollLeft = currentScroll + scrollSpeed;
+        
+        // Método 1: scrollLeft directo
+        container.scrollLeft = newScrollLeft;
+        
+        // Método 2: scrollTo como backup inmediato
+        try {
+          container.scrollTo({
+            left: newScrollLeft,
+            behavior: 'auto'
+          });
+        } catch (e) {
+          // Método 3: scrollBy como último recurso
+          container.scrollBy(scrollSpeed, 0);
+        }
+        
+        // Forzar repaint para iOS
+        container.style.transform = 'translateZ(0)';
+        setTimeout(() => {
+          if (container) container.style.transform = '';
+        }, 0);
+        
+      } else if (isAndroid) {
+        // Android: usar scrollBy
+        container.scrollBy(scrollSpeed, 0);
+      } else {
+        // Desktop: scrollBy con behavior
+        container.scrollBy({
+          left: scrollSpeed,
+          behavior: 'auto'
+        });
       }
     };
 
-    // Usar setInterval para iOS (más confiable que setTimeout recursivo)
+    // Estrategia diferente por dispositivo
     if (isIOS) {
-      intervalId = setInterval(autoScroll, 16); // ~60fps
-    } else if (isMobile) {
-      // Usar setTimeout para otros móviles
-      const timeoutScroll = () => {
+      // iOS: setInterval más frecuente
+      intervalRef.current = setInterval(autoScroll, 12); // ~83fps para iOS
+    } else if (isAndroid) {
+      // Android: setTimeout recursivo
+      const androidScroll = () => {
         autoScroll();
-        if (!isScrolling && autoScrollEnabled) {
-          setTimeout(timeoutScroll, 16);
+        if (autoScrollEnabled && !isScrolling) {
+          timeoutRef.current = setTimeout(androidScroll, 16);
         }
       };
-      setTimeout(timeoutScroll, 16);
+      timeoutRef.current = setTimeout(androidScroll, 16);
     } else {
-      // requestAnimationFrame para desktop
-      const rafScroll = () => {
+      // Desktop: requestAnimationFrame
+      const desktopScroll = () => {
         autoScroll();
-        if (!isScrolling && autoScrollEnabled) {
-          animationId = requestAnimationFrame(rafScroll);
+        if (autoScrollEnabled && !isScrolling) {
+          animationRef.current = requestAnimationFrame(desktopScroll);
         }
       };
-      animationId = requestAnimationFrame(rafScroll);
+      animationRef.current = requestAnimationFrame(desktopScroll);
     }
 
     return () => {
-      if (intervalId) {
-        clearInterval(intervalId);
-      }
-      if (animationId) {
-        cancelAnimationFrame(animationId);
-      }
+      if (intervalRef.current) clearInterval(intervalRef.current);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
-  }, [isScrolling, autoScrollEnabled]);
+  }, [isScrolling, autoScrollEnabled, isIOS, isAndroid]);
 
   const handleMouseEnter = () => {
     setIsScrolling(true);
@@ -180,6 +219,21 @@ export const LearningSection = () => {
   };
 
   const toggleAutoScroll = () => {
+    // Limpiar timers actuales inmediatamente
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    if (animationRef.current) {
+      cancelAnimationFrame(animationRef.current);
+      animationRef.current = null;
+    }
+    
+    // Cambiar el estado
     setAutoScrollEnabled(!autoScrollEnabled);
   };
 
@@ -304,6 +358,27 @@ export const LearningSection = () => {
                 (Toca para {autoScrollEnabled ? 'pausar' : 'reanudar'})
               </span>
             </button>
+            
+            {/* Botón específico para iOS cuando el auto-scroll no funciona */}
+            {isIOS && !autoScrollEnabled && (
+              <button
+                onClick={() => {
+                  if (scrollRef.current) {
+                    const container = scrollRef.current;
+                    const targetScroll = container.scrollLeft + container.offsetWidth * 0.8;
+                    container.scrollTo({
+                      left: targetScroll > container.scrollWidth - container.offsetWidth 
+                        ? 0 
+                        : targetScroll,
+                      behavior: 'smooth'
+                    });
+                  }
+                }}
+                className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/20 backdrop-blur-sm border border-primary/30 text-xs text-primary hover:bg-primary/30 transition-all duration-200 hover:scale-105 cursor-pointer"
+              >
+                <span className="font-medium">📱 Avanzar en iOS</span>
+              </button>
+            )}
             
             {/* Debug info para iOS */}
             {isIOS && (
