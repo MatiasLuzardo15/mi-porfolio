@@ -96,20 +96,12 @@ export const LearningSection = () => {
     
     const autoScroll = () => {
       if (!autoScrollEnabled || isScrolling || !container) return;
-      
-      const currentScroll = container.scrollLeft;
       const maxScroll = container.scrollWidth / 3;
-      
-      // Reset cuando llega al final del segundo conjunto
-      if (currentScroll >= maxScroll * 2) {
-        container.scrollTo({
-          left: maxScroll,
-          behavior: 'auto'
-        });
-        return;
+      // Si el scroll llega o supera el final del segundo bloque, reajustar siempre al centro
+      if (container.scrollLeft >= maxScroll * 2 - 1) {
+        container.scrollLeft = maxScroll;
       }
-      
-      // Desktop: scrollBy con behavior
+      // Scroll normal
       container.scrollBy({
         left: scrollSpeed,
         behavior: 'auto'
@@ -250,7 +242,7 @@ export const LearningSection = () => {
             }}
             onTouchEnd={handleTouchEnd}
             onClick={handleFirstTouch}
-            className="flex gap-6 overflow-x-auto scroll-smooth px-16 pb-4 scrollbar-hide"
+            className="flex gap-6 overflow-x-auto scroll-smooth px-2 sm:px-8 md:px-16 pb-4 scrollbar-hide"
             style={{
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',
@@ -263,10 +255,10 @@ export const LearningSection = () => {
             {infiniteCertificates.map((cert, index) => (
               <div
                 key={`${cert.id}-${index}`}
-                className="flex-shrink-0 w-80 group cursor-pointer"
+                className="flex-shrink-0 w-80 group cursor-pointer relative"
                 onClick={() => setSelectedCertificate(cert)}
               >
-                <div className="bg-card rounded-xl border border-border overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:scale-105 hover:-translate-y-2">
+                <div className="bg-card rounded-xl border border-border overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:scale-105 hover:-translate-y-2 relative z-10">
                   {/* Imagen del Certificado */}
                   <div className="relative overflow-hidden bg-gradient-to-br from-muted/50 to-muted/30">
                     <img
@@ -276,7 +268,6 @@ export const LearningSection = () => {
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    
                     {/* Icono de zoom */}
                     <div className="absolute top-3 right-3 w-8 h-8 bg-background/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110">
                       <ZoomIn className="w-4 h-4 text-primary" />
@@ -293,11 +284,9 @@ export const LearningSection = () => {
                         {cert.year}
                       </span>
                     </div>
-                    
                     <p className="text-muted-foreground text-sm mb-4">
                       {cert.institution}
                     </p>
-
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-muted-foreground">
                         Certificado verificado

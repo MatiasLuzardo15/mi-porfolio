@@ -83,7 +83,7 @@ const projects = [
   {
     id: 1,
     title: "Weatherl",
-    description: "Una hermosa aplicación del clima con animaciones estilo Apple, construida con React, Framer Motion y TailwindCSS.",
+    description: "Aplicación meteorológica moderna con animaciones fluidas estilo Apple, desarrollada con React, Framer Motion y TailwindCSS para una experiencia de usuario elegante.",
     image: "/projects/project1.png",
     tags: ["React", "Tailwind CSS", "Framer Motion", "JavaScript"],
     demoUrl: "https://weatherl.space",
@@ -131,9 +131,12 @@ export const ProjectsSection = () => {
           {projects.map((project, key) => (
             <div
               key={key}
-              className="group bg-card rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 card-hover flex flex-col"
+              className={`group rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 card-hover flex flex-col min-w-[340px] md:min-w-[370px] max-w-md mx-auto relative z-10 hover:z-20 focus-within:z-20 text-white
+                ${key === 0 ? 'bg-pink-100 dark:bg-pink-900' : ''}
+                ${key === 1 ? 'bg-blue-100 dark:bg-blue-900' : ''}
+                ${key === 2 ? 'bg-violet-100 dark:bg-violet-900' : ''}`}
             >
-              <div className="h-56 overflow-hidden">
+              <div className="h-36 md:h-40 lg:h-36 overflow-hidden">
                 <img
                   src={project.image}
                   alt={project.title}
@@ -141,33 +144,35 @@ export const ProjectsSection = () => {
                 />
               </div>
 
-              <div className="p-6 flex flex-col h-full">
-                <div className="flex flex-wrap gap-2 mb-5">
-                  {project.tags.map((tag) => {
-                    const techInfo = getTechIcon(tag);
-                    return (
-                      <span 
-                        key={tag}
-                        className={`px-3 py-1.5 text-xs font-semibold border rounded-full transition-all duration-200 hover:scale-105 flex items-center gap-1.5 ${techInfo.color}`}
-                      >
-                        {techInfo.icon}
-                        {tag}
-                      </span>
-                    );
-                  })}
-                </div>
+              <div className="p-4 flex flex-col h-full justify-between min-h-[220px] md:min-h-[240px]">
+                <div className="transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:opacity-100 opacity-90">
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    {project.tags.map((tag) => {
+                      const techInfo = getTechIcon(tag);
+                      return (
+                        <span 
+                          key={tag}
+                          className={`px-3 py-1.5 text-xs font-semibold border rounded-full transition-all duration-200 hover:scale-105 flex items-center gap-1.5 ${techInfo.color}`}
+                        >
+                          {techInfo.icon}
+                          {tag}
+                        </span>
+                      );
+                    })}
+                  </div>
 
-                <h3 className="text-xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors duration-300">{project.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow">
-                  {project.description}
-                </p>
-                <div className="flex justify-start items-center">
+                  <h3 className="text-lg font-bold mb-1 text-white group-hover:text-primary transition-colors duration-300">{project.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-1">
+                    {project.description}
+                  </p>
+                </div>
+                <div className="flex justify-start items-center mt-1 transition-all duration-500 ease-out group-hover:-translate-y-1 group-hover:opacity-100 opacity-90">
                   <div className="flex space-x-3">
                     {project.id !== 3 && (
                       <a
                         href={project.demoUrl}
                         target="_blank"
-                        className="flex items-center gap-2 px-3 py-2 rounded-full bg-blue-500/10 text-blue-600 hover:bg-blue-500/20 hover:text-blue-700 transition-all duration-300 text-sm font-medium"
+                        className="flex items-center gap-2 px-3 py-2 rounded-full bg-blue-500/10 text-white hover:bg-blue-500/20 hover:text-white transition-all duration-300 text-sm font-medium"
                       >
                         <ExternalLink size={16} />
                         Visitar
