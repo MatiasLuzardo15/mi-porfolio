@@ -310,6 +310,83 @@ export const LearningSection = () => {
                 </span>
               </button>
             )}
+            
+            {/* Ruedita de control para móviles */}
+            {(isIOS || isAndroid) && (
+              <div className="flex flex-col items-center gap-3 mt-4">
+                <div className="relative">
+                  {/* Ruedita principal */}
+                  <div 
+                    className="w-16 h-16 rounded-full border-2 border-border bg-background/50 backdrop-blur-sm relative cursor-pointer overflow-hidden"
+                    onTouchStart={(e) => {
+                      const touch = e.touches[0];
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      const centerX = rect.left + rect.width / 2;
+                      const centerY = rect.top + rect.height / 2;
+                      const startAngle = Math.atan2(touch.clientY - centerY, touch.clientX - centerX);
+                      e.currentTarget.dataset.startAngle = startAngle;
+                      e.currentTarget.dataset.lastScroll = scrollContainerRef.current?.scrollLeft || 0;
+                    }}
+                    onTouchMove={(e) => {
+                      e.preventDefault();
+                      const touch = e.touches[0];
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      const centerX = rect.left + rect.width / 2;
+                      const centerY = rect.top + rect.height / 2;
+                      const currentAngle = Math.atan2(touch.clientY - centerY, touch.clientX - centerX);
+                      const startAngle = parseFloat(e.currentTarget.dataset.startAngle);
+                      const lastScroll = parseFloat(e.currentTarget.dataset.lastScroll);
+                      
+                      let angleDiff = currentAngle - startAngle;
+                      // Normalizar la diferencia de ángulo
+                      if (angleDiff > Math.PI) angleDiff -= 2 * Math.PI;
+                      if (angleDiff < -Math.PI) angleDiff += 2 * Math.PI;
+                      
+                      // Convertir rotación a scroll (sensibilidad ajustable)
+                      const scrollDelta = angleDiff * 150; // Factor de sensibilidad
+                      const newScroll = Math.max(0, lastScroll + scrollDelta);
+                      
+                      if (scrollContainerRef.current) {
+                        scrollContainerRef.current.scrollLeft = newScroll;
+                      }
+                    }}
+                  >
+                    {/* Indicadores radiales */}
+                    {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
+                      <div
+                        key={i}
+                        className="absolute w-0.5 h-2 bg-muted-foreground/30"
+                        style={{
+                          top: '4px',
+                          left: '50%',
+                          transform: `translateX(-50%) rotate(${i * 45}deg)`,
+                          transformOrigin: '50% 28px'
+                        }}
+                      />
+                    ))}
+                    
+                    {/* Centro de la ruedita */}
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-primary/80" />
+                    
+                    {/* Indicador de posición */}
+                    <div 
+                      className="absolute w-1 h-4 bg-primary rounded-full"
+                      style={{
+                        top: '2px',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        transformOrigin: '50% 30px'
+                      }}
+                    />
+                  </div>
+                </div>
+                
+                {/* Texto explicativo minimalista */}
+                <div className="text-[9px] text-muted-foreground/50 text-center">
+                  Gira para navegar
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
