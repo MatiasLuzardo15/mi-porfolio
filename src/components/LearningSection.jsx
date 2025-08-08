@@ -314,31 +314,31 @@ export const LearningSection = () => {
             {/* Control deslizante horizontal para móviles */}
             {(isIOS || isAndroid) && (
               <div className="flex flex-col items-center gap-3 mt-6">
-                <div className="relative w-48 h-8">
-                  {/* Pista del slider */}
-                  <div className="absolute top-1/2 left-0 right-0 h-1 bg-border rounded-full transform -translate-y-1/2" />
+                <div className="relative w-52 h-10">
+                  {/* Pista del slider mejorada */}
+                  <div className="absolute top-1/2 left-2 right-2 h-1.5 bg-gradient-to-r from-muted-foreground/20 via-muted-foreground/30 to-muted-foreground/20 rounded-full transform -translate-y-1/2 shadow-inner" />
                   
-                  {/* Marcas de posición */}
+                  {/* Marcas de posición mejoradas */}
                   {[0, 1, 2, 3, 4].map((i) => (
                     <div
                       key={i}
-                      className="absolute w-0.5 h-2 bg-muted-foreground/40 rounded-full"
+                      className="absolute w-0.5 h-3 bg-muted-foreground/50 rounded-full shadow-sm"
                       style={{
-                        left: `${(i / 4) * 100}%`,
+                        left: `${8 + (i / 4) * 84}%`,
                         top: '50%',
                         transform: 'translateX(-50%) translateY(-50%)'
                       }}
                     />
                   ))}
                   
-                  {/* Control deslizante */}
+                  {/* Control deslizante mejorado */}
                   <div 
-                    className="absolute w-6 h-6 bg-background border-2 border-primary rounded-full cursor-pointer transform -translate-y-1/2 transition-all duration-150 hover:scale-110 active:scale-95"
+                    className="absolute w-8 h-8 bg-gradient-to-b from-background to-background/90 border-2 border-primary/80 rounded-full cursor-pointer transform -translate-y-1/2 transition-all duration-200 hover:scale-110 active:scale-95 hover:border-primary active:shadow-lg"
                     style={{
-                      left: '0%',
+                      left: '8%',
                       top: '50%',
                       transform: 'translateX(-50%) translateY(-50%)',
-                      boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
+                      boxShadow: '0 4px 12px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.1)'
                     }}
                     onTouchStart={(e) => {
                       const touch = e.touches[0];
@@ -354,29 +354,36 @@ export const LearningSection = () => {
                       const rect = e.currentTarget.parentElement.getBoundingClientRect();
                       const startX = parseFloat(e.currentTarget.dataset.startX);
                       const startLeft = parseFloat(e.currentTarget.dataset.startLeft);
-                      const lastScroll = parseFloat(e.currentTarget.dataset.lastScroll);
                       
-                      // Calcular nueva posición del slider
+                      // Calcular nueva posición del slider con márgenes
                       const deltaX = touch.clientX - startX;
-                      const newLeft = Math.max(0, Math.min(rect.width, startLeft + deltaX));
-                      const percentage = newLeft / rect.width;
+                      const sliderWidth = rect.width - 32; // Restar márgenes
+                      const newLeft = Math.max(16, Math.min(rect.width - 16, startLeft + deltaX));
+                      const percentage = (newLeft - 16) / sliderWidth;
                       
                       // Actualizar posición visual del slider
-                      e.currentTarget.style.left = `${percentage * 100}%`;
+                      e.currentTarget.style.left = `${16 + percentage * sliderWidth}px`;
                       
-                      // Calcular scroll de los certificados
+                      // Calcular scroll de los certificados con suavizado
                       if (scrollContainerRef.current) {
                         const maxScroll = scrollContainerRef.current.scrollWidth - scrollContainerRef.current.offsetWidth;
-                        const newScroll = percentage * maxScroll;
-                        scrollContainerRef.current.scrollLeft = newScroll;
+                        const targetScroll = percentage * maxScroll;
+                        
+                        // Scroll suavizado con interpolación
+                        const currentScroll = scrollContainerRef.current.scrollLeft;
+                        const smoothedScroll = currentScroll + (targetScroll - currentScroll) * 0.3;
+                        scrollContainerRef.current.scrollLeft = smoothedScroll;
                       }
                     }}
                     onTouchEnd={(e) => {
-                      e.currentTarget.style.transition = 'all 0.15s';
+                      e.currentTarget.style.transition = 'all 0.2s ease-out';
                     }}
                   >
-                    {/* Centro del control */}
-                    <div className="absolute top-1/2 left-1/2 w-2 h-2 bg-primary rounded-full transform -translate-x-1/2 -translate-y-1/2" />
+                    {/* Centro del control mejorado */}
+                    <div className="absolute top-1/2 left-1/2 w-2.5 h-2.5 bg-primary rounded-full transform -translate-x-1/2 -translate-y-1/2 shadow-sm" />
+                    
+                    {/* Anillo interior para efecto 3D */}
+                    <div className="absolute top-1/2 left-1/2 w-5 h-5 border border-primary/20 rounded-full transform -translate-x-1/2 -translate-y-1/2" />
                   </div>
                 </div>
                 
