@@ -311,85 +311,109 @@ export const LearningSection = () => {
               </button>
             )}
             
-            {/* Control deslizante horizontal para móviles */}
+            {/* Scrollbar estilo perilla de volumen para móviles */}
             {(isIOS || isAndroid) && (
-              <div className="flex flex-col items-center gap-3 mt-6">
-                <div className="relative w-52 h-10">
-                  {/* Pista del slider mejorada */}
-                  <div className="absolute top-1/2 left-2 right-2 h-1.5 bg-gradient-to-r from-muted-foreground/20 via-muted-foreground/30 to-muted-foreground/20 rounded-full transform -translate-y-1/2 shadow-inner" />
-                  
-                  {/* Marcas de posición mejoradas */}
-                  {[0, 1, 2, 3, 4].map((i) => (
-                    <div
-                      key={i}
-                      className="absolute w-0.5 h-3 bg-muted-foreground/50 rounded-full shadow-sm"
-                      style={{
-                        left: `${8 + (i / 4) * 84}%`,
-                        top: '50%',
-                        transform: 'translateX(-50%) translateY(-50%)'
-                      }}
-                    />
-                  ))}
-                  
-                  {/* Control deslizante mejorado */}
-                  <div 
-                    className="absolute w-8 h-8 bg-gradient-to-b from-background to-background/90 border-2 border-primary/80 rounded-full cursor-pointer transform -translate-y-1/2 transition-all duration-200 hover:scale-110 active:scale-95 hover:border-primary active:shadow-lg"
-                    style={{
-                      left: '8%',
-                      top: '50%',
-                      transform: 'translateX(-50%) translateY(-50%)',
-                      boxShadow: '0 4px 12px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.1)'
-                    }}
-                    onTouchStart={(e) => {
-                      const touch = e.touches[0];
-                      const rect = e.currentTarget.parentElement.getBoundingClientRect();
-                      e.currentTarget.dataset.startX = touch.clientX;
-                      e.currentTarget.dataset.startLeft = touch.clientX - rect.left;
-                      e.currentTarget.dataset.lastScroll = scrollContainerRef.current?.scrollLeft || 0;
-                      e.currentTarget.style.transition = 'none';
-                    }}
-                    onTouchMove={(e) => {
-                      e.preventDefault();
-                      const touch = e.touches[0];
-                      const rect = e.currentTarget.parentElement.getBoundingClientRect();
-                      const startX = parseFloat(e.currentTarget.dataset.startX);
-                      const startLeft = parseFloat(e.currentTarget.dataset.startLeft);
-                      
-                      // Calcular nueva posición del slider con márgenes
-                      const deltaX = touch.clientX - startX;
-                      const sliderWidth = rect.width - 32; // Restar márgenes
-                      const newLeft = Math.max(16, Math.min(rect.width - 16, startLeft + deltaX));
-                      const percentage = (newLeft - 16) / sliderWidth;
-                      
-                      // Actualizar posición visual del slider
-                      e.currentTarget.style.left = `${16 + percentage * sliderWidth}px`;
-                      
-                      // Calcular scroll de los certificados con suavizado
-                      if (scrollContainerRef.current) {
-                        const maxScroll = scrollContainerRef.current.scrollWidth - scrollContainerRef.current.offsetWidth;
-                        const targetScroll = percentage * maxScroll;
-                        
-                        // Scroll suavizado con interpolación
-                        const currentScroll = scrollContainerRef.current.scrollLeft;
-                        const smoothedScroll = currentScroll + (targetScroll - currentScroll) * 0.3;
-                        scrollContainerRef.current.scrollLeft = smoothedScroll;
-                      }
-                    }}
-                    onTouchEnd={(e) => {
-                      e.currentTarget.style.transition = 'all 0.2s ease-out';
-                    }}
-                  >
-                    {/* Centro del control mejorado */}
-                    <div className="absolute top-1/2 left-1/2 w-2.5 h-2.5 bg-primary rounded-full transform -translate-x-1/2 -translate-y-1/2 shadow-sm" />
+              <div className="flex flex-col items-center gap-4 mt-6">
+                <div className="relative w-64 h-12 bg-gradient-to-b from-muted/20 to-muted/40 rounded-lg border border-border/50 shadow-inner p-2">
+                  {/* Canal principal de la scrollbar */}
+                  <div className="relative w-full h-full">
+                    {/* Pista principal con efecto hundido */}
+                    <div className="absolute top-1/2 left-2 right-2 h-2 bg-gradient-to-b from-muted-foreground/30 to-muted-foreground/10 rounded-full transform -translate-y-1/2 shadow-inner border border-muted-foreground/20" />
                     
-                    {/* Anillo interior para efecto 3D */}
-                    <div className="absolute top-1/2 left-1/2 w-5 h-5 border border-primary/20 rounded-full transform -translate-x-1/2 -translate-y-1/2" />
+                    {/* Indicadores de graduación estilo audio */}
+                    <div className="absolute top-0 left-2 right-2 flex justify-between">
+                      {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+                        <div key={i} className="flex flex-col items-center">
+                          <div className={`w-px bg-muted-foreground/40 ${i % 2 === 0 ? 'h-2' : 'h-1'}`} />
+                          {i % 2 === 0 && (
+                            <div className="text-[8px] text-muted-foreground/60 mt-0.5 font-mono">
+                              {i}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                    
+                    {/* Barra de progreso que sigue al thumb */}
+                    <div 
+                      className="absolute top-1/2 left-2 h-2 bg-gradient-to-r from-primary/60 to-primary/30 rounded-full transform -translate-y-1/2 transition-all duration-100"
+                      style={{ 
+                        width: '20%', // Se actualiza dinámicamente
+                        boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.1)'
+                      }}
+                      id="progress-bar"
+                    />
+                    
+                    {/* Thumb estilo perilla profesional */}
+                    <div 
+                      className="absolute w-6 h-8 bg-gradient-to-b from-background via-background/95 to-background/90 border-2 border-primary/70 rounded-md cursor-pointer transform -translate-y-1/2 transition-all duration-150 hover:border-primary active:scale-95 shadow-lg"
+                      style={{
+                        left: '20%',
+                        top: '50%',
+                        transform: 'translateX(-50%) translateY(-50%)',
+                        boxShadow: '0 2px 8px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1)'
+                      }}
+                      onTouchStart={(e) => {
+                        const touch = e.touches[0];
+                        const rect = e.currentTarget.parentElement.getBoundingClientRect();
+                        e.currentTarget.dataset.startX = touch.clientX;
+                        e.currentTarget.dataset.startLeft = touch.clientX - rect.left;
+                        e.currentTarget.style.transition = 'none';
+                        
+                        // Añadir feedback visual
+                        e.currentTarget.style.transform = 'translateX(-50%) translateY(-50%) scale(0.98)';
+                      }}
+                      onTouchMove={(e) => {
+                        e.preventDefault();
+                        const touch = e.touches[0];
+                        const rect = e.currentTarget.parentElement.getBoundingClientRect();
+                        const startX = parseFloat(e.currentTarget.dataset.startX);
+                        const startLeft = parseFloat(e.currentTarget.dataset.startLeft);
+                        
+                        // Calcular nueva posición con límites del canal
+                        const deltaX = touch.clientX - startX;
+                        const trackWidth = rect.width - 16; // Ancho del canal menos márgenes
+                        const newLeft = Math.max(8, Math.min(rect.width - 8, startLeft + deltaX));
+                        const percentage = (newLeft - 8) / trackWidth;
+                        
+                        // Actualizar posición del thumb
+                        e.currentTarget.style.left = `${newLeft}px`;
+                        
+                        // Actualizar barra de progreso
+                        const progressBar = document.getElementById('progress-bar');
+                        if (progressBar) {
+                          progressBar.style.width = `${percentage * (trackWidth)}px`;
+                        }
+                        
+                        // Scroll suavizado de certificados
+                        if (scrollContainerRef.current) {
+                          const maxScroll = scrollContainerRef.current.scrollWidth - scrollContainerRef.current.offsetWidth;
+                          const targetScroll = percentage * maxScroll;
+                          const currentScroll = scrollContainerRef.current.scrollLeft;
+                          const smoothedScroll = currentScroll + (targetScroll - currentScroll) * 0.4;
+                          scrollContainerRef.current.scrollLeft = smoothedScroll;
+                        }
+                      }}
+                      onTouchEnd={(e) => {
+                        e.currentTarget.style.transition = 'all 0.15s ease-out';
+                        e.currentTarget.style.transform = 'translateX(-50%) translateY(-50%) scale(1)';
+                      }}
+                    >
+                      {/* Detalles del thumb estilo hardware */}
+                      <div className="absolute top-1/2 left-1/2 w-1 h-4 bg-primary/60 rounded-full transform -translate-x-1/2 -translate-y-1/2" />
+                      <div className="absolute top-1 left-1/2 w-3 h-px bg-primary/30 transform -translate-x-1/2" />
+                      <div className="absolute bottom-1 left-1/2 w-3 h-px bg-primary/30 transform -translate-x-1/2" />
+                    </div>
                   </div>
                 </div>
                 
-                {/* Texto explicativo minimalista */}
-                <div className="text-[9px] text-muted-foreground/50 text-center">
-                  Desliza para navegar
+                {/* Etiquetas estilo panel de audio */}
+                <div className="flex items-center gap-2 text-[8px] text-muted-foreground/60 font-mono">
+                  <span>MIN</span>
+                  <div className="w-8 h-px bg-muted-foreground/30" />
+                  <span>CERTIFICADOS</span>
+                  <div className="w-8 h-px bg-muted-foreground/30" />
+                  <span>MAX</span>
                 </div>
               </div>
             )}
