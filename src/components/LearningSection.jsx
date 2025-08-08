@@ -311,79 +311,78 @@ export const LearningSection = () => {
               </button>
             )}
             
-            {/* Ruedita de control para móviles */}
+            {/* Control deslizante horizontal para móviles */}
             {(isIOS || isAndroid) && (
-              <div className="flex flex-col items-center gap-3 mt-4">
-                <div className="relative">
-                  {/* Ruedita principal */}
+              <div className="flex flex-col items-center gap-3 mt-6">
+                <div className="relative w-48 h-8">
+                  {/* Pista del slider */}
+                  <div className="absolute top-1/2 left-0 right-0 h-1 bg-border rounded-full transform -translate-y-1/2" />
+                  
+                  {/* Marcas de posición */}
+                  {[0, 1, 2, 3, 4].map((i) => (
+                    <div
+                      key={i}
+                      className="absolute w-0.5 h-2 bg-muted-foreground/40 rounded-full"
+                      style={{
+                        left: `${(i / 4) * 100}%`,
+                        top: '50%',
+                        transform: 'translateX(-50%) translateY(-50%)'
+                      }}
+                    />
+                  ))}
+                  
+                  {/* Control deslizante */}
                   <div 
-                    className="w-16 h-16 rounded-full border-2 border-border bg-background/50 backdrop-blur-sm relative cursor-pointer overflow-hidden"
+                    className="absolute w-6 h-6 bg-background border-2 border-primary rounded-full cursor-pointer transform -translate-y-1/2 transition-all duration-150 hover:scale-110 active:scale-95"
+                    style={{
+                      left: '0%',
+                      top: '50%',
+                      transform: 'translateX(-50%) translateY(-50%)',
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
+                    }}
                     onTouchStart={(e) => {
                       const touch = e.touches[0];
-                      const rect = e.currentTarget.getBoundingClientRect();
-                      const centerX = rect.left + rect.width / 2;
-                      const centerY = rect.top + rect.height / 2;
-                      const startAngle = Math.atan2(touch.clientY - centerY, touch.clientX - centerX);
-                      e.currentTarget.dataset.startAngle = startAngle;
+                      const rect = e.currentTarget.parentElement.getBoundingClientRect();
+                      e.currentTarget.dataset.startX = touch.clientX;
+                      e.currentTarget.dataset.startLeft = touch.clientX - rect.left;
                       e.currentTarget.dataset.lastScroll = scrollContainerRef.current?.scrollLeft || 0;
+                      e.currentTarget.style.transition = 'none';
                     }}
                     onTouchMove={(e) => {
                       e.preventDefault();
                       const touch = e.touches[0];
-                      const rect = e.currentTarget.getBoundingClientRect();
-                      const centerX = rect.left + rect.width / 2;
-                      const centerY = rect.top + rect.height / 2;
-                      const currentAngle = Math.atan2(touch.clientY - centerY, touch.clientX - centerX);
-                      const startAngle = parseFloat(e.currentTarget.dataset.startAngle);
+                      const rect = e.currentTarget.parentElement.getBoundingClientRect();
+                      const startX = parseFloat(e.currentTarget.dataset.startX);
+                      const startLeft = parseFloat(e.currentTarget.dataset.startLeft);
                       const lastScroll = parseFloat(e.currentTarget.dataset.lastScroll);
                       
-                      let angleDiff = currentAngle - startAngle;
-                      // Normalizar la diferencia de ángulo
-                      if (angleDiff > Math.PI) angleDiff -= 2 * Math.PI;
-                      if (angleDiff < -Math.PI) angleDiff += 2 * Math.PI;
+                      // Calcular nueva posición del slider
+                      const deltaX = touch.clientX - startX;
+                      const newLeft = Math.max(0, Math.min(rect.width, startLeft + deltaX));
+                      const percentage = newLeft / rect.width;
                       
-                      // Convertir rotación a scroll (sensibilidad ajustable)
-                      const scrollDelta = angleDiff * 150; // Factor de sensibilidad
-                      const newScroll = Math.max(0, lastScroll + scrollDelta);
+                      // Actualizar posición visual del slider
+                      e.currentTarget.style.left = `${percentage * 100}%`;
                       
+                      // Calcular scroll de los certificados
                       if (scrollContainerRef.current) {
+                        const maxScroll = scrollContainerRef.current.scrollWidth - scrollContainerRef.current.offsetWidth;
+                        const newScroll = percentage * maxScroll;
                         scrollContainerRef.current.scrollLeft = newScroll;
                       }
                     }}
+                    onTouchEnd={(e) => {
+                      e.currentTarget.style.transition = 'all 0.15s';
+                    }}
                   >
-                    {/* Indicadores radiales */}
-                    {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
-                      <div
-                        key={i}
-                        className="absolute w-0.5 h-2 bg-muted-foreground/30"
-                        style={{
-                          top: '4px',
-                          left: '50%',
-                          transform: `translateX(-50%) rotate(${i * 45}deg)`,
-                          transformOrigin: '50% 28px'
-                        }}
-                      />
-                    ))}
-                    
-                    {/* Centro de la ruedita */}
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-primary/80" />
-                    
-                    {/* Indicador de posición */}
-                    <div 
-                      className="absolute w-1 h-4 bg-primary rounded-full"
-                      style={{
-                        top: '2px',
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        transformOrigin: '50% 30px'
-                      }}
-                    />
+                    {/* Centro del control */}
+                    <div className="absolute top-1/2 left-1/2 w-2 h-2 bg-primary rounded-full transform -translate-x-1/2 -translate-y-1/2" />
                   </div>
                 </div>
                 
                 {/* Texto explicativo minimalista */}
                 <div className="text-[9px] text-muted-foreground/50 text-center">
-                  Gira para navegar
+                  Desliza para navegar
                 </div>
               </div>
             )}
