@@ -109,7 +109,15 @@ const projects = [
   },
 ];
 
+
+import React, { useState } from "react";
+
 export const ProjectsSection = () => {
+  const [modalProject, setModalProject] = useState(null);
+
+  const openModal = (project) => setModalProject(project);
+  const closeModal = () => setModalProject(null);
+
   return (
     <section 
       id="projects" 
@@ -135,6 +143,11 @@ export const ProjectsSection = () => {
                 ${key === 0 ? 'bg-pink-100 dark:bg-pink-900' : ''}
                 ${key === 1 ? 'bg-blue-100 dark:bg-blue-900' : ''}
                 ${key === 2 ? 'bg-violet-100 dark:bg-violet-900' : ''}`}
+              tabIndex={0}
+              role="button"
+              onClick={() => openModal(project)}
+              onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') openModal(project); }}
+              style={{ cursor: 'pointer' }}
             >
               <div className="h-36 md:h-40 lg:h-36 overflow-hidden">
                 <img
@@ -173,6 +186,7 @@ export const ProjectsSection = () => {
                         href={project.demoUrl}
                         target="_blank"
                         className="flex items-center gap-2 px-3 py-2 rounded-full bg-blue-500/10 text-white hover:bg-blue-500/20 hover:text-white transition-all duration-300 text-sm font-medium"
+                        onClick={e => e.stopPropagation()}
                       >
                         <ExternalLink size={16} />
                         Visitar
@@ -183,6 +197,7 @@ export const ProjectsSection = () => {
                         href={project.githubUrl}
                         target="_blank"
                         className="flex items-center gap-2 px-3 py-2 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-800 dark:bg-slate-700 dark:text-slate-200 dark:hover:bg-slate-600 dark:hover:text-slate-100 transition-all duration-300 text-sm font-medium border border-slate-200 dark:border-slate-600"
+                        onClick={e => e.stopPropagation()}
                       >
                         <Github size={16} />
                         GitHub
@@ -194,6 +209,82 @@ export const ProjectsSection = () => {
             </div>
           ))}
         </div>
+
+        {/* Modal */}
+        {modalProject && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+            onClick={closeModal}
+            aria-modal="true"
+            role="dialog"
+          >
+            <div
+              className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl max-w-lg w-full p-8 relative text-slate-900 dark:text-white animate-fadeIn"
+              onClick={e => e.stopPropagation()}
+            >
+              <button
+                className="absolute top-4 right-4 text-2xl text-slate-400 hover:text-slate-700 dark:hover:text-white focus:outline-none"
+                onClick={closeModal}
+                aria-label="Cerrar"
+              >
+                ×
+              </button>
+              <img
+                src={modalProject.image}
+                alt={modalProject.title}
+                className="w-full h-48 object-cover rounded-xl mb-4"
+              />
+              <h3 className="text-2xl font-bold mb-2">{modalProject.title}</h3>
+              <div className="flex flex-wrap gap-2 mb-3">
+                {modalProject.tags.map((tag) => {
+                  const techInfo = getTechIcon(tag);
+                  return (
+                    <span 
+                      key={tag}
+                      className={`px-3 py-1.5 text-xs font-semibold border rounded-full flex items-center gap-1.5 ${techInfo.color}`}
+                    >
+                      {techInfo.icon}
+                      {tag}
+                    </span>
+                  );
+                })}
+              </div>
+              <p className="mb-4 text-base text-slate-700 dark:text-slate-200">{modalProject.description}</p>
+              {modalProject.title === "Cold Laked Store" && (
+                <div className="flex items-center gap-3 mb-4 p-3 rounded-lg bg-yellow-100 border-l-4 border-yellow-400 dark:bg-yellow-900 dark:border-yellow-500">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 48 48" strokeWidth={2} stroke="currentColor" className="w-14 h-14 text-yellow-600 dark:text-yellow-300">
+                    <circle cx="24" cy="24" r="20" fill="currentColor" opacity=".2" />
+                    <rect x="22" y="14" width="4" height="16" rx="2" fill="currentColor" />
+                    <circle cx="24" cy="36" r="2.5" fill="currentColor" />
+                  </svg>
+                  <span className="text-yellow-800 dark:text-yellow-200 font-semibold">Esta app se encuentra en mantenimiento por el momento.</span>
+                </div>
+              )}
+              <div className="flex gap-3">
+                {modalProject.demoUrl && (
+                  <a
+                    href={modalProject.demoUrl}
+                    target="_blank"
+                    className="flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition-all duration-300 text-sm font-medium"
+                  >
+                    <ExternalLink size={16} />
+                    Visitar
+                  </a>
+                )}
+                {modalProject.githubUrl && (
+                  <a
+                    href={modalProject.githubUrl}
+                    target="_blank"
+                    className="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-700 text-white hover:bg-slate-800 transition-all duration-300 text-sm font-medium"
+                  >
+                    <Github size={16} />
+                    GitHub
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
