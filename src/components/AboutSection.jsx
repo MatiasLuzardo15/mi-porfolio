@@ -17,7 +17,7 @@ export const AboutSection = () => {
             </h3>
 
             <p className="text-muted-foreground">
-              Soy <span className="text-primary font-semibold">Matías Luzardo</span>, tengo 21 años y soy desarrollador web en formación, actualmente cursando el <span className="text-primary font-semibold">4.º semestre de Tecnologías de la Información</span> en Uruguay. A lo largo de la carrera adquirí experiencia práctica en programación, bases de datos, redes y testing. Además, me he formado de manera autodidacta en <span className="text-primary font-semibold">desarrollo web</span>. Actualmente, busco mi primera oportunidad laboral para seguir creciendo y aplicar mis conocimientos en proyectos reales.
+              Soy <span className="text-blue-500 font-semibold">Matías Luzardo</span>, tengo <span className="text-blue-500 font-semibold">21 años</span> y estoy en formación como <span className="text-blue-500 font-semibold">desarrollador web</span>. Actualmente curso el <span className="text-blue-500 font-semibold">4.º semestre de Tecnologías de la Información</span> en <span className="text-blue-500 font-semibold">Uruguay</span>. Durante la carrera he adquirido experiencia práctica en <span className="text-blue-500 font-semibold">programación</span>, <span className="text-blue-500 font-semibold">bases de datos</span>, <span className="text-blue-500 font-semibold">redes</span> y <span className="text-blue-500 font-semibold">testing</span>. Además, me he formado de manera autodidacta para complementar mis conocimientos. Busco mi primera oportunidad laboral para seguir creciendo y aplicar lo aprendido en proyectos reales.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
