@@ -320,20 +320,6 @@ export const LearningSection = () => {
                     {/* Pista principal con efecto hundido */}
                     <div className="absolute top-1/2 left-2 right-2 h-2 bg-gradient-to-b from-muted-foreground/30 to-muted-foreground/10 rounded-full transform -translate-y-1/2 shadow-inner border border-muted-foreground/20" />
                     
-                    {/* Indicadores de graduación estilo audio */}
-                    <div className="absolute top-0 left-2 right-2 flex justify-between">
-                      {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-                        <div key={i} className="flex flex-col items-center">
-                          <div className={`w-px bg-muted-foreground/40 ${i % 2 === 0 ? 'h-2' : 'h-1'}`} />
-                          {i % 2 === 0 && (
-                            <div className="text-[8px] text-muted-foreground/60 mt-0.5 font-mono">
-                              {i}
-                            </div>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                    
                     {/* Barra de progreso que sigue al thumb */}
                     <div 
                       className="absolute top-1/2 left-2 h-2 bg-gradient-to-r from-primary/60 to-primary/30 rounded-full transform -translate-y-1/2 transition-all duration-100"
@@ -405,22 +391,6 @@ export const LearningSection = () => {
                       <div className="absolute bottom-1 left-1/2 w-3 h-px bg-primary/30 transform -translate-x-1/2" />
                     </div>
                   </div>
-                </div>
-                
-                {/* Etiquetas específicas para los 5 certificados */}
-                <div className="flex items-center justify-between w-64 text-[8px] text-muted-foreground/60 font-mono">
-                  <span>01</span>
-                  <span>02</span>
-                  <span>03</span>
-                  <span>04</span>
-                  <span>05</span>
-                </div>
-                
-                {/* Etiqueta central */}
-                <div className="flex items-center gap-2 text-[9px] text-muted-foreground/50 font-medium">
-                  <div className="w-6 h-px bg-primary/30" />
-                  <span>CERTIFICACIONES</span>
-                  <div className="w-6 h-px bg-primary/30" />
                 </div>
               </div>
             )}
