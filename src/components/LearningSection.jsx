@@ -1,4 +1,4 @@
-import { GraduationCap, ChevronLeft, ChevronRight } from "lucide-react";
+import { GraduationCap, ChevronLeft, ChevronRight, X, ZoomIn } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
 export const LearningSection = () => {
@@ -7,6 +7,7 @@ export const LearningSection = () => {
   const [autoScrollEnabled, setAutoScrollEnabled] = useState(true);
   const [isIOS, setIsIOS] = useState(false);
   const [isAndroid, setIsAndroid] = useState(false);
+  const [selectedCertificate, setSelectedCertificate] = useState(null);
   const intervalRef = useRef(null);
   const timeoutRef = useRef(null);
   const animationRef = useRef(null);
@@ -19,6 +20,20 @@ export const LearningSection = () => {
     setIsIOS(iosDetection);
     setIsAndroid(androidDetection);
   }, []);
+
+  // Prevenir scroll del body cuando el modal está abierto
+  useEffect(() => {
+    if (selectedCertificate) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
+    // Cleanup al desmontar
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedCertificate]);
 
   // Datos de los certificados
   const certificates = [
@@ -249,6 +264,7 @@ export const LearningSection = () => {
               <div
                 key={`${cert.id}-${index}`}
                 className="flex-shrink-0 w-80 group cursor-pointer"
+                onClick={() => setSelectedCertificate(cert)}
               >
                 <div className="bg-card rounded-xl border border-border overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:scale-105 hover:-translate-y-2">
                   {/* Imagen del Certificado */}
@@ -260,6 +276,11 @@ export const LearningSection = () => {
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    
+                    {/* Icono de zoom */}
+                    <div className="absolute top-3 right-3 w-8 h-8 bg-background/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110">
+                      <ZoomIn className="w-4 h-4 text-primary" />
+                    </div>
                   </div>
 
                   {/* Información del Certificado */}
@@ -313,6 +334,61 @@ export const LearningSection = () => {
           </div>
         </div>
       </div>
+      
+      {/* Modal de Certificado Ampliado */}
+      {selectedCertificate && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+          onClick={() => setSelectedCertificate(null)}
+        >
+          <div 
+            className="relative max-w-4xl max-h-[90vh] bg-background rounded-xl shadow-2xl overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header del Modal */}
+            <div className="flex items-center justify-between p-4 border-b border-border bg-card">
+              <div className="flex items-center gap-3">
+                <GraduationCap className="text-primary" size={24} />
+                <div>
+                  <h3 className="font-semibold text-lg">{selectedCertificate.title}</h3>
+                  <p className="text-sm text-muted-foreground">{selectedCertificate.institution} • {selectedCertificate.year}</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setSelectedCertificate(null)}
+                className="w-8 h-8 rounded-full bg-muted/20 hover:bg-muted/40 flex items-center justify-center transition-colors duration-200"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+            
+            {/* Imagen del Certificado Ampliada */}
+            <div className="p-4">
+              <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-muted/20 to-muted/10">
+                <img
+                  src={selectedCertificate.image}
+                  alt={selectedCertificate.title}
+                  className="w-full h-auto max-h-[70vh] object-contain"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            
+            {/* Footer del Modal */}
+            <div className="p-4 border-t border-border bg-card/50">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs text-muted-foreground">Certificado verificado</span>
+                  <div className="w-2 h-2 rounded-full bg-green-500" />
+                </div>
+                <div className="text-xs text-muted-foreground">
+                  Click fuera para cerrar
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
