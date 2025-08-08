@@ -1,80 +1,121 @@
 import { GraduationCap, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export const LearningSection = () => {
   const scrollContainerRef = useRef(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
+  const [isScrolling, setIsScrolling] = useState(false);
+  const [autoScrollEnabled, setAutoScrollEnabled] = useState(true);
 
   // Datos de los certificados
   const certificates = [
     {
       id: 1,
-      title: "Certificado de Programación Web",
-      institution: "Institución Educativa",
+      title: "Cybersecurity Essentials",
+      institution: "Cisco Networking Academy",
       image: "/learning/Certificate1.png",
       year: "2024"
     },
     {
       id: 2,
-      title: "Certificado de JavaScript Avanzado",
-      institution: "Plataforma de Aprendizaje",
+      title: "Introducción a Jenkins",
+      institution: "The Linux Foundation",
       image: "/learning/Certificate2.png",
       year: "2024"
     },
     {
       id: 3,
-      title: "Certificado de React Development",
-      institution: "Academia Online",
+      title: "Redes, Seguridad y Automatización",
+      institution: "Cisco Networking Academy",
       image: "/learning/Certificate3.png",
-      year: "2024"
+      year: "2023"
     },
     {
       id: 4,
-      title: "Certificado de Bases de Datos",
-      institution: "Centro de Formación",
+      title: "Introducción a la Ciberseguridad",
+      institution: "Cisco Networking Academy",
       image: "/learning/Certificate4.png",
       year: "2024"
     },
     {
       id: 5,
-      title: "Certificado de Marketing Digital",
-      institution: "Instituto Digital",
+      title: "Escala tu negocio digital",
+      institution: "Hotmart Academy",
       image: "/learning/Certificate5.png",
-      year: "2024"
+      year: "2025"
     }
   ];
+
+  // Duplicar certificados para scroll infinito
+  const infiniteCertificates = [...certificates, ...certificates, ...certificates];
+
+  // Auto-scroll infinito
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    let animationId;
+    const scrollSpeed = 0.5; // Velocidad del scroll automático
+
+    const autoScroll = () => {
+      if (!isScrolling && autoScrollEnabled && container) {
+        container.scrollLeft += scrollSpeed;
+        
+        // Reset cuando llega al final del segundo conjunto
+        const maxScroll = container.scrollWidth / 3; // Dividido por 3 porque tenemos 3 conjuntos
+        if (container.scrollLeft >= maxScroll * 2) {
+          container.scrollLeft = maxScroll;
+        }
+      }
+      animationId = requestAnimationFrame(autoScroll);
+    };
+
+    animationId = requestAnimationFrame(autoScroll);
+
+    return () => {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+    };
+  }, [isScrolling, autoScrollEnabled]);
+
+  const handleMouseEnter = () => {
+    setIsScrolling(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsScrolling(false);
+  };
 
   const scroll = (direction) => {
     const container = scrollContainerRef.current;
     if (!container) return;
 
+    setIsScrolling(true);
     const scrollAmount = 320; // Ancho de una tarjeta + gap
-    const currentScroll = container.scrollLeft;
     const targetScroll = direction === 'left' 
-      ? currentScroll - scrollAmount 
-      : currentScroll + scrollAmount;
+      ? container.scrollLeft - scrollAmount 
+      : container.scrollLeft + scrollAmount;
 
     container.scrollTo({
       left: targetScroll,
       behavior: 'smooth'
     });
+
+    // Resumir auto-scroll después de 2 segundos
+    setTimeout(() => {
+      setIsScrolling(false);
+    }, 2000);
   };
 
-  const handleScroll = () => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-
-    const { scrollLeft, scrollWidth, clientWidth } = container;
-    setCanScrollLeft(scrollLeft > 0);
-    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
+  const toggleAutoScroll = () => {
+    setAutoScrollEnabled(!autoScrollEnabled);
   };
 
   return (
-    <section id="aprendizaje" className="py-20 px-4 bg-muted/20">
-      <div className="container mx-auto max-w-7xl">
-        {/* Header */}
-        <div className="text-center mb-12">
+    <section id="aprendizaje" className="relative py-20 px-4 bg-muted/20 overflow-hidden">
+      <div className="container mx-auto max-w-7xl relative z-10">
+        {/* Header - Con animación de aparición */}
+        <div className="text-center mb-12 opacity-100 transform translate-y-0 transition-all duration-700">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 flex items-center justify-center gap-3">
             <GraduationCap className="text-primary" size={42} />
             Mi <span className="text-primary">Aprendizaje</span>
@@ -90,12 +131,7 @@ export const LearningSection = () => {
           {/* Botón Izquierdo */}
           <button
             onClick={() => scroll('left')}
-            disabled={!canScrollLeft}
-            className={`absolute left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-background/90 backdrop-blur-sm border border-border shadow-lg flex items-center justify-center transition-all duration-200 ${
-              canScrollLeft 
-                ? 'hover:bg-primary/10 hover:scale-110 text-primary' 
-                : 'opacity-50 cursor-not-allowed text-muted-foreground'
-            }`}
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-background/90 backdrop-blur-sm border border-border shadow-lg flex items-center justify-center transition-all duration-200 hover:bg-primary/10 hover:scale-110 text-primary opacity-80 hover:opacity-100"
             aria-label="Anterior certificado"
           >
             <ChevronLeft className="w-6 h-6" />
@@ -104,31 +140,26 @@ export const LearningSection = () => {
           {/* Botón Derecho */}
           <button
             onClick={() => scroll('right')}
-            disabled={!canScrollRight}
-            className={`absolute right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-background/90 backdrop-blur-sm border border-border shadow-lg flex items-center justify-center transition-all duration-200 ${
-              canScrollRight 
-                ? 'hover:bg-primary/10 hover:scale-110 text-primary' 
-                : 'opacity-50 cursor-not-allowed text-muted-foreground'
-            }`}
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-background/90 backdrop-blur-sm border border-border shadow-lg flex items-center justify-center transition-all duration-200 hover:bg-primary/10 hover:scale-110 text-primary opacity-80 hover:opacity-100"
             aria-label="Siguiente certificado"
           >
             <ChevronRight className="w-6 h-6" />
           </button>
 
-          {/* Carrusel de Certificados */}
+          {/* Carrusel de Certificados Infinito */}
           <div
             ref={scrollContainerRef}
-            onScroll={handleScroll}
-            className="flex gap-6 overflow-x-auto scroll-smooth px-14 pb-4 scrollbar-hide"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            className="flex gap-6 overflow-x-auto scroll-smooth px-16 pb-4 scrollbar-hide"
             style={{
               scrollbarWidth: 'none',
-              msOverflowStyle: 'none',
-              WebkitScrollbar: { display: 'none' }
+              msOverflowStyle: 'none'
             }}
           >
-            {certificates.map((cert) => (
+            {infiniteCertificates.map((cert, index) => (
               <div
-                key={cert.id}
+                key={`${cert.id}-${index}`}
                 className="flex-shrink-0 w-80 group cursor-pointer"
               >
                 <div className="bg-card rounded-xl border border-border overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:scale-105 hover:-translate-y-2">
@@ -170,14 +201,24 @@ export const LearningSection = () => {
             ))}
           </div>
 
-          {/* Indicadores de scroll para móvil */}
-          <div className="flex justify-center mt-6 gap-2 md:hidden">
-            {certificates.map((_, index) => (
-              <div
-                key={index}
-                className="w-2 h-2 rounded-full bg-muted-foreground/30"
-              />
-            ))}
+          {/* Indicador de scroll automático clickeable */}
+          <div className="flex justify-center mt-6">
+            <button
+              onClick={toggleAutoScroll}
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-background/80 backdrop-blur-sm border border-border text-xs text-muted-foreground hover:bg-background/90 transition-all duration-200 hover:scale-105 cursor-pointer"
+            >
+              <div className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+                autoScrollEnabled 
+                  ? 'bg-primary animate-pulse' 
+                  : 'bg-red-500'
+              }`} />
+              <span className="font-medium">
+                {autoScrollEnabled ? 'Scroll automático activo' : 'Scroll automático pausado'}
+              </span>
+              <span className="text-[10px] opacity-70">
+                (Click para {autoScrollEnabled ? 'pausar' : 'reanudar'})
+              </span>
+            </button>
           </div>
         </div>
       </div>
