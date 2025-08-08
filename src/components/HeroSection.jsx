@@ -37,7 +37,15 @@ export const HeroSection = () => {
           </h1>
 
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto opacity-0 animate-fade-in-delay-4">
-            <span className="text-primary font-semibold">Desarrollador Web</span> en <span className="text-blue-400 font-semibold">Uruguay</span> con conocimientos en <span className="text-green-400 font-semibold">React</span>, <span className="text-yellow-400 font-semibold">JavaScript</span> y <span className="text-orange-400 font-semibold">WordPress</span>. Estudiante de <span className="text-cyan-400 font-semibold">Tecnologías de la Información</span> con experiencia en <span className="text-pink-400 font-semibold">desarrollo frontend</span>, <span className="text-purple-400 font-semibold">backend</span>, <span className="text-indigo-400 font-semibold">bases de datos</span> y <span className="text-red-400 font-semibold">marketing digital</span>. Creando soluciones web modernas y responsivas.
+            Desarrollador web en <span className="text-blue-400 font-semibold">Uruguay</span> con conocimientos en
+            <span className="text-orange-400 font-semibold"> HTML</span>,
+            <span className="text-blue-500 font-semibold"> CSS</span>,
+            <span className="text-yellow-400 font-semibold"> JavaScript</span> y
+            <span className="text-teal-400 font-semibold"> Tailwind</span>, utilizo tecnologías como
+            <span className="text-green-400 font-semibold"> React</span>,
+            <span className="text-indigo-400 font-semibold"> Astro</span> y
+            <span className="text-blue-400 font-semibold"> WordPress</span>.
+            Tengo interés en el diseño centrado en <span className="text-pink-400 font-semibold">UI</span> y <span className="text-purple-400 font-semibold">UX</span>, buscando crear experiencias simples y agradables. Estudiante de <span className="text-cyan-400 font-semibold">Tecnologías de la Información</span>, en constante aprendizaje.
           </p>
 
           <div className="pt-4 opacity-0 animate-fade-in-delay-5">
@@ -83,10 +91,9 @@ export const HeroSection = () => {
       {/* Flecha minimalista */}
       <button 
         onClick={() => {
-          document.getElementById('projects')?.scrollIntoView({ 
-            behavior: 'smooth',
-            block: 'start'
-          });
+                          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto opacity-0 animate-fade-in-delay-4">
+                            Desarrollador web en Uruguay con conocimientos en HTML, CSS, JavaScript y Tailwind, y experiencia con React, Astro y WordPress. Tengo interés en el diseño centrado en UI y UX, buscando crear experiencias simples y agradables. Estudiante de Tecnologías de la Información, en constante aprendizaje.
+                          </p>
         }}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 animate-fade-in-delay-4 group cursor-pointer transition-all duration-200 hover:scale-110"
         aria-label="Ver proyectos"

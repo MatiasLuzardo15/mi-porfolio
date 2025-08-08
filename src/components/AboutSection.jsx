@@ -17,7 +17,7 @@ export const AboutSection = () => {
             </h3>
 
             <p className="text-muted-foreground">
-              Soy <span className="text-primary font-semibold">Matías Luzardo</span>, desarrollador web en formación y estudiante de <span className="text-primary font-semibold">4.º semestre de Tecnologías de la Información</span> en Uruguay. A lo largo de la carrera adquirí experiencia práctica en programación, bases de datos, redes y testing. Además, me he formado de manera autodidacta en <span className="text-primary font-semibold">desarrollo web</span> y <span className="text-primary font-semibold">marketing digital</span>. Actualmente, busco mi primera oportunidad laboral para seguir creciendo y aplicar mis conocimientos en proyectos reales.
+              Soy <span className="text-primary font-semibold">Matías Luzardo</span>, tengo 21 años y soy desarrollador web en formación, actualmente cursando el <span className="text-primary font-semibold">4.º semestre de Tecnologías de la Información</span> en Uruguay. A lo largo de la carrera adquirí experiencia práctica en programación, bases de datos, redes y testing. Además, me he formado de manera autodidacta en <span className="text-primary font-semibold">desarrollo web</span>. Actualmente, busco mi primera oportunidad laboral para seguir creciendo y aplicar mis conocimientos en proyectos reales.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
@@ -64,20 +64,7 @@ export const AboutSection = () => {
                 </div>
               </div>
             </div>
-            <div className="gradient-border p-6 card-hover">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <Briefcase className="h-6 w-6 text-primary" />
-                </div>
 
-                <div className="text-left">
-                  <h4 className="font-semibold text-lg">Marketing Digital</h4>
-                  <p className="text-muted-foreground">
-                    Formación autodidacta en marketing digital que complementa mis habilidades técnicas para soluciones integrales.
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
