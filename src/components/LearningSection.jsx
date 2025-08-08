@@ -407,13 +407,20 @@ export const LearningSection = () => {
                   </div>
                 </div>
                 
-                {/* Etiquetas estilo panel de audio */}
-                <div className="flex items-center gap-2 text-[8px] text-muted-foreground/60 font-mono">
-                  <span>MIN</span>
-                  <div className="w-8 h-px bg-muted-foreground/30" />
-                  <span>CERTIFICADOS</span>
-                  <div className="w-8 h-px bg-muted-foreground/30" />
-                  <span>MAX</span>
+                {/* Etiquetas específicas para los 5 certificados */}
+                <div className="flex items-center justify-between w-64 text-[8px] text-muted-foreground/60 font-mono">
+                  <span>01</span>
+                  <span>02</span>
+                  <span>03</span>
+                  <span>04</span>
+                  <span>05</span>
+                </div>
+                
+                {/* Etiqueta central */}
+                <div className="flex items-center gap-2 text-[9px] text-muted-foreground/50 font-medium">
+                  <div className="w-6 h-px bg-primary/30" />
+                  <span>CERTIFICACIONES</span>
+                  <div className="w-6 h-px bg-primary/30" />
                 </div>
               </div>
             )}
