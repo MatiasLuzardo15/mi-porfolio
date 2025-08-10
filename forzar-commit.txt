@@ -1,3 +1,0 @@
-# Archivo temporal para forzar commit
-
-Este archivo puede ser eliminado después de confirmar que la eliminación del site se reflejó correctamente en el repositorio remoto.
