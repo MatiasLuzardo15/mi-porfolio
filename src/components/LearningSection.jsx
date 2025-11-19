@@ -79,6 +79,14 @@ export const LearningSection = () => {
       institution: "Udemy",
       image: "/learning/Certificate6.png",
       year: "2025"
+    },
+
+    {
+      id: 7,
+      title: "Essential Photoshop Course for Beginner To Advanced",
+      institution: "Udemy",
+      image: "/learning/Certificate7.png",
+      year: "2025"
     }
   ];
 
