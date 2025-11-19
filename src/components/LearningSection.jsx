@@ -77,7 +77,7 @@ export const LearningSection = () => {
       id: 6,
       title: "English Grammar Mastery: Learn to Speak & Write",
       institution: "Udemy",
-      image: `${import.meta.env.BASE_URL}learning/Certificate6.jpg`,
+      image: "/learning/Certificate6.png",
       year: "2025"
     }
   ];
