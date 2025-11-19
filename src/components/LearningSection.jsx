@@ -72,6 +72,14 @@ export const LearningSection = () => {
       image: "/learning/Certificate5.png",
       year: "2025"
     }
+    ,
+    {
+      id: 6,
+      title: "Curso Avanzado de DevOps",
+      institution: "Plataforma Ejemplo",
+      image: "/learning/Certificate6.jpg",
+      year: "2025"
+    }
   ];
 
   // Duplicar certificados para scroll infinito
