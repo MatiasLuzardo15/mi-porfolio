@@ -75,9 +75,9 @@ export const LearningSection = () => {
     ,
     {
       id: 6,
-      title: "Curso Avanzado de DevOps",
-      institution: "Plataforma Ejemplo",
-      image: "/learning/Certificate6.jpg",
+      title: "English Grammar Mastery: Learn to Speak & Write",
+      institution: "Udemy",
+      image: `${import.meta.env.BASE_URL}learning/Certificate6.jpg`,
       year: "2025"
     }
   ];
