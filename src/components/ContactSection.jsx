@@ -1,7 +1,6 @@
 import {
   Mail,
   MapPin,
-  Phone,
   Send,
   MessageSquare,
 } from "lucide-react";
@@ -90,22 +89,7 @@ export const ContactSection = () => {
                 </div>
               </div>
 
-              <div className="flex flex-col lg:flex-row items-center lg:items-center space-y-2 lg:space-y-0 lg:space-x-3 justify-center lg:justify-start">
-                <div className="p-3 lg:p-3 rounded-full bg-primary/10 flex-shrink-0">
-                  <Phone className="h-5 w-5 lg:h-6 lg:w-6 text-primary" />
-                </div>
-                <div className="text-center lg:text-left min-w-0 flex-1">
-                  <h4 className="font-medium text-sm lg:text-base">Teléfono</h4>
-                  <a
-                    href="https://wa.me/598091692885"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-primary transition-colors text-xs lg:text-sm"
-                  >
-                    +598 091 692 885
-                  </a>
-                </div>
-              </div>
+
 
               <div className="flex flex-col lg:flex-row items-center lg:items-center space-y-2 lg:space-y-0 lg:space-x-3 justify-center lg:justify-start">
                 <div className="p-3 lg:p-3 rounded-full bg-primary/10 flex-shrink-0">
