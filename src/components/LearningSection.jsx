@@ -87,6 +87,13 @@ export const LearningSection = () => {
       institution: "Udemy",
       image: "/learning/Certificate7.png",
       year: "2025"
+    },
+    {
+      id: 8,
+      title: "Technical Support Fundamentals",
+      institution: "Coursera",
+      image: "/learning/Certificate8.png",
+      year: "2025"
     }
   ];
 
