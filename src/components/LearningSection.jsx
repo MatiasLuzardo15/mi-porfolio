@@ -93,7 +93,8 @@ export const LearningSection = () => {
       title: "Technical Support Fundamentals",
       institution: "Coursera",
       image: "/learning/Certificate8.png",
-      year: "2025"
+      year: "2025",
+      certificateLink: "https://www.coursera.org/account/accomplishments/verify/JE121XW3RVV8?utm_source=ln&utm_medium=certificate&utm_content=cert_image&utm_campaign=pdf_header_button&utm_product=course"
     }
   ];
 
@@ -393,9 +394,21 @@ export const LearningSection = () => {
                   <span className="text-xs text-muted-foreground">Certificado verificado</span>
                   <div className="w-2 h-2 rounded-full bg-green-500" />
                 </div>
-                <div className="text-xs text-muted-foreground">
-                  Click fuera para cerrar
-                </div>
+                {selectedCertificate.certificateLink && (
+                  <a
+                    href={selectedCertificate.certificateLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-primary hover:underline font-medium"
+                  >
+                    Ver certificado verificado
+                  </a>
+                )}
+                {!selectedCertificate.certificateLink && (
+                  <div className="text-xs text-muted-foreground">
+                    Click fuera para cerrar
+                  </div>
+                )}
               </div>
             </div>
           </div>
