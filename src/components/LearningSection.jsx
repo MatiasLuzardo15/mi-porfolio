@@ -93,7 +93,7 @@ export const LearningSection = () => {
       title: "Technical Support Fundamentals",
       institution: "Coursera",
       image: "/learning/Certificate8.png",
-      year: "2025",
+      year: "2026",
       certificateLink: "https://www.coursera.org/account/accomplishments/verify/JE121XW3RVV8?utm_source=ln&utm_medium=certificate&utm_content=cert_image&utm_campaign=pdf_header_button&utm_product=course"
     }
   ];
