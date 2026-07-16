@@ -53,7 +53,7 @@ export const Navbar = () => {
     <header className={`editorial-nav ${isScrolled ? "is-scrolled" : ""}`}>
       <a href="#hero" className="nav-signature" aria-label="Ir al inicio">
         <span className="identity-mark" aria-hidden="true">
-          <b>M</b><b>L</b><i />
+          <img src="/images/favicon.png?v=2" alt="" />
         </span>
         <span className="identity-copy">
           <strong>MATÍAS LUZARDO</strong>
