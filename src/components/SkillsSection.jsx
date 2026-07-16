@@ -4,9 +4,8 @@ const skills = [
   ["03", "Tailwind CSS", "Sistemas visuales"],
   ["04", "Supabase", "Datos en tiempo real"],
   ["05", "Node.js", "Servicios web"],
-  ["06", "WordPress", "Experiencias CMS"],
-  ["07", "Figma", "Diseño UI / UX"],
-  ["08", "Git & GitHub", "Flujos de trabajo"],
+  ["06", "Figma", "Diseño UI / UX"],
+  ["07", "Git & GitHub", "Flujos de trabajo"],
 ];
 
 const marquee = [

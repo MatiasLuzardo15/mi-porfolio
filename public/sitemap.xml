@@ -11,7 +11,7 @@
     <image:image>
       <image:loc>https://matias-luzardo-portfolio.vercel.app/images/profile.jpg</image:loc>
       <image:title>Matías Luzardo - Desarrollador Web</image:title>
-      <image:caption>Foto de perfil de Matías Luzardo, desarrollador web especializado en React y WordPress</image:caption>
+      <image:caption>Foto de perfil de Matías Luzardo, desarrollador web especializado en React y TypeScript</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://matias-luzardo-portfolio.vercel.app/banner.png</image:loc>
@@ -38,11 +38,6 @@
       <image:loc>https://matias-luzardo-portfolio.vercel.app/projects/project1.png</image:loc>
       <image:title>Weatherl - Aplicación del Clima</image:title>
       <image:caption>Aplicación del clima desarrollada con React y Framer Motion</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://matias-luzardo-portfolio.vercel.app/projects/project2.png</image:loc>
-      <image:title>Cold Laked Store - E-commerce</image:title>
-      <image:caption>Tienda en línea desarrollada con WordPress</image:caption>
     </image:image>
   </url>
   

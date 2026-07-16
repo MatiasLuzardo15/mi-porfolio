@@ -33,7 +33,7 @@
 
 ## 🚀 Introducción
 
-Portfolio personal desarrollado con **React**, **TailwindCSS** y **Vite**. Presenta mis proyectos, habilidades y experiencia como estudiante de 4º semestre de Licenciatura en Tecnologías de la Información, con formación autodidacta en desarrollo web, WordPress y marketing digital.
+Portfolio personal desarrollado con **React**, **TailwindCSS** y **Vite**. Presenta mis proyectos, habilidades y experiencia como estudiante de 4º semestre de Licenciatura en Tecnologías de la Información, con formación autodidacta en desarrollo web, TypeScript y marketing digital.
 
 ---
 
@@ -115,7 +115,6 @@ La aplicación estará disponible en: [http://localhost:5173](http://localhost:5
 
 ### 📁 Proyectos
 - **Weatherl**: Aplicación del clima con React y Framer Motion
-- **Cold Laked Store**: E-commerce desarrollado en WordPress
 - Enlaces directos a demos y repositorios
 
 ### 📞 Contacto
