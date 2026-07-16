@@ -1,72 +1,54 @@
-import { Briefcase, Code, User, FileText, UserCircle } from "lucide-react";
+import { ArrowUpRight, Database, FileText, Layout, Server } from "lucide-react";
+
+const principles = [
+  { icon: Layout, title: "Interfaces claras", text: "Diseño centrado en jerarquía, respuesta visual y una experiencia simple." },
+  { icon: Server, title: "Código que escala", text: "Componentes mantenibles y soluciones pensadas para crecer con el producto." },
+  { icon: Database, title: "Visión completa", text: "Frontend, backend y datos conectados en una experiencia coherente." },
+];
 
 export const AboutSection = () => {
   return (
-    <section id="about" className="py-20 px-4 relative">
-      {" "}
-      <div className="container mx-auto max-w-5xl">
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-12 text-center flex items-center justify-center gap-3">
-          <UserCircle className="text-primary" size={42} />
-          Acerca de <span className="text-primary"> Mí</span>
-        </h2>
+    <section id="about" className="section-block about-editorial">
+      <div className="section-kicker">
+        <span>01 / PERFIL</span>
+        <span>DETALLE · LÓGICA · EXPERIENCIA</span>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            <h3 className="text-2xl font-semibold">
-              Desarrollador Web Frontend & Backend | Uruguay
-            </h3>
+      <div className="about-layout">
+        <div className="about-heading">
+          <p className="eyebrow"><i /> UN POCO SOBRE MÍ</p>
+          <h2>Ideas que se vuelven<br /><em>experiencias reales.</em></h2>
+        </div>
 
-            <p className="text-muted-foreground">
-              Soy <span className="text-blue-500 font-semibold">Matías Luzardo</span>, tengo <span className="text-blue-500 font-semibold">21 años</span> y estoy en formación como <span className="text-blue-500 font-semibold">desarrollador web</span>. Actualmente curso el <span className="text-blue-500 font-semibold">4.º semestre de Tecnologías de la Información</span> en <span className="text-blue-500 font-semibold">Uruguay</span>. Durante la carrera he adquirido experiencia práctica en <span className="text-blue-500 font-semibold">programación</span>, <span className="text-blue-500 font-semibold">bases de datos</span>, <span className="text-blue-500 font-semibold">redes</span> y <span className="text-blue-500 font-semibold">testing</span>. Además, me he formado de manera autodidacta para complementar mis conocimientos. Busco mi primera oportunidad laboral para seguir creciendo y aplicar lo aprendido en proyectos reales.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
-              <a href="#contact" className="cosmic-button">
-                {" "}
-                Contáctame
-              </a>
-
-              <a
-                href="/Expediente_Academico.pdf"
-                download="Expediente_Academico_Matias_Luzardo.pdf"
-                className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300 flex items-center gap-2 justify-center"
-              >
-                <FileText size={18} />
-                Expediente Académico
-              </a>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 gap-6">
-            <div className="gradient-border p-6 card-hover">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <Code className="h-6 w-6 text-primary" />
-                </div>
-                <div className="text-left">
-                  <h4 className="font-semibold text-lg">Desarrollo Web</h4>
-                  <p className="text-muted-foreground">
-                    Creación de sitios web responsivos con HTML, CSS, Tailwind y JavaScript. Experiencia en frameworks modernos.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="gradient-border p-6 card-hover">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <User className="h-6 w-6 text-primary" />
-                </div>
-                <div className="text-left">
-                  <h4 className="font-semibold text-lg">Bases de Datos y Redes</h4>
-                  <p className="text-muted-foreground">
-                    Conocimientos en bases de datos relacionales, infraestructura de redes y testing de aplicaciones.
-                  </p>
-                </div>
-              </div>
-            </div>
-
+        <div className="about-copy">
+          <p className="about-lead">
+            Soy Matías Luzardo, desarrollador web uruguayo de 22 años y estudiante
+            de Tecnologías de la Información.
+          </p>
+          <p>
+            Combino formación técnica y aprendizaje autodidacta para crear productos
+            web útiles, ágiles y visualmente cuidados. Me interesan especialmente React,
+            TypeScript, Supabase y el diseño centrado en UI/UX. Busco mi primera oportunidad
+            profesional para aportar, aprender y construir productos que resuelvan problemas reales.
+          </p>
+          <div className="about-links">
+            <a href="#contact">Trabajemos juntos <ArrowUpRight size={16} /></a>
+            <a href="/Expediente_Academico.pdf" download="Expediente_Academico_Matias_Luzardo.pdf">
+              Expediente académico <FileText size={16} />
+            </a>
           </div>
         </div>
+      </div>
+
+      <div className="principles-grid">
+        {principles.map(({ icon: Icon, title, text }, index) => (
+          <article key={title} className="principle-card">
+            <span className="principle-number">0{index + 1}</span>
+            <Icon size={24} strokeWidth={1.5} />
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </article>
+        ))}
       </div>
     </section>
   );

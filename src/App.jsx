@@ -2,13 +2,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { NotFound } from "./pages/NotFound";
 import { Toaster } from "@/components/ui/toaster";
-import { ThemeIndicator } from "@/components/ThemeIndicator";
+import { PremiumCursor } from "@/components/PremiumCursor";
 
 function App() {
   return (
     <>
       <Toaster />
-      <ThemeIndicator />
+      <PremiumCursor />
       <BrowserRouter>
         <Routes>
           <Route index element={<Home />} />

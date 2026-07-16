@@ -1,33 +1,24 @@
 import { Navbar } from "../components/Navbar";
-import { ProfessionalBackground } from "@/components/StarBackground";
 import { HeroSection } from "../components/HeroSection";
 import { AboutSection } from "../components/AboutSection";
 import { ProjectsSection } from "../components/ProjectsSection";
+import { SkillsSection } from "../components/SkillsSection";
 import { LearningSection } from "../components/LearningSection";
 import { ContactSection } from "../components/ContactSection";
 import { Footer } from "../components/Footer";
-import { useTheme } from "@/hooks/use-theme";
 
 export const Home = () => {
-  const { theme } = useTheme();
-  
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      {/* Professional Background */}
-      <ProfessionalBackground />
-
-      {/* Navbar */}
+    <div className="site-shell">
       <Navbar />
-      {/* Main Content */}
       <main>
         <HeroSection />
-        <ProjectsSection />
         <AboutSection />
+        <ProjectsSection />
+        <SkillsSection />
         <LearningSection />
         <ContactSection />
       </main>
-
-      {/* Footer */}
       <Footer />
     </div>
   );

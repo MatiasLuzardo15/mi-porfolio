@@ -29,6 +29,7 @@ export default defineConfig({
   },
   // Optimización del servidor de desarrollo
   server: {
+    host: "0.0.0.0",
     hmr: {
       overlay: false,
     },

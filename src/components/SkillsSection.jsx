@@ -1,86 +1,45 @@
-import { useState } from "react";
-import { cn } from "@/lib/utils";
-import { Zap } from "lucide-react";
-
 const skills = [
-  { name: "HTML/CSS", level: 95, category: "frontend" },
-  { name: "JavaScript", level: 90, category: "frontend" },
-  { name: "React", level: 90, category: "frontend" },
-  { name: "TypeScript", level: 85, category: "frontend" },
-  { name: "Tailwind CSS", level: 90, category: "frontend" },
-  { name: "Next.js", level: 80, category: "frontend" },
-  { name: "React Router", level: 85, category: "frontend" },
-
-  { name: "Node.js", level: 80, category: "backend" },
-  { name: "Express", level: 75, category: "backend" },
-  { name: "MongoDB", level: 70, category: "backend" },
-  { name: "PostgreSQL", level: 65, category: "backend" },
-  { name: "GraphQL", level: 60, category: "backend" },
-  { name: "PHP", level: 70, category: "backend" },
-
-  { name: "Git/GitHub", level: 90, category: "tools" },
-  { name: "Vite", level: 85, category: "tools" },
-  { name: "WordPress", level: 75, category: "tools" },
-  { name: "Docker", level: 70, category: "tools" },
-  { name: "Figma", level: 85, category: "tools" },
-  { name: "VS Code", level: 95, category: "tools" },
+  ["01", "React", "Interfaces"],
+  ["02", "TypeScript", "Código robusto"],
+  ["03", "Tailwind CSS", "Sistemas visuales"],
+  ["04", "Supabase", "Datos en tiempo real"],
+  ["05", "Node.js", "Servicios web"],
+  ["06", "WordPress", "Experiencias CMS"],
+  ["07", "Figma", "Diseño UI / UX"],
+  ["08", "Git & GitHub", "Flujos de trabajo"],
 ];
 
-const categories = ["all", "frontend", "backend", "tools"];
+const marquee = ["ADAPTABLE", "ACCESIBLE", "RÁPIDO", "ESCALABLE", "INTUITIVO", "OPTIMIZADO"];
 
 export const SkillsSection = () => {
-  const [activeCategory, setActiveCategory] = useState("all");
-
-  const filteredSkills = skills.filter(
-    (skill) => activeCategory === "all" || skill.category === activeCategory
-  );
   return (
-    <section id="skills" className="py-20 px-4 relative">
-      <div className="container mx-auto max-w-5xl">
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-12 text-center flex items-center justify-center gap-3">
-          <Zap className="text-primary" size={42} />
-          Mis <span className="text-primary"> Habilidades</span>
-        </h2>
-
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {categories.map((category, key) => (
-            <button
-              key={key}
-              onClick={() => setActiveCategory(category)}
-              className={cn(
-                "px-5 py-2 rounded-full transition-colors duration-300 capitalize",
-                activeCategory === category
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-secondary/70 text-forefround hover:bd-secondary"
-              )}
-            >
-              {category}
-            </button>
+    <section id="skills" className="skills-editorial">
+      <div className="marquee" aria-label="Cualidades del trabajo">
+        <div className="marquee-track">
+          {[0, 1].map((group) => (
+            <div className="marquee-group" aria-hidden={group === 1} key={group}>
+              {marquee.map((item) => <span key={`${group}-${item}`}>{item} <b>✦</b></span>)}
+            </div>
           ))}
         </div>
+      </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredSkills.map((skill, key) => (
-            <div
-              key={key}
-              className="bg-card p-6 rounded-lg shadow-xs card-hover"
-            >
-              <div className="text-left mb-4">
-                <h3 className="font-semibold text-lg"> {skill.name}</h3>
-              </div>
-              <div className="w-full bg-secondary/50 h-2 rounded-full overflow-hidden">
-                <div
-                  className="bg-primary h-2 rounded-full origin-left animate-[grow_1.5s_ease-out]"
-                  style={{ width: skill.level + "%" }}
-                />
-              </div>
-
-              <div className="text-right mt-1">
-                <span className="text-sm text-muted-foreground">
-                  {skill.level}%
-                </span>
-              </div>
-            </div>
+      <div className="section-block skills-inner">
+        <div className="section-kicker">
+          <span>03 / HERRAMIENTAS</span>
+          <span>EL SISTEMA DETRÁS DEL RESULTADO</span>
+        </div>
+        <div className="skills-heading">
+          <p className="eyebrow"><i /> MI STACK</p>
+          <h2>La tecnología es el medio.<br /><em>La experiencia, el objetivo.</em></h2>
+        </div>
+        <div className="skills-grid">
+          {skills.map(([number, name, use]) => (
+            <article key={name}>
+              <span>{number}</span>
+              <h3>{name}</h3>
+              <p>{use}</p>
+            </article>
           ))}
         </div>
       </div>
