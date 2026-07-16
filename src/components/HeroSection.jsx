@@ -1,4 +1,4 @@
-import { ArrowDown, Github, Linkedin } from "lucide-react";
+import { ArrowDown, ArrowDownRight, Github, Linkedin } from "lucide-react";
 
 export const HeroSection = () => {
   return (
@@ -24,7 +24,7 @@ export const HeroSection = () => {
               </p>
             </div>
             <div className="hero-actions">
-              <a className="button-primary" href="#projects">Explorar proyectos <span>↘</span></a>
+              <a className="button-primary" href="#projects">Explorar proyectos <ArrowDownRight size={16} strokeWidth={1.8} /></a>
               <a className="icon-link" href="https://github.com/MatiasLuzardo15" target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={19} /></a>
               <a className="icon-link" href="https://www.linkedin.com/in/matias-luzardo-a87280248/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><Linkedin size={19} /></a>
             </div>

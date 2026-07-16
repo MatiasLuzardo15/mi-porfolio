@@ -1,4 +1,4 @@
-import { Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const navItems = [
@@ -89,7 +89,7 @@ export const Navbar = () => {
       </nav>
 
       <button
-        className="nav-menu-button"
+        className={`nav-menu-button ${isMenuOpen ? "is-open" : ""}`}
         onClick={() => setIsMenuOpen((open) => !open)}
         aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
         aria-expanded={isMenuOpen}
@@ -98,16 +98,26 @@ export const Navbar = () => {
       </button>
 
       <div className={`mobile-panel ${isMenuOpen ? "is-open" : ""}`}>
-        {navItems.map((item) => (
+        <div className="mobile-panel-header">
+          <span>NAVEGACIÓN / ÍNDICE</span>
+          <small>ML—26</small>
+        </div>
+        {navItems.map((item, index) => (
           <a
             key={item.href}
             href={item.href}
             className={activeSection === item.id ? "is-active" : ""}
             onClick={() => setIsMenuOpen(false)}
           >
-            {item.name}<span>↗</span>
+            <span className="mobile-nav-index">0{index + 1}</span>
+            <strong>{item.name}</strong>
+            <ArrowUpRight size={17} strokeWidth={1.8} />
           </a>
         ))}
+        <div className="mobile-panel-footer">
+          <span>MATÍAS LUZARDO</span>
+          <span>FLORIDA · UY</span>
+        </div>
       </div>
     </header>
   );

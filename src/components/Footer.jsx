@@ -1,4 +1,4 @@
-import { ArrowUpRight, Github, Linkedin } from "lucide-react";
+import { ArrowUp, ArrowUpRight, Github, Linkedin } from "lucide-react";
 
 export const Footer = () => {
   return (
@@ -10,7 +10,7 @@ export const Footer = () => {
       <div className="footer-links">
         <a href="https://github.com/MatiasLuzardo15" target="_blank" rel="noreferrer"><Github size={17} /> GitHub <ArrowUpRight size={14} /></a>
         <a href="https://www.linkedin.com/in/matias-luzardo-a87280248/" target="_blank" rel="noreferrer"><Linkedin size={17} /> LinkedIn <ArrowUpRight size={14} /></a>
-        <a href="#hero">Volver arriba ↑</a>
+        <a href="#hero">Volver arriba <ArrowUp size={14} /></a>
       </div>
       <div className="footer-bottom">
         <span>© {new Date().getFullYear()} MATÍAS LUZARDO</span>
