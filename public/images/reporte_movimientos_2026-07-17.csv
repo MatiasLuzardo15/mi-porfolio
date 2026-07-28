@@ -1,0 +1,29 @@
+﻿sep=;
+Movimientos
+Periodo:;Julio de 2026 a Julio de 2026
+Generado el:;17/7/2026
+
+RESUMEN FINANCIERO
+Moneda;Ingresos;Egresos;Saldo Neto
+USD;2300;33574.59;-31274.589999999997
+
+
+DETALLE DE OPERACIONES
+Fecha;Tipo;Categoria;Proyecto;Monto;Moneda;Nota
+2026-07-17;Salida;Fertilizantes;;600;USD;Gaste 600 dls en fertilizantes
+2026-07-15;Salida;Fertilizantes;;300;USD;Gaste 300 dolares en fertilizantes
+2026-07-10;Salida;Fertilizantes;;300;USD;gaste 300 en fertilizantes
+2026-07-10;Salida;Fertilizantes;;74.59;USD;Gasté 3000 pesos en fertilizantes
+2026-07-03;Salida;Compra de ganado;;15000;USD;Compré 15 novillos por 15.000 USD
+2026-07-03;Entrada;Venta de terneros;;500;USD;vendi 2 terneros por 500 dls y gaste 300 dolares en fertilizantes
+2026-07-03;Salida;Otros gastos;;300;USD;pago de cuidado de luna a ines por 300 dls
+2026-07-03;Salida;Otros gastos;;300;USD;pago a Ines por cuidado de luna
+2026-07-03;Salida;Vacunas;;400;USD;gaste 400 dolares en vacunas
+2026-07-02;Entrada;Venta de terneros;;900;USD;Vendí 2 terneros por 900 USD
+2026-07-02;Salida;Alambrados;;12000;USD;Compré alambre por 12000
+2026-07-02;Salida;Super;;2300;USD;Gaste 2300 pesos en super y tambien pague renta a jose por 7000 dolares
+2026-07-02;Salida;Veterinaria;;500;USD;Gasté 500 en gasoil y 1200 en veterinaria
+2026-07-02;Salida;Veterinaria;;500;USD;Gasté 500 en gasoil y 1200 en veterinaria
+2026-07-02;Salida;Veterinaria;;500;USD;Gasté 500 en gasoil y 1200 en veterinaria
+2026-07-02;Salida;Veterinaria;;500;USD;Gasté 500 en gasoil y 1200 en veterinaria
+2026-07-01;Entrada;Venta de terneros;;900;USD;Vendí 2 terneros por 900 USD

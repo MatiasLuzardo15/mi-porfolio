@@ -71,9 +71,6 @@ Portfolio personal desarrollado con **React**, **TailwindCSS** y **Vite**. Prese
 * 📩 **Formulario de Contacto**
   Formulario funcional con notificaciones toast
 
-* 🎓 **Expediente Académico**
-  Descarga directa del expediente en formato PDF
-
 ---
 
 ## 👌 Inicio Rápido

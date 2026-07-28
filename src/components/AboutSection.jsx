@@ -1,4 +1,4 @@
-import { ArrowUpRight, Database, FileText, Layout, Server } from "lucide-react";
+import { ArrowUpRight, Database, Layout, Server } from "lucide-react";
 
 const principles = [
   { icon: Layout, title: "Interfaces claras", text: "Diseño centrado en jerarquía, respuesta visual y una experiencia simple." },
@@ -33,9 +33,6 @@ export const AboutSection = () => {
           </p>
           <div className="about-links">
             <a href="#contact">Trabajemos juntos <ArrowUpRight size={16} /></a>
-            <a href="/Expediente_Academico.pdf" download="Expediente_Academico_Matias_Luzardo.pdf">
-              Expediente académico <FileText size={16} />
-            </a>
           </div>
         </div>
       </div>

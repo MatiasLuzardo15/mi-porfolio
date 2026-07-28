@@ -57,12 +57,4 @@
     <priority>0.8</priority>
   </url>
   
-  <!-- Expediente Académico -->
-  <url>
-    <loc>https://matias-luzardo-portfolio.vercel.app/Expediente_Academico.pdf</loc>
-    <lastmod>2025-08-05</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
 </urlset>
