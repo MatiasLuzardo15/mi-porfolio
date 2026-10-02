@@ -10,6 +10,9 @@ const certificates = [
   { id: 6, title: "English Grammar Mastery", institution: "Udemy", image: "/learning/Certificate6.png", year: "2025" },
   { id: 7, title: "Essential Photoshop Course", institution: "Udemy", image: "/learning/Certificate7.png", year: "2025" },
   { id: 8, title: "Technical Support Fundamentals", institution: "Coursera", image: "/learning/Certificate8.png", year: "2026", certificateLink: "https://www.coursera.org/account/accomplishments/verify/JE121XW3RVV8" },
+  { id: 9, title: "Fundamentos de ciberseguridad", institution: "Santander Open Academy", image: "/learning/Certificate9.png", year: "2026" },
+  { id: 10, title: "Cybersecurity Specialist", institution: "4Geeks Academy / UTEC", image: "/learning/Certificate10.png", year: "2026" },
+  { id: 11, title: "Desarrollo y Crecimiento Profesional", institution: "Santander Open Academy", image: "/learning/Certificate11.png", year: "2026" },
 ];
 
 const loopedCertificates = Array.from({ length: 3 }, (_, copy) =>
@@ -133,7 +136,7 @@ export const LearningSection = () => {
       <div className="certificate-controls" aria-label="Controles del carrusel">
         <span className="control-index">01</span>
         <div className="certificate-progress"><i className={isPaused ? "is-paused" : ""} /></div>
-        <span className="control-index">08</span>
+        <span className="control-index">{String(certificates.length).padStart(2, "0")}</span>
         <div className="certificate-buttons">
           <button onClick={() => moveCarousel(-1)} aria-label="Certificado anterior"><ChevronLeft size={16} /></button>
           <button onClick={() => setIsPaused((paused) => !paused)} aria-label={isPaused ? "Reanudar carrusel" : "Pausar carrusel"}>

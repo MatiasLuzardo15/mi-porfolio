@@ -35,9 +35,14 @@
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://matias-luzardo-portfolio.vercel.app/projects/project1.png</image:loc>
-      <image:title>Weatherl - Aplicación del Clima</image:title>
-      <image:caption>Aplicación del clima desarrollada con React y Framer Motion</image:caption>
+      <image:loc>https://matias-luzardo-portfolio.vercel.app/projects/project4.png</image:loc>
+      <image:title>Zenth Productivity</image:title>
+      <image:caption>Suite de productividad con tareas, notas asistidas por IA y planificación</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://matias-luzardo-portfolio.vercel.app/projects/project5.png</image:loc>
+      <image:title>Ruralit</image:title>
+      <image:caption>Software de gestión rural para registrar gastos, stock, ventas e inversiones</image:caption>
     </image:image>
   </url>
   

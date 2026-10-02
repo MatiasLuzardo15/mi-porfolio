@@ -3,25 +3,6 @@ import { ArrowUpRight, Github } from "lucide-react";
 const projects = [
   {
     id: "01",
-    code: "WTH",
-    title: "Weatherl",
-    description: "Aplicación meteorológica moderna con animaciones fluidas y una experiencia visual inspirada en productos premium.",
-    image: "/projects/project1.png",
-    tags: ["React", "Tailwind CSS", "Framer Motion", "JavaScript"],
-    demoUrl: "https://weatherl.space",
-    githubUrl: "https://github.com/MatiasLuzardo15/weatherl",
-  },
-  {
-    id: "02",
-    code: "ML",
-    title: "Portfolio Personal",
-    description: "Mi espacio digital: responsivo, optimizado para SEO y construido con una arquitectura simple y mantenible.",
-    tags: ["React", "Vite", "Tailwind CSS", "React Router"],
-    demoUrl: "https://matiasluzardo.com",
-    githubUrl: "https://github.com/MatiasLuzardo15/mi-porfolio",
-  },
-  {
-    id: "03",
     code: "ZTH",
     title: "Zenth Productivity",
     description: "Suite de productividad con tareas, notas asistidas por IA, planificación anual, gamificación y sincronización en tiempo real.",
@@ -30,13 +11,22 @@ const projects = [
     demoUrl: "https://www.zenth.space/",
   },
   {
-    id: "04",
+    id: "02",
     code: "RLT",
     title: "Ruralit",
     description: "Software de gestión rural para registrar gastos, stock, ventas e inversiones y comprender el margen real del campo.",
     image: "/projects/project5.png",
     tags: ["React", "TypeScript", "Vite", "Supabase", "Capacitor"],
     demoUrl: "https://www.ruralit.blog/",
+  },
+  {
+    id: "03",
+    code: "ML",
+    title: "Portfolio Personal",
+    description: "Mi espacio digital: responsivo, optimizado para SEO y construido con una arquitectura simple y mantenible.",
+    tags: ["React", "Vite", "Tailwind CSS", "React Router"],
+    demoUrl: "https://matiasluzardo.com",
+    githubUrl: "https://github.com/MatiasLuzardo15/mi-porfolio",
   },
 ];
 

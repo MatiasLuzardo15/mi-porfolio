@@ -111,7 +111,9 @@ La aplicación estará disponible en: [http://localhost:5173](http://localhost:5
 - Filtros interactivos por categoría
 
 ### 📁 Proyectos
-- **Weatherl**: Aplicación del clima con React y Framer Motion
+- **Zenth Productivity**: Suite de productividad con tareas, notas asistidas por IA y planificación
+- **Ruralit**: Software de gestión rural para registrar gastos, stock, ventas e inversiones
+- **Portfolio Personal**: Sitio personal desarrollado con React, Vite y Tailwind CSS
 - Enlaces directos a demos y repositorios
 
 ### 📞 Contacto
