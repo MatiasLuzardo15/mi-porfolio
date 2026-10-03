@@ -298,30 +298,6 @@
 .rt-spin { animation: rt-spin .8s linear infinite; }
 @keyframes rt-spin { to { transform: rotate(360deg); } }
 
-/* Ruralit index: a field clock that replaces the portfolio rail. */
-.rt-index { position: absolute; top: 50%; right: 24px; z-index: 4; display: flex; width: 84px; flex-direction: column; align-items: center; gap: 8px; padding: 14px 8px 10px; border-radius: 18px; background: rgba(249, 248, 243, .9); box-shadow: 0 0 0 1px rgba(0, 0, 0, .06), 0 18px 40px rgba(25, 40, 20, .22); backdrop-filter: blur(12px); translate: 0 -50%; }
-.rt-index p { margin: 0; }
-.rt-index-mark { width: 30px; height: 30px; }
-.rt-index-arc { width: 64px; overflow: visible; }
-.rt-index-arc path { fill: none; stroke: #c9c4b0; stroke-width: 1.5; stroke-dasharray: 2 3; }
-.rt-index-arc .rt-index-horizon { stroke: var(--green-main); stroke-dasharray: none; opacity: .5; }
-.rt-index-arc circle { fill: #f2b84b; filter: drop-shadow(0 0 4px rgba(242, 184, 75, .8)); transition: cx .3s linear, cy .3s linear; }
-.rt-index-arc .rt-index-moon { fill: #4f5c8c; stroke: none; stroke-dasharray: none; }
-.rt-index-clock { color: var(--t1); font-size: 17px; font-weight: 600; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
-.rt-index-phase { display: grid; height: 18px; overflow: hidden; color: var(--t3); font-size: 11px; font-weight: 600; letter-spacing: .03em; text-transform: uppercase; }
-.rt-index-phase > span { grid-area: 1 / 1; }
-.rt-index ol { position: relative; display: flex; flex-direction: column; gap: 2px; width: 100%; margin: 4px 0 0; padding: 8px 0 0; border-top: 1px solid var(--border-sm); list-style: none; }
-.rt-index-fence { position: absolute; top: 14px; bottom: 6px; right: 2px; width: 2px; background: repeating-linear-gradient(180deg, #d8d3c0 0 6px, transparent 6px 10px); }
-.rt-index-fence i { display: block; height: 100%; background: var(--green-main); transform-origin: top; transition: transform .2s linear; }
-.rt-index button { position: relative; display: grid; width: 100%; height: 40px; place-items: center; border: 0; border-radius: 10px; background: none; color: var(--t2); cursor: pointer; transition: color .12s var(--motion), scale .12s var(--motion); }
-.rt-index button > svg { position: relative; }
-.rt-index button:hover { color: var(--green-main); }
-.rt-index button[aria-current="page"] { color: var(--green-main); }
-.rt-index button:active { scale: .96; }
-.rt-index button:focus-visible { outline: 2px solid var(--blue-main); outline-offset: 2px; }
-.rt-index-active { position: absolute; inset: 0; border-radius: 10px; background: var(--green-light); }
-.rt-index-active::before { content: ""; position: absolute; top: 10px; bottom: 10px; left: 0; width: 3px; border-radius: 99px; background: var(--green-main); }
-@media (max-width: 900px) { .rt-index { display: none; } }
 
 .rt-reports { height: auto; align-items: start; }
 .rt-report-side { display: flex; min-width: 0; flex-direction: column; gap: 12px; }
@@ -344,11 +320,3 @@
 .rt-balance .rt-chart > .rt-card { display: flex; flex-direction: column; }
 .rt-balance .rt-bars { min-height: 140px; flex: 1; height: auto; }
 
-/* Index polish */
-.rt-index { gap: 10px; padding: 16px 8px 10px; }
-.rt-index-arc .rt-index-trail { stroke: #f2b84b; stroke-width: 2; stroke-dasharray: 1; stroke-linecap: round; transition: stroke-dashoffset .3s linear; }
-.rt-index-active::before { content: none; }
-.rt-index-active i { position: absolute; top: 9px; bottom: 9px; left: 0; width: 3px; border-radius: 99px; background: var(--green-main); transform-origin: center; transition: transform .2s linear; }
-.rt-index button.is-past::after { content: ""; position: absolute; top: 8px; right: 10px; width: 6px; height: 6px; border-radius: 50%; background: var(--green-main); }
-.rt-index-tip { position: absolute; top: 50%; right: calc(100% + 16px); padding: 7px 12px; border: 1px solid var(--border-sm); border-radius: 10px; background: #f9f8f3; color: var(--green-main); font-size: 12.5px; font-weight: 600; white-space: nowrap; box-shadow: 0 8px 20px rgba(25, 40, 20, .16); opacity: 0; pointer-events: none; transform: translate(6px, -50%); transition: opacity .15s var(--motion), transform .15s var(--motion); }
-.rt-index button:hover .rt-index-tip, .rt-index button:focus-visible .rt-index-tip { opacity: 1; transform: translate(0, -50%); }

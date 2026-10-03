@@ -335,38 +335,4 @@
   .zn { transition: none; }
 }
 
-/* Zenth index: replaces the portfolio rail while the tour is on screen. */
-.zn-index { position: absolute; top: 50%; right: 24px; z-index: 4; display: flex; width: 76px; flex-direction: column; align-items: center; gap: 10px; padding: 14px 8px 10px; border-radius: 40px; background: color-mix(in srgb, var(--fr-canvas) 74%, transparent); box-shadow: inset 0 0 0 1px var(--fr-hairline-soft), inset 0 .5px 0 rgba(255,255,255,.1), 0 10px 30px rgba(0,0,0,.12); backdrop-filter: blur(16px); translate: 0 -50%; }
-.zn-index p { margin: 0; }
-.zn-index-head { position: relative; width: 56px; height: 56px; }
-.zn-index-ring { position: absolute; inset: 0; transform: rotate(-90deg); }
-.zn-index-ring circle { fill: none; stroke-width: 3; stroke-linecap: round; }
-.zn-index-ring circle:first-child { stroke: var(--fr-surface-2); }
-.zn-index-ring circle:last-child { stroke: var(--fr-accent); }
-.zn-index-mark { position: absolute; inset: 15px; overflow: visible; fill: var(--fr-ink); }
-.zn-index-mark path { transition: transform .45s var(--zn-ease); }
-.zn-index-count { display: flex; align-items: baseline; gap: 3px; font-size: 15px; font-weight: 600; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
-.zn-index-count > span:last-child { color: var(--fr-ink-muted); font-size: 10px; font-weight: 500; }
-.zn-index-label { display: grid; width: 100%; height: 28px; place-items: center; overflow: hidden; color: var(--fr-ink-muted); font-size: 10.5px; font-weight: 500; line-height: 1.25; text-align: center; }
-.zn-index-label > span { grid-area: 1 / 1; }
-.zn-index ol { position: relative; display: flex; flex-direction: column; gap: 4px; margin: 0; padding: 0; list-style: none; }
-.zn-index-rail { position: absolute; top: 10px; bottom: 10px; left: -7px; width: 2px; border-radius: 2px; background: var(--fr-hairline); }
-.zn-index-rail i { display: block; height: 100%; border-radius: inherit; background: var(--fr-accent); transform-origin: top; transition: transform .2s linear; }
-.zn-index button { position: relative; display: grid; width: 40px; height: 40px; place-items: center; border: 0; border-radius: 100px; background: none; color: var(--fr-ink-muted); cursor: pointer; transition: color .15s ease-out, scale .15s ease-out; }
-.zn-index button > svg { position: relative; }
-.zn-index button:hover, .zn-index button[aria-current="true"] { color: var(--fr-ink); }
-.zn-index button:active { scale: .96; }
-.zn-index button:focus-visible { outline: 2px solid var(--fr-accent); outline-offset: 2px; }
-.zn-index-active { position: absolute; inset: 0; border-radius: 100px; background: var(--fr-surface-1); box-shadow: inset 0 0 0 1px var(--fr-hairline-soft); }
-@media (max-width: 900px) { .zn-index { display: none; } }
 
-/* Index polish */
-.zn-index { gap: 12px; padding: 16px 10px 12px; }
-.zn-index-count { margin-top: 2px; }
-.zn-index-label { margin-top: -6px; padding-bottom: 8px; border-bottom: 1px solid var(--fr-hairline-soft); }
-.zn-index button > .zn-index-progress { position: absolute; inset: -2px; width: calc(100% + 4px); height: calc(100% + 4px); transform: rotate(-90deg); pointer-events: none; }
-.zn-index-progress circle { fill: none; stroke: var(--fr-accent); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 1; transition: stroke-dashoffset .2s linear; }
-.zn-index button.is-past::after { content: ""; position: absolute; right: 6px; bottom: 6px; width: 6px; height: 6px; border: 1.5px solid var(--fr-canvas); border-radius: 50%; background: var(--fr-accent); }
-.zn-index-tip { position: absolute; top: 50%; right: calc(100% + 14px); display: flex; align-items: center; gap: 8px; padding: 7px 12px; border-radius: 100px; background: var(--fr-primary); color: var(--fr-on-primary); font-size: 12px; font-weight: 500; white-space: nowrap; opacity: 0; pointer-events: none; transform: translate(6px, -50%); transition: opacity .15s ease-out, transform .15s ease-out; }
-.zn-index-tip small { opacity: .6; font-variant-numeric: tabular-nums; }
-.zn-index button:hover .zn-index-tip, .zn-index button:focus-visible .zn-index-tip { opacity: 1; transform: translate(0, -50%); }

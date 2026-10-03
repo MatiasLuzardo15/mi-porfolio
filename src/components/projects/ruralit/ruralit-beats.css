@@ -109,3 +109,4 @@
   .rs-calf.is-walking .rfx-leg-a, .rs-calf.is-walking .rfx-leg-b, .rs-calf.is-walking svg { animation: none; }
 }
 .rs-frag > .rfx-word, .rs-frag > .rfx-book, .rs-frag > .rfx-bag, .rs-frag > .rfx-coin, .rs-frag > .rfx-mini-coin, .rs-frag > .rfx-paper { position: relative; }
+
