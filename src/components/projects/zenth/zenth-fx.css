@@ -51,7 +51,7 @@
 
 @media (max-width: 900px) {
   .zfx-layer { display: none; }
-  .zfx-lyra { top: 8%; max-width: 80%; }
+  .zfx-lyra { top: max(13%, 96px); max-width: 80%; }
 }
 
 @media (prefers-reduced-motion: reduce) {

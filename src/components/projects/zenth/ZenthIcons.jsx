@@ -29,9 +29,10 @@ export const ZENTH_PIECES = [
   { d: "M1250 975L1520 905C1610 885 1680 950 1680 1045V1520C1680 1630 1595 1720 1485 1720H670C595 1720 560 1650 610 1600L1185 1015C1205 995 1225 982 1250 975Z", from: { x: 520, y: 420, rotate: -22 } },
 ];
 
+// Always the light-theme mark (black tile, white pieces), whatever scene it sits on.
 export const ZenthMark = (props) => (
   <svg viewBox="0 0 2000 2000" aria-hidden="true" {...props}>
-    <rect width="2000" height="2000" rx="440" fill="var(--fr-ink, #000)" />
-    {ZENTH_PIECES.map((piece) => <path key={piece.d} d={piece.d} fill="var(--fr-canvas, #fff)" />)}
+    <rect width="2000" height="2000" rx="440" fill="#000" />
+    {ZENTH_PIECES.map((piece) => <path key={piece.d} d={piece.d} fill="#fff" />)}
   </svg>
 );

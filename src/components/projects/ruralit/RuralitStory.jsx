@@ -30,7 +30,7 @@ const Frag = ({ x, y, style, className = "", children }) => (
   </div>
 );
 
-const Calf = () => (
+export const Calf = () => (
   <svg viewBox="0 0 64 44" aria-hidden="true">
     <ellipse cx="30" cy="22" rx="20" ry="11" fill="#7a5634" />
     <ellipse cx="24" cy="20" rx="7" ry="5" fill="#f2ece2" />

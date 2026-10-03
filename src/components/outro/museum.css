@@ -1,0 +1,153 @@
+/* Formación as a museum hall: warm wall, polished floor, a spotlight over every framed work. */
+
+.museum-story { position: relative; margin-top: -100vh; }
+.museum-viewport {
+  --lights: 0;
+  --art-h: min(40vh, 400px);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+  background: #070605;
+  color: #ece6dc;
+}
+.museum-story:not([data-docked]) .museum-viewport { background: transparent; }
+.museum-story:not([data-docked]) .mu-wall, .museum-story:not([data-docked]) .mu-floor { opacity: 0; }
+
+.mu-wall {
+  position: absolute;
+  inset: 0 0 24%;
+  background:
+    radial-gradient(ellipse 60% 70% at 50% 30%, rgba(255, 226, 180, calc(var(--lights) * .1)), transparent 70%),
+    linear-gradient(180deg, color-mix(in srgb, #2a231c calc(var(--lights) * 100%), #070605), color-mix(in srgb, #17130f calc(var(--lights) * 100%), #070605));
+}
+.mu-wall::after { content: ""; position: absolute; right: 0; bottom: 0; left: 0; height: 10px; background: linear-gradient(#0d0a08, #1d1712); opacity: calc(.4 + var(--lights) * .6); }
+.mu-floor {
+  position: absolute;
+  inset: 76% 0 0;
+  background:
+    radial-gradient(ellipse 50% 90% at 50% 0, rgba(255, 226, 180, calc(var(--lights) * .08)), transparent 70%),
+    linear-gradient(180deg, color-mix(in srgb, #1c1611 calc(var(--lights) * 100%), #050404), #070605);
+}
+
+.mu-hall { position: absolute; inset: 0; perspective: 1600px; perspective-origin: 50% 42%; transform-style: preserve-3d; }
+.mu-piece { --light: 0; position: absolute; width: max-content; top: 44%; left: 50%; transform-style: preserve-3d; will-change: transform; }
+
+/* Spotlight: a soft cone from the ceiling onto the work. */
+.mu-spot {
+  position: absolute;
+  bottom: 30%;
+  left: 50%;
+  width: calc(var(--art-h) * 2.4);
+  height: calc(var(--art-h) * 1.9);
+  background: radial-gradient(ellipse 45% 75% at 50% 0, rgba(255, 236, 200, .32), rgba(255, 226, 180, .08) 55%, transparent 75%);
+  clip-path: polygon(42% 0, 58% 0, 100% 100%, 0 100%);
+  opacity: var(--light);
+  translate: -50% 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+.mu-spot::before { content: ""; position: absolute; top: -6px; left: 50%; width: 46px; height: 10px; border-radius: 0 0 8px 8px; background: #111; translate: -50% 0; box-shadow: 0 6px 14px rgba(255, 236, 200, calc(var(--light) * .6)); }
+
+.mu-frame {
+  position: relative;
+  display: block;
+  padding: 14px;
+  border: 0;
+  background: linear-gradient(145deg, #2c241c, #120e0a 60%, #261e17);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 220, 170, .18),
+    inset 0 0 0 5px #0d0a07,
+    0 30px 60px rgba(0, 0, 0, .7),
+    0 0 calc(var(--light) * 80px) rgba(255, 226, 180, calc(var(--light) * .12));
+  cursor: pointer;
+  filter: brightness(calc(.28 + var(--light) * .78));
+  -webkit-box-reflect: below 26px linear-gradient(transparent 62%, rgba(255, 255, 255, .1));
+  transition: scale .25s cubic-bezier(.23, 1, .32, 1);
+}
+.mu-frame:hover { scale: 1.02; }
+.mu-frame:active { scale: .99; }
+.mu-frame:focus-visible { outline: 2px solid #e9c48a; outline-offset: 6px; }
+.mu-mat { display: block; padding: calc(var(--art-h) * .07); background: #f2ede3; box-shadow: inset 0 2px 8px rgba(0, 0, 0, .25); }
+.mu-mat img { display: block; width: auto; max-width: none; height: var(--art-h); box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 2px 6px rgba(0, 0, 0, .15); }
+
+.mu-placard { position: absolute; top: calc(100% + 22px); right: 0; width: 240px; padding: 14px 16px; border-radius: 2px; background: #f4efe6; color: #2a2520; box-shadow: 0 12px 24px rgba(0, 0, 0, .45); pointer-events: none; }
+.mu-placard span { display: block; margin-bottom: 8px; color: #8a7f72; font-size: 10px; font-weight: 700; letter-spacing: .14em; }
+.mu-placard strong { display: block; margin-bottom: 4px; font-family: "Fraunces Variable", Baskerville, serif; font-size: 17px; font-variation-settings: "opsz" 40, "wght" 520; line-height: 1.2; }
+.mu-placard small { display: block; color: #5d554c; font-size: 12px; }
+.mu-placard em { display: block; margin-top: 10px; padding-top: 8px; border-top: 1px solid #dcd3c6; color: #8a7f72; font-size: 10px; font-style: normal; letter-spacing: .04em; }
+
+/* Exhibition and closing walls */
+.mu-intro, .mu-outro { width: min(640px, 80vw); text-align: center; filter: brightness(calc(.35 + var(--light) * .7)); }
+.mu-intro .mu-spot, .mu-outro .mu-spot { bottom: 20%; }
+.mu-kicker { white-space: nowrap; display: flex; align-items: center; justify-content: center; gap: 14px; margin: 0 0 24px; color: #a8987f; font-size: 10px; font-weight: 700; letter-spacing: .22em; }
+.mu-kicker i { width: 36px; height: 1px; background: currentColor; opacity: .5; }
+.mu-intro h2, .mu-outro h3 { position: relative; margin: 0; color: #f1eadf; font-family: "Archivo Variable", sans-serif; font-size: clamp(2.4rem, 4.6vw, 4.4rem); font-variation-settings: "wdth" 92, "wght" 560; line-height: .98; letter-spacing: -.055em; }
+.mu-outro h3 { font-size: clamp(2rem, 3.6vw, 3.4rem); }
+.mu-intro em, .mu-outro em { color: #c9b89c; font-family: "Fraunces Variable", Baskerville, serif; font-style: italic; font-variation-settings: "opsz" 80, "SOFT" 85, "WONK" 1, "wght" 390; }
+.mu-intro > p { position: relative; max-width: 44ch; margin: 22px auto 18px; color: #a8a096; font-family: "Manrope Variable", "Segoe UI", sans-serif; font-size: 15px; line-height: 1.6; }
+.mu-intro small, .mu-outro small { position: relative; display: inline-flex; align-items: center; gap: 6px; color: #8c8174; font-size: 11px; letter-spacing: .06em; }
+.mu-outro small { margin-top: 22px; }
+
+/* Dust drifting through the light. */
+.mu-dust {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(60vw, 700px);
+  height: 70%;
+  background-image: radial-gradient(1px 1px at 20% 30%, rgba(255, 236, 200, .7), transparent), radial-gradient(1px 1px at 70% 60%, rgba(255, 236, 200, .5), transparent), radial-gradient(1.5px 1.5px at 40% 80%, rgba(255, 236, 200, .5), transparent), radial-gradient(1px 1px at 85% 20%, rgba(255, 236, 200, .6), transparent), radial-gradient(1px 1px at 55% 45%, rgba(255, 236, 200, .4), transparent);
+  background-size: 220px 220px;
+  opacity: calc(var(--lights) * .7);
+  translate: -50% 0;
+  pointer-events: none;
+  animation: mu-dust 22s linear infinite;
+}
+@keyframes mu-dust { to { background-position: 60px 220px, -40px 220px, 30px 220px, -60px 220px, 20px 220px; } }
+
+/* Hall plan: horizontal, under the page chrome, in the hall's warm light. */
+.mu-index { position: absolute; top: 84px; left: 50%; z-index: 30; display: flex; flex-direction: column; align-items: center; gap: 10px; translate: -50% 0; transition: opacity .5s ease-out; }
+.mu-index-label { display: flex; max-width: min(520px, 84vw); align-items: baseline; gap: 12px; margin: 0; color: #ece6dc; white-space: nowrap; }
+.mu-index-count { display: inline-flex; align-items: baseline; gap: 4px; font-size: 13px; font-weight: 650; font-variant-numeric: tabular-nums; }
+.mu-index-count small { color: #8c8174; font-size: 10px; font-weight: 500; }
+.mu-index-title { overflow: hidden; color: #a8987f; font-family: "Fraunces Variable", Baskerville, serif; font-size: 13px; font-style: italic; text-overflow: ellipsis; }
+.mu-index ol { --fill: 0; position: relative; display: flex; align-items: center; gap: 2px; margin: 0; padding: 0; list-style: none; }
+.mu-index ol::before, .mu-index ol::after { content: ""; position: absolute; top: 50%; right: 11px; left: 11px; height: 1px; }
+.mu-index ol::before { background: rgba(236, 230, 220, .14); }
+.mu-index ol::after { background: linear-gradient(90deg, rgba(233, 196, 138, .2), #e9c48a); transform: scaleX(var(--fill)); transform-origin: left; transition: transform .2s linear; }
+.mu-index button { position: relative; z-index: 1; display: grid; width: 22px; height: 22px; place-items: center; padding: 0; border: 0; background: none; cursor: pointer; }
+.mu-index button i { display: block; width: 8px; height: 6px; border: 1px solid rgba(236, 230, 220, .35); border-radius: 1px; background: #0d0b09; transition: width .3s cubic-bezier(.23, 1, .32, 1), height .3s cubic-bezier(.23, 1, .32, 1), border-color .25s ease-out, background-color .25s ease-out, box-shadow .25s ease-out; }
+.mu-index button.is-past i { border-color: rgba(233, 196, 138, .6); }
+.mu-index button.is-current i { width: 14px; height: 10px; border-color: #e9c48a; background: #e9c48a; box-shadow: 0 0 12px rgba(233, 196, 138, .55); }
+.mu-index button:hover i { border-color: #ece6dc; }
+.mu-index button:focus-visible { outline: 1px solid #e9c48a; outline-offset: 1px; border-radius: 4px; }
+
+/* Close-up */
+.mu-closeup { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: 24px; background: rgba(7, 6, 5, .92); backdrop-filter: blur(14px); animation: mu-fade .3s ease-out; }
+.mu-closeup-card { position: relative; display: grid; width: min(1080px, 100%); max-height: calc(100svh - 48px); grid-template-columns: minmax(0, 1fr) 260px; gap: 28px; align-items: end; animation: mu-rise .45s cubic-bezier(.23, 1, .32, 1); }
+.mu-closeup-art { padding: 14px; background: linear-gradient(145deg, #2c241c, #120e0a 60%, #261e17); box-shadow: 0 40px 90px rgba(0, 0, 0, .8); }
+.mu-closeup-art img { display: block; width: 100%; max-height: calc(100svh - 120px); object-fit: contain; border: clamp(10px, 2.4vw, 28px) solid #f2ede3; background: #f2ede3; }
+.mu-closeup-label { padding: 18px 20px; background: #f4efe6; color: #2a2520; }
+.mu-closeup-label span { color: #8a7f72; font-size: 10px; font-weight: 700; letter-spacing: .14em; }
+.mu-closeup-label h3 { margin: 10px 0 6px; font-family: "Fraunces Variable", Baskerville, serif; font-size: 22px; font-variation-settings: "opsz" 40, "wght" 520; line-height: 1.2; }
+.mu-closeup-label p { margin: 0; color: #5d554c; font-size: 13px; }
+.mu-closeup-label a { display: inline-flex; min-height: 40px; align-items: center; gap: 6px; margin-top: 14px; color: #8a5a1c; font-size: 12px; font-weight: 700; }
+.mu-closeup-close { position: absolute; top: -8px; right: -8px; z-index: 1; display: grid; width: 40px; height: 40px; place-items: center; border: 0; border-radius: 50%; background: #f4efe6; color: #2a2520; cursor: pointer; transition: scale .15s ease-out; }
+.mu-closeup-close:active { scale: .92; }
+@keyframes mu-fade { from { opacity: 0; } }
+@keyframes mu-rise { from { opacity: 0; transform: translateY(24px) scale(.97); } }
+
+@media (max-width: 900px) {
+  .museum-viewport { --art-h: min(26vh, 46vw); }
+  .mu-placard { top: calc(100% + 22px); right: auto; left: 50%; width: min(300px, 80vw); translate: -50% 0; }
+  .mu-piece { top: 40%; }
+  .mu-closeup-card { grid-template-columns: 1fr; gap: 12px; }
+}
+@media (prefers-reduced-motion: reduce) { .mu-dust { animation: none; } }
+
+@media (max-width: 650px) {
+  .mu-index { top: 70px; }
+  .mu-index button { width: 18px; }
+}

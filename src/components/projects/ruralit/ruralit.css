@@ -55,7 +55,6 @@
 .rt-intro { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; pointer-events: none; }
 .rt-intro svg { width: min(28vh, 240px); overflow: visible; }
 .rt-intro-copy { display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--logo-ink); text-align: center; }
-.rt-intro-copy strong { font-size: clamp(40px, 5.4vw, 68px); line-height: 1; }
 .rt-intro-copy span { color: #3f4f40; font-size: 15px; }
 
 .rt-layout {
@@ -87,9 +86,6 @@
 .rt-app button:focus-visible, .rt-app input:focus-visible { outline: 2px solid var(--blue-main); outline-offset: 2px; }
 .rt-sidebar { display: flex; flex-direction: column; gap: 18px; padding: 18px 12px; border-right: 1px solid var(--border-sm); background: var(--bg-sidebar); }
 .rt-logo { display: flex; align-items: center; gap: 8px; padding: 0 6px; font-size: 19px; }
-/* Wordmark from ruralia (BottomNav sidebar-brand-name): Orbitron 700, military green, lime dot. */
-.rt-wordmark { color: var(--green-main); font-family: Orbitron, var(--font, sans-serif); font-weight: 700; letter-spacing: -.03em; text-transform: none; }
-.rt-wordmark > span { color: var(--logo-dot); }
 .rt-logo svg { width: 28px; height: 28px; }
 .rt-estab { display: flex; width: 100%; align-items: center; gap: 9px; padding: 8px 10px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-card); font-size: 13px; font-weight: 600; text-align: left; }
 .rt-estab > span:first-child { display: grid; width: 24px; height: 24px; flex-shrink: 0; place-items: center; border-radius: 7px; background: var(--green-light); color: var(--green-main); font-size: 10px; font-weight: 700; }
@@ -320,3 +316,9 @@
 .rt-balance .rt-chart > .rt-card { display: flex; flex-direction: column; }
 .rt-balance .rt-bars { min-height: 140px; flex: 1; height: auto; }
 
+
+/* On small screens the page chrome already shows the app mark right above: keep only the line. */
+@media (max-width: 900px) {
+  .rt-brand svg { display: none; }
+  .rt-brand span { padding-left: 0; border-left: 0; }
+}

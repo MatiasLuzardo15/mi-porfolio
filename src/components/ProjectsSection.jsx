@@ -3,10 +3,11 @@ import { useMotionValueEvent, useReducedMotion, useScroll, useSpring, useTransfo
 import { ArrowDown, Github } from "lucide-react";
 import { ZenthScene } from "./projects/zenth/ZenthScene";
 import { RuralitScene } from "./projects/ruralit/RuralitScene";
-import { TIMELINE, clamp, sceneEnd } from "./projects/timeline";
+import { TIMELINE, sceneEnd } from "./projects/timeline";
+import { glideTo } from "./projects/glide";
+import { publishScene } from "./chrome/sceneStore";
+import { useBackdropTone } from "./chrome/useBackdropTone";
 import "./projects/story.css";
-
-const easeInOut = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
 
 // Which app owns the page index at a given point of the story.
 const sceneAt = (value) => {
@@ -22,9 +23,9 @@ const portfolio = {
   githubUrl: "https://github.com/MatiasLuzardo15/mi-porfolio",
 };
 
-export const ProjectsSection = () => {
+export const ProjectsSection = ({ joined = false }) => {
   const storyRef = useRef(null);
-  const frameRef = useRef(0);
+  const frameRef = useRef(null);
   const reduceMotion = useReducedMotion();
   const [scene, setScene] = useState(null);
   const { scrollYProgress } = useScroll({ target: storyRef, offset: ["start start", "end end"] });
@@ -38,82 +39,75 @@ export const ProjectsSection = () => {
     setScene((current) => (current === next ? current : next));
   }, []);
   useMotionValueEvent(u, "change", syncScene);
+  // Until the story pins, its viewport stays see-through so the entrance above plays to the end.
+  const [docked, setDocked] = useState(false);
+  // The app switcher and the scroll hint take light or dark ink from the scene behind them.
+  const [hudTone, nextTone] = useBackdropTone([[70, -36], [-110, -36]]);
   useEffect(() => {
     // Native listener as well, so jumps (anchors, restored scroll) always hand the index over.
     const onScroll = () => {
       const story = storyRef.current;
-      if (story) syncScene(-story.getBoundingClientRect().top / window.innerHeight);
+      if (!story) return;
+      const top = story.getBoundingClientRect().top;
+      syncScene(-top / window.innerHeight);
+      setDocked(top <= 0.5);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, [syncScene]);
 
-  // The portfolio rail steps aside while an app shows its own index.
+  // Between the apps the page chrome shows the archive; on stage, each app names its chapter.
   useEffect(() => {
-    const root = document.documentElement;
-    if (scene) root.dataset.story = scene;
-    else delete root.dataset.story;
-    return () => { delete root.dataset.story; };
+    if (!scene) publishScene("projects", { detail: "Archivo digital", mark: "avatar" });
   }, [scene]);
 
-  useEffect(() => () => cancelAnimationFrame(frameRef.current), []);
+  useEffect(() => () => frameRef.current?.(), []);
 
   // Index clicks glide to a chapter; the story plays on the way because scroll drives it.
   const navigate = useCallback((value) => {
     const story = storyRef.current;
     if (!story) return;
     const target = story.getBoundingClientRect().top + window.scrollY + window.innerHeight * value;
-    if (reduceMotion) {
-      window.scrollTo({ top: target });
-      return;
-    }
-    cancelAnimationFrame(frameRef.current);
-    const root = document.documentElement;
-    const start = window.scrollY;
-    const distance = target - start;
-    const duration = clamp((Math.abs(distance) / window.innerHeight) * 900, 700, 2600);
-    const startTime = performance.now();
-    root.style.scrollBehavior = "auto";
-    const step = (now) => {
-      const progress = clamp((now - startTime) / duration);
-      window.scrollTo(0, start + distance * easeInOut(progress));
-      if (progress < 1) frameRef.current = requestAnimationFrame(step);
-      else root.style.scrollBehavior = "";
-    };
-    frameRef.current = requestAnimationFrame(step);
+    frameRef.current?.();
+    frameRef.current = glideTo(target, reduceMotion);
   }, [reduceMotion]);
 
   return (
-    <section id="projects" className="projects-editorial">
-      <div className="projects-intro">
-        <div className="section-kicker">
-          <span>02 / ARCHIVO DIGITAL</span>
-          <span>2024 — 2026</span>
+    <section id={joined ? undefined : "projects"} className={`projects-editorial${joined ? " is-joined" : ""}`}>
+      {/* Static heading only for reduced motion; otherwise the intro story builds the entrance. */}
+      {!joined && (
+        <div className="projects-intro">
+          <div className="section-kicker">
+            <span>02 / ARCHIVO DIGITAL</span>
+            <span>2024 — 2026</span>
+          </div>
+          <div className="projects-heading">
+            <p className="eyebrow"><i /> DISEÑO + DESARROLLO</p>
+            <h2>PROYECTOS<br /><span>DESTACADOS</span></h2>
+            <p>Dos productos en producción. Seguí bajando: el scroll cuenta su historia.</p>
+          </div>
         </div>
-        <div className="projects-heading">
-          <p className="eyebrow"><i /> DISEÑO + DESARROLLO</p>
-          <h2>PROYECTOS<br /><span>DESTACADOS</span></h2>
-          <p>Dos productos en producción. Seguí bajando: el scroll cuenta su historia.</p>
-        </div>
-      </div>
+      )}
 
-      <div className="story" ref={storyRef} style={{ height: `${(TIMELINE.units + 1) * 100}vh` }}>
+      <div className="story" ref={storyRef} data-docked={docked ? "" : undefined} style={{ height: `${(TIMELINE.units + 1) * 100}vh` }}>
         <div className="story-viewport">
-          <ZenthScene u={u} onNavigate={navigate} />
-          <RuralitScene u={u} onNavigate={navigate} />
+          <ZenthScene u={u} onNavigate={navigate} active={scene === "zenth"} />
+          <RuralitScene u={u} onNavigate={navigate} active={scene === "ruralit"} />
 
-          <nav className="story-hud" aria-label="Proyectos">
+          <nav className="story-hud" data-tone-probe data-tone={hudTone} aria-label="Proyectos" style={{ opacity: scene ? 1 : 0, pointerEvents: scene ? undefined : "none", transition: "opacity .4s ease-out" }}>
             <button type="button" aria-current={scene === "zenth"} onClick={() => navigate(TIMELINE.zenth.introRest)}>Zenth</button>
             <button type="button" aria-current={scene === "ruralit"} onClick={() => navigate(TIMELINE.ruralit.introRest)}>Ruralit</button>
           </nav>
-          <p className={`story-next${scene ? " is-visible" : ""}`} aria-hidden="true">
+          <p className={`story-next${scene ? " is-visible" : ""}`} data-tone-probe data-tone={nextTone} aria-hidden="true">
             <ArrowDown size={13} /> Seguí bajando
           </p>
         </div>
       </div>
 
-      <div className="projects-coda">
+      {/* With the stories joined, this site's own card opens Herramientas instead. */}
+      {!joined && (
+        <div className="projects-coda">
         <div className="coda-row">
           <div className="coda-copy">
             <h3>{portfolio.title}</h3>
@@ -127,6 +121,7 @@ export const ProjectsSection = () => {
           </a>
         </div>
       </div>
+      )}
     </section>
   );
 };

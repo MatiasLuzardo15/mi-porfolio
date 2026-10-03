@@ -3,6 +3,7 @@
 import { clamp } from "./timeline";
 
 export const lerp = (from, to, t) => from + (to - from) * t;
+export const easeIn = (t) => t * t * t;
 export const easeOut = (t) => 1 - Math.pow(1 - t, 3);
 export const easeInOut = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 export const backOut = (t) => (t <= 0 ? 0 : t >= 1 ? 1 : 1 + 2.70158 * Math.pow(t - 1, 3) + 1.70158 * Math.pow(t - 1, 2));

@@ -1,0 +1,113 @@
+/* Contacto: the ending. Morning light, one letter to write, a stamp and a postmark. */
+
+.contact-story { position: relative; }
+.contact-story.is-pinned { margin-top: -100vh; }
+.contact-viewport {
+  --ct-paper: #fbf8f2;
+  --ct-ink-letter: #1d1a16;
+  --ct-muted: #8a8073;
+  --ct-line: #e2d9cb;
+  --ct-postal: #3b46a0;
+  position: relative;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto auto minmax(0, 1fr) auto;
+  justify-items: center;
+  align-items: center;
+  gap: 18px;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 92px 24px 18px;
+  background: var(--ct-bg, #ebe5d9);
+  color: var(--ct-ink, #1d1a16);
+}
+.contact-story.is-pinned .contact-viewport { position: sticky; top: 0; height: 100vh; height: 100svh; }
+.contact-story.is-pinned:not([data-docked]) .contact-viewport { background: transparent; }
+
+/* The closing line of the story, kept close to the letter: the two sit together at the centre. */
+.contact-story.is-pinned .ct-ending { grid-row: 2; margin-bottom: clamp(6px, 1.4vh, 16px); }
+.contact-story.is-pinned .ct-letter { grid-row: 3; }
+.contact-story.is-pinned .ct-footer { grid-row: 5; }
+.ct-ending { text-align: center; }
+.ct-ending p { margin: 0 0 6px; color: color-mix(in srgb, var(--ct-ink) 55%, transparent); font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 10px; letter-spacing: .24em; text-transform: uppercase; }
+.ct-ending h2 { margin: 0; font-family: "Fraunces Variable", Baskerville, serif; font-size: clamp(1.9rem, 3.6vw, 3rem); font-style: italic; font-variation-settings: "opsz" 96, "SOFT" 80, "wght" 380; line-height: 1.05; letter-spacing: -.02em; }
+
+/* The letter: the form, and the main action of the page. */
+.ct-letter {
+  position: relative;
+  width: min(620px, 100%);
+  padding: clamp(22px, 3.6vh, 36px) clamp(22px, 3.6vw, 40px);
+  border-radius: 3px;
+  background: var(--ct-paper);
+  color: var(--ct-ink-letter);
+  box-shadow: 0 1px 0 rgba(60, 40, 20, .05), 0 34px 70px -28px rgba(60, 40, 20, .45), 0 14px 28px -16px rgba(60, 40, 20, .25);
+  transform-origin: 50% 100%;
+}
+.ct-letter label > span, .ct-letter-head p span { color: var(--ct-muted); font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; }
+
+.ct-letter-head { position: relative; display: flex; min-height: 96px; align-items: flex-start; justify-content: space-between; }
+.ct-letter-head p { display: flex; align-items: baseline; gap: 12px; margin: 6px 0 0; font-family: "Fraunces Variable", Baskerville, serif; font-size: 22px; font-variation-settings: "opsz" 40, "wght" 460; }
+.ct-stamp { display: flex; width: 74px; flex-direction: column; align-items: center; gap: 4px; padding: 6px 6px 5px; border: 1px solid #e3dacd; background: #fffdf8; box-shadow: 0 6px 14px -6px rgba(60, 40, 20, .35); outline: 3px dotted var(--ct-paper); outline-offset: -2px; }
+.ct-stamp-art { display: block; width: 100%; height: 76px; overflow: hidden; background: linear-gradient(160deg, #e7e5ff, #f4ecdf); }
+.ct-stamp img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; transform: scale(2.1); transform-origin: 50% 4%; image-rendering: pixelated; }
+.ct-stamp small { color: var(--ct-muted); font-family: ui-monospace, Consolas, monospace; font-size: 8px; letter-spacing: .14em; }
+.ct-postmark { position: absolute; top: 30px; right: 44px; width: 132px; height: 99px; overflow: visible; pointer-events: none; }
+.ct-postmark circle, .ct-postmark .is-waves { fill: none; stroke: var(--ct-postal); stroke-width: 1.4; }
+.ct-postmark text { fill: var(--ct-postal); font-family: ui-monospace, Consolas, monospace; font-size: 9px; letter-spacing: .16em; }
+.ct-postmark .is-small { font-size: 8px; }
+
+.ct-letter-from { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.ct-letter-from label { display: flex; align-items: baseline; gap: 10px; padding: 10px 0 8px; border-bottom: 1px solid var(--ct-line); transition: border-color .2s ease-out; }
+.ct-letter-from label:focus-within, .ct-letter-body:focus-within textarea { border-color: var(--ct-ink-letter); }
+.ct-letter input, .ct-letter textarea { width: 100%; min-width: 0; padding: 0; border: 0; outline: 0; background: transparent; color: var(--ct-ink-letter); font-family: "Manrope Variable", "Segoe UI", sans-serif; font-size: 16px; }
+.ct-letter input::placeholder, .ct-letter textarea::placeholder { color: #b3a99b; }
+
+.ct-letter-body { display: block; margin-top: 22px; }
+.ct-letter .ct-letter-body > span { display: block; color: var(--ct-ink-letter); font-family: "Fraunces Variable", Baskerville, serif; font-size: 21px; font-style: italic; font-variation-settings: "opsz" 40, "wght" 420; letter-spacing: 0; text-transform: none; }
+.ct-letter-body textarea { display: block; height: calc(32px * 4 + 2px); margin-top: 4px; border-bottom: 1px solid var(--ct-line); background: repeating-linear-gradient(transparent 0 31px, var(--ct-line) 31px 32px); font-family: "Fraunces Variable", Baskerville, serif; font-size: 18px; line-height: 32px; resize: none; transition: border-color .2s ease-out; }
+
+.ct-letter-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-top: 20px; }
+.ct-letter-foot button { display: inline-flex; min-height: 46px; align-items: center; gap: 10px; padding: 0 22px; border: 0; border-radius: 99px; background: var(--ct-ink-letter); color: var(--ct-paper); font-size: 14px; font-weight: 650; cursor: pointer; transition: background-color .2s ease-out, scale .15s ease-out; }
+.ct-letter-foot button:hover { background: var(--ct-postal); }
+.ct-letter-foot button:active { scale: .97; }
+.ct-letter-foot button:disabled { cursor: progress; }
+.ct-letter-foot button:focus-visible { outline: 2px solid var(--ct-postal); outline-offset: 3px; }
+.ct-letter-foot p { margin: 0; color: var(--ct-muted); font-size: 12px; line-height: 1.5; }
+
+/* Sending: the letter folds away and a paper plane carries it off. */
+.ct-letter.is-sending { animation: ct-fold .7s cubic-bezier(.6, 0, .4, 1) both; }
+.ct-plane { position: absolute; top: 58%; left: 50%; z-index: 4; width: 52px; height: 52px; overflow: visible; fill: var(--ct-paper); stroke: var(--ct-ink-letter); stroke-width: 1.3; stroke-linejoin: round; animation: ct-fly 1.9s .45s cubic-bezier(.45, 0, .65, 1) both; pointer-events: none; }
+@keyframes ct-fold {
+  45% { opacity: 1; transform: perspective(1400px) rotateX(64deg) scale(.82); }
+  100% { opacity: 0; transform: perspective(1400px) rotateX(88deg) translateY(10vh) scale(.2); }
+}
+@keyframes ct-fly {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(.3) rotate(0); }
+  18% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(-6deg); }
+  60% { transform: translate(calc(-50% + 18vw), calc(-50% - 20vh)) scale(1.05) rotate(10deg); }
+  100% { opacity: 0; transform: translate(calc(-50% + 55vw), calc(-50% - 70vh)) scale(.55) rotate(-18deg); }
+}
+
+/* Quiet ending line: email, networks, back to the start. */
+.ct-footer { display: flex; width: min(1180px, 100%); flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 22px; color: color-mix(in srgb, var(--ct-ink) 62%, transparent); font-size: 12px; }
+.ct-footer a { display: inline-flex; min-height: 36px; align-items: center; gap: 7px; color: inherit; transition: color .15s ease-out; }
+.ct-footer a:hover { color: var(--ct-postal); }
+.ct-footer nav { display: flex; gap: 18px; }
+.ct-footer small { font-size: 11px; }
+
+@media (max-height: 760px) and (min-width: 901px) {
+  .ct-letter-head { min-height: 82px; }
+  .ct-letter-body textarea { height: calc(32px * 3 + 2px); }
+}
+
+/* Small screens: the ending flows like a page. */
+.contact-story:not(.is-pinned) .contact-viewport { display: flex; flex-direction: column; align-items: center; gap: 30px; padding: 104px 16px 24px; }
+@media (max-width: 600px) {
+  .ct-letter-from { grid-template-columns: 1fr; gap: 0; }
+  .ct-postmark { right: 28px; width: 110px; }
+  .ct-stamp { width: 62px; }
+  .ct-stamp-art { height: 64px; }
+  .ct-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ct-letter.is-sending, .ct-plane { animation: none; }
+}

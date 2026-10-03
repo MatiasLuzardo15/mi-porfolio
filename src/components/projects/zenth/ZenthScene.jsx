@@ -11,6 +11,7 @@ import { ZenthIndex } from "./ZenthIndex";
 import { CALL_BACKGROUNDS, MOODS, ProgressSky, ZENTH_BEATS } from "./ZenthStory";
 import { TIMELINE, beat, chapterAt, chapterRest, ramp, sceneEnd } from "../timeline";
 import { useScrubbed } from "../useScrubbed";
+import { publishScene } from "../../chrome/sceneStore";
 
 const ease = [0.23, 1, 0.32, 1];
 
@@ -78,7 +79,7 @@ const Title = ({ text }) => {
   );
 };
 
-export function ZenthScene({ u, onNavigate }) {
+export function ZenthScene({ u, onNavigate, active }) {
   const reduceMotion = useReducedMotion();
   const [chapter, setChapter] = useState(() => ({ index: 0, p: 0 }));
   // Scroll drives the story directly: chapter.p is scroll progress, playhead the story beat.
@@ -96,6 +97,11 @@ export function ZenthScene({ u, onNavigate }) {
     setInteractive((prev) => (prev === live ? prev : live));
   }, []);
   useMotionValueEvent(u, "change", sync);
+  // The page chrome follows the chapter while the app is on stage.
+  // Only the app that owns the stage speaks for the section, so the two never overwrite each other.
+  useEffect(() => {
+    if (active) publishScene("projects", { detail: interactive ? `Zenth · ${current.label}` : "Zenth", mark: "zenth" });
+  }, [active, interactive, current.label]);
   useEffect(() => {
     const id = requestAnimationFrame(() => sync(u.get()));
     return () => cancelAnimationFrame(id);
@@ -136,6 +142,7 @@ export function ZenthScene({ u, onNavigate }) {
     <motion.div
       className="zn story-scene"
       data-theme={theme}
+      data-night={night > 0.3 ? "" : undefined}
       data-immersive={current.id === "focus" && focusRunning ? "" : undefined}
       style={{ opacity: sceneOpacity, visibility, "--zn-tint": moodHex && !night ? `${moodHex}3d` : "transparent" }}
     >
@@ -157,9 +164,12 @@ export function ZenthScene({ u, onNavigate }) {
       </motion.div>
 
       <div className="zn-intro" aria-hidden="true">
-        <motion.svg className="zn-intro-mark" viewBox="0 0 2000 2000" style={{ scale: markScale, opacity: markOpacity }}>
-          {ZENTH_PIECES.map((piece, index) => <IntroPiece key={piece.d} piece={piece} index={index} u={u} still={reduceMotion} />)}
-        </motion.svg>
+        {/* The mark grows by its real size, not a scaled bitmap, so it stays sharp up close. */}
+        <span className="zn-intro-mark-slot">
+          <motion.svg className="zn-intro-mark" viewBox="0 0 2000 2000" style={{ "--mark-scale": markScale, opacity: markOpacity }}>
+            {ZENTH_PIECES.map((piece, index) => <IntroPiece key={piece.d} piece={piece} index={index} u={u} still={reduceMotion} />)}
+          </motion.svg>
+        </span>
         <motion.div className="zn-intro-copy" style={{ opacity: introOpacity, y: introY }}>
           <strong>Zenth</strong>
           <span>Menos vueltas. Más espacio para lo importante.</span>

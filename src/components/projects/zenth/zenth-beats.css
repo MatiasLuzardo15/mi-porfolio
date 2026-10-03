@@ -119,3 +119,10 @@
   .zs-day.is-pulse, .zs-person.is-speaking b { animation: none; }
 }
 .zs-frag > .zfx-reaction, .zs-frag > .zfx-notice { position: relative; }
+
+/* On phones the five moods sit too close for their names: only the chosen one keeps its label. */
+@media (max-width: 650px) {
+  .zs-mood { padding: 4px; }
+  .zs-mood small { display: none; }
+  .zs-mood.is-on small { display: block; }
+}

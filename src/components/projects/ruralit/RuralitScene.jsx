@@ -2,15 +2,17 @@ import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion, useMotionTemplate, useMotionValueEvent, useReducedMotion, useTransform } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import "@fontsource-variable/inter-tight";
-import "@fontsource/orbitron/700.css";
 import "./ruralit.css";
 import "./ruralit-story.css";
 import "./ruralit-fx.css";
 import "./ruralit-beats.css";
+import "./ruralit-land.css";
 import { RT_CHAPTERS, RURALIT_BEATS } from "./RuralitStory";
+import { RURALIT_LAND } from "./RuralitLand";
 import { RuralitIndex } from "./RuralitIndex";
 import { LEAF, RT_PATHS, RuralitMark, VEINS } from "./RuralitMark";
 import { TIMELINE, beat, chapterAt, chapterRest, sceneEnd } from "../timeline";
+import { publishScene } from "../../chrome/sceneStore";
 
 const ease = [0.2, 0, 0.2, 1];
 
@@ -28,7 +30,7 @@ const RS = TIMELINE.ruralit.introStart;
 const START = TIMELINE.ruralit.start;
 const END = sceneEnd("ruralit");
 
-export function RuralitScene({ u, onNavigate }) {
+export function RuralitScene({ u, onNavigate, active }) {
   const reduceMotion = useReducedMotion();
   const [chapter, setChapter] = useState(() => ({ index: 0, p: 0 }));
   // Scroll drives the story directly: chapter.p is scroll progress, playhead the story beat.
@@ -37,6 +39,7 @@ export function RuralitScene({ u, onNavigate }) {
   const current = RT_CHAPTERS[chapter.index];
   const copy = COPY[current.id];
   const Beat = RURALIT_BEATS[current.id];
+  const LandBeat = RURALIT_LAND[current.id];
 
   const sync = useCallback((value) => {
     const next = chapterAt("ruralit", value);
@@ -46,6 +49,11 @@ export function RuralitScene({ u, onNavigate }) {
     setInteractive((prev) => (prev === live ? prev : live));
   }, []);
   useMotionValueEvent(u, "change", sync);
+  // The page chrome follows the chapter while the app is on stage.
+  // Only the app that owns the stage speaks for the section, so the two never overwrite each other.
+  useEffect(() => {
+    if (active) publishScene("projects", { detail: interactive ? `Ruralit · ${current.label}` : "Ruralit", mark: "ruralit" });
+  }, [active, interactive, current.label]);
   useEffect(() => {
     const id = requestAnimationFrame(() => sync(u.get()));
     return () => cancelAnimationFrame(id);
@@ -103,9 +111,24 @@ export function RuralitScene({ u, onNavigate }) {
           </motion.g>
         </svg>
         <div className="rt-intro-copy">
-          <strong className="rt-wordmark" aria-label="Ruralit">ruralit<span>.</span></strong>
           <span>Tu libreta digital para el campo.</span>
         </div>
+      </motion.div>
+
+      {/* Large screens: the story happens on the land itself, around the copy. */}
+      <motion.div className="rs-land" style={{ opacity: layoutOpacity }} aria-hidden="true">
+        <AnimatePresence initial={false}>
+          <motion.div
+            key={current.id}
+            className="rs-chapter"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, transition: { duration: 0.25, ease: "easeOut" } }}
+            transition={{ duration: 0.35, ease }}
+          >
+            <LandBeat p={playhead} />
+          </motion.div>
+        </AnimatePresence>
       </motion.div>
 
       <motion.div className="rt-layout" style={{ opacity: layoutOpacity, pointerEvents: interactive ? "auto" : "none" }}>
