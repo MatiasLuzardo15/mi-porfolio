@@ -1,0 +1,53 @@
+/* Elements that escape Ruralit's window and move through the field in 3D. */
+
+.rt-stage > .rt-app { position: relative; z-index: 1; }
+.rfx-layer { position: absolute; inset: 0; z-index: 3; pointer-events: none; perspective: 1100px; transform-style: preserve-3d; }
+
+/* Inicio: words in the sky */
+.rfx-word { position: absolute; display: flex; flex-direction: column; gap: 2px; padding: 12px 18px; border-radius: 14px; background: #fff; color: var(--t1); font-size: 18px; font-weight: 600; white-space: nowrap; box-shadow: 0 24px 50px rgba(25, 40, 20, .28), 0 0 0 1px rgba(0, 0, 0, .05); }
+.rfx-word small { color: var(--t3); font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+.rfx-word.is-tipo { color: var(--green-main); }
+.rfx-word.is-cantidad { color: var(--blue-main); }
+.rfx-word.is-monto { background: var(--green-main); color: #fff; }
+.rfx-word.is-monto small { color: rgba(255, 255, 255, .7); }
+
+/* Movimientos: two books */
+.rfx-links { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.rfx-links path { fill: none; stroke: rgba(255, 255, 255, .85); stroke-width: .35; stroke-dasharray: 1.2 1; vector-effect: non-scaling-stroke; }
+.rfx-book { position: absolute; display: flex; width: 240px; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 16px; background: #fffdf6; box-shadow: 0 24px 50px rgba(25, 40, 20, .3), inset 4px 0 0 var(--green-main); }
+.rfx-book > span { display: grid; width: 36px; height: 36px; flex-shrink: 0; place-items: center; border-radius: 10px; background: var(--green-light); color: var(--green-main); }
+.rfx-book small { display: block; color: var(--t3); font-size: 11px; font-weight: 600; }
+.rfx-book strong { display: block; color: var(--t1); font-size: 20px; font-weight: 600; letter-spacing: -.02em; }
+.rfx-book em { color: var(--t3); font-size: 11.5px; font-style: normal; }
+
+/* Stock: calves and the delivery */
+.rfx-calf { position: absolute; width: 124px; transform-origin: bottom center; filter: drop-shadow(0 10px 8px rgba(0, 0, 0, .25)); }
+.rfx-calf svg { display: block; width: 100%; overflow: visible; }
+.rfx-calf.is-walking .rfx-leg-a { animation: rfx-step .45s ease-in-out infinite; }
+.rfx-calf.is-walking .rfx-leg-b { animation: rfx-step .45s ease-in-out infinite reverse; }
+.rfx-calf.is-walking svg { animation: rfx-bob .45s ease-in-out infinite; }
+@keyframes rfx-step { 50% { transform: translateX(3px) rotate(8deg); } }
+@keyframes rfx-bob { 50% { transform: translateY(-2px); } }
+.rfx-leg { transform-box: fill-box; transform-origin: top center; }
+.rfx-bag { position: absolute; display: flex; width: 58px; height: 64px; flex-direction: column; align-items: center; justify-content: center; gap: 2px; border-radius: 10px 10px 14px 14px; background: linear-gradient(#f6e9c9, #e8d29e); color: #7a5a21; box-shadow: 0 16px 30px rgba(0, 0, 0, .25), inset 0 -6px 0 rgba(0, 0, 0, .08); }
+.rfx-bag small { font-size: 10px; font-weight: 700; }
+
+/* Balances and Proyectos: coins */
+.rfx-coin { position: absolute; display: flex; width: 150px; height: 150px; flex-direction: column; align-items: center; justify-content: center; border: 6px solid #d9a52c; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff3c4, #f2c94c 58%, #c3911c); color: #5a4100; font-size: 34px; font-weight: 700; letter-spacing: -.03em; box-shadow: 0 30px 60px rgba(150, 100, 0, .35), inset 0 -6px 0 rgba(0, 0, 0, .12); backface-visibility: visible; }
+.rfx-coin b { font-size: 14px; letter-spacing: .04em; }
+.rfx-mini-coin { position: absolute; display: grid; width: 34px; height: 34px; place-items: center; border: 3px solid #d9a52c; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff3c4, #f2c94c 60%, #c3911c); color: #5a4100; font-size: 14px; font-weight: 800; box-shadow: 0 10px 20px rgba(150, 100, 0, .3); }
+
+/* Reportes: the printed page */
+.rfx-paper { position: absolute; width: 260px; padding: 18px 18px 22px; border-radius: 4px; background: #fff; color: var(--t1); box-shadow: 0 40px 80px rgba(0, 0, 0, .45), 0 0 0 1px rgba(0, 0, 0, .05); }
+.rfx-paper header { display: flex; align-items: center; gap: 6px; padding-bottom: 10px; margin-bottom: 12px; border-bottom: 2px solid var(--green-main); color: var(--green-main); font-size: 12px; font-weight: 600; }
+.rfx-paper i { display: block; height: 7px; margin-bottom: 9px; border-radius: 4px; background: #eceae0; }
+.rfx-paper i:nth-of-type(2n) { width: 74%; }
+.rfx-paper p { display: flex; align-items: center; gap: 6px; margin: 4px 0 12px; padding: 7px 9px; border-radius: 6px; background: var(--green-light); color: var(--green-main); font-size: 12px; font-weight: 600; }
+
+@media (max-width: 900px) {
+  .rfx-layer { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rfx-calf.is-walking .rfx-leg-a, .rfx-calf.is-walking .rfx-leg-b, .rfx-calf.is-walking svg { animation: none; }
+}
